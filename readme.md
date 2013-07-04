@@ -65,5 +65,5 @@ Po zainstalowaniu przez composera paczki platformy należy dopisać do pliku app
 oraz opublikować wszystkie assety:
 
 ```bash
-php artisan asset:publish code4/platform"
+php artisan asset:publish code4/platform
 ```
