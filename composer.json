@@ -17,7 +17,8 @@
             "src/migrations"
         ],
         "psr-0": {
-            "Code4\\Platform": "src/"
+            "Code4\\Platform": "src/",
+            "Code4\\Platform\\Menu": "src/"
         }
     },
     "minimum-stability": "dev"

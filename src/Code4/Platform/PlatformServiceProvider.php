@@ -37,7 +37,7 @@ class PlatformServiceProvider extends ServiceProvider {
 
         $this->app['menu'] = $this->app->share(function($app)
         {
-            return new Menu;
+            return new Menu\Menu;
         });
 
         $this->app['platform']->registerDependentPackages();
