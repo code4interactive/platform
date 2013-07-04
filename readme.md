@@ -14,10 +14,13 @@ Wydania będą numerowane wg. następującego formatu:
 Należy je ustawiać tylko wtedy kiedy wydawana jest nowa wersja aplikacji. Bierzące commity które służą tylko wymianie plików między developerami nie mogą wpływać na tagi.
 Komunikaty do tagów należy ustawiać tak aby objaśniały najważniejszą zmianę lub jeśli było ich więcej zwykły opis wersji (jak na przykładzie poniżej)
 
+Więcej informacji dotyczących oznaczania wersji dle composera pod adresem:
+https://github.com/composer/composer/blob/master/doc/04-schema.md
+
 Aktualna wersja została ustawiona następująco:
 
 ```bash
-git tag -a 2.0.0
+git tag -a 1.0.0-dev -m "Message"
 ```
 
 Aby uzyskać aktualną wersję należy skorzystać z poniższego skryptu:
@@ -48,6 +51,7 @@ A następnie pushować zmianę na serwer:
 ```bash
 git push origin :refs/tags/mojTag
 ```
+
 
 Instalacja
 ----------
