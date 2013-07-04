@@ -1,0 +1,63 @@
+view:
+  cssFiles:
+    - "assets/_css/c4platform.css"
+    - "assets/C4Forms/c4forms.css"
+#    - "assets/platform/bootstrap/css/bootstrap.css"
+#    - "assets/platform/bootstrap/css/bootstrap-responsive.css"
+#    - "assets/platform/bootstrap-xtra-master/bootstrap.css"
+#     - "assets/platform/css/c4platform.css"
+#    - "assets/platform/c4p_css/c4p_style.css"
+#    - "assets/platform/c4p_css/main.css"
+#    - "assets/platform/c4p_css/layout.css"
+#    - "assets/platform/c4p_css/base.css"
+    - "assets/platform/c4p_css/jquery-ui-custom/jquery-ui-1.8.23.custom.css"
+#    - "assets/platform/c4p.dialogboxes.0.0.1/css/dialogboxes.css"
+#PNOTIFY
+    - "assets/platform/pnotify-1.2.0/jquery.pnotify.default.css"
+#ICONS    
+    - "assets/platform/c4p_css/oxygen/icons.css"
+#CIZACL
+    #- "assets/platform/cizacl/css/cizacl.css"
+    #- "assets/platform/cizacl/css/colorbox.css"
+    #- "assets/platform/cizacl/css/ui.jqgrid.css"
+    #- "assets/platform/cizacl/css/jquery.searchFilter.css"
+    
+    
+  jsFiles: 
+    - "assets/_scripts/c4platform-ck.js"
+    #- "assets/lib-scripts-ck.js"
+    #- "assets/platform/c4p_js/jquery-1.7.2.min.js"
+    #- "assets/platform/c4p_js/jquery-ui-1.8.22.custom.min.js"
+    #- "assets/libs/bootstrap/js/bootstrap.js"
+    #- "assets/libs/bootstrap-jasny/js/jasny-bootstrap.js"
+#PNOTIFY
+    - "assets/platform/pnotify-1.2.0/jquery.pnotify.js"
+    
+#    - "assets/platform/c4p_js/c4p.helper-functions.js"
+#    - "assets/platform/c4p_js/c4p.base.js"
+#   - "assets/platform/c4p_js/c4p.events.js"
+#    - "assets/platform/c4p_js/c4p.decorations.js"
+#    - "assets/platform/c4p_js/c4p.forms.js"
+    - "assets/platform/c4p.dialogboxes.0.0.1/scripts/c4p.dialogboxes.js"
+#    - "assets/platform/c4p_js/jquery-ui-timepicker-addon.js"
+#CIZACL
+    #- "assets/platform/cizacl/js/jquery.colorbox.js"
+    #- "assets/platform/cizacl/js/i18n/jqgrid/grid.locale-pl.js"
+    #- "assets/platform/cizacl/js/jquery.jqGrid.min.js"
+  cssPlain: null
+  jsPlain: null
+
+
+view:
+  view: "welcome"
+  siteName: "C4Platform"
+
+
+platform:
+
+  showConsole: true
+  showProfiler: true
+
+
+  #mainView: "platform/template/mainView"
+  #mainView: "templates/default/mainView"

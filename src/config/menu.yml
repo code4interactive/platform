@@ -1,0 +1,47 @@
+topmenu:
+  root:
+    1:
+      id: "main"
+      name: "Strona główna"
+      url: "/"
+      pos: 1
+      parent: "root"
+      roles: ["all"]
+    1000:
+      id: "admin"
+      name: "Administracja"
+      url: "#"
+      pos: 1000
+      parent: "root"
+      roles: ["all"]
+  admin:
+    10:
+      id: "userManagment"
+      name: "Użytkownicy"
+      url: "/platform/acl/users"
+      pos: 10
+      icon: ""
+      parent: "admin"
+      roles: ["all"]
+    15:
+      id: "roles"
+      name: "Role"
+      url: "/platform/acl/roles"
+      pos: 15
+      icon: ""
+      parent: "admin"
+      roles: ["all"]
+    20:
+      id: "sessions"
+      name: "Sesje"
+      url: "/platform/acl/sessions"
+      pos: 20
+      icon: ""
+      parent: "admin"
+      roles: ["all"]
+leftmenu:
+  root:
+    1:
+      id: "main"
+      name: "Dashboard"
+      url: "/"

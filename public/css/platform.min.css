@@ -1,0 +1,25 @@
+.code4-time {
+  color: #ffffff;
+  font-size: 9px;
+  margin: 5px;
+}
+.code4-date {
+  color: #ffffff;
+  line-height: 13px;
+  margin: 9px 0 0 0;
+  text-align: right;
+  font-size: 10px;
+}
+.notifications-dropdown {
+  width: auto!important;
+  min-width: 220px;
+}
+.notification-close a {
+  color: #a069c3;
+}
+.notification-close a:hover,
+.notification-close a:focus {
+  text-decoration: none!important;
+  color: #cb6fd7 !important;
+  background: transparent!important;
+}
