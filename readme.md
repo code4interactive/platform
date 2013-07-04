@@ -61,3 +61,9 @@ Po zainstalowaniu przez composera paczki platformy należy dopisać do pliku app
 ```php
 'Code4\Platform\PlatformServiceProvider'
 ```
+
+oraz opublikować wszystkie assety:
+
+```bash
+php artisan asset:publish code4/platform"
+```
