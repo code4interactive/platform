@@ -7,10 +7,21 @@
             "email": "artur.bartczak@code4.pl"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/code4interactive/platform"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/code4interactive/menu"
+        }
+    ],
     "require": {
         "php": ">=5.3.0",
         "illuminate/support": "4.0.x",
-        "edvinaskrucas/notification": "1.*@dev"
+        "edvinaskrucas/notification": "1.*@dev",
+        "code4/menu": "1.0.*"
     },
     "autoload": {
         "classmap": [
