@@ -8,7 +8,7 @@ return array(
                 'id' => 'main',
                 'name' => 'Strona główna',
                 'url' => '#',//action('HomeController@getIndex'),
-                'icon' => 'icon-home',
+                'icon' => Icons::$icon_home,
                 'roles' => array('all'),
                 'style' => 'purple',
                 'sub-style' => 'navbar-pink'
@@ -17,7 +17,7 @@ return array(
                 'id' => 'admin',
                 'name' => 'Administracja',
                 'url' => '#',
-                'icon' => 'icon-cog',
+                'icon' => Icons::$icon_cog,
                 'roles' => array('all'),
                 'style' => 'grey'
             )
