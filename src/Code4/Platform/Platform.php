@@ -7,14 +7,11 @@
  */
 
 namespace Code4\Platform;
-use Symfony\Component\Yaml\Parser;
 
 class Platform {
 
     public function __construct() {
 
-        //$yaml = new Parser();
-        //$this->menu = $yaml->parse(file_get_contents(__DIR__.'/../../config/platform.yml'));
 
     }
 
@@ -22,7 +19,6 @@ class Platform {
     public function registerDependentPackages() {
 
         \App::register('Krucas\Notification\NotificationServiceProvider');
-        //\App::register('Code4\Notification\NotificationServiceProvider');
 
     }
 
@@ -31,9 +27,7 @@ class Platform {
         $autoLoader = \Illuminate\Foundation\AliasLoader::getInstance();
 
         $autoLoader->alias('Platform', 'Code4\Platform\Facades\Platform');
-        $autoLoader->alias('Menu', 'Code4\Platform\Menu\Facades\Menu');
         $autoLoader->alias('Notification', 'Krucas\Notification\Facades\Notification');
-       // $autoLoader->alias('Notification', 'Code4\Notification\Facades\Notification');
 
     }
 

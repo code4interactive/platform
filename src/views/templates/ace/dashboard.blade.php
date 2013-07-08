@@ -1,7 +1,3 @@
-<?php
-Menu::addToMenu("Ass");
-?>
-
 @include('platform::templates/ace/_header')
 
 <div class="navbar navbar-inverse">
@@ -17,7 +13,8 @@ Menu::addToMenu("Ass");
 
             <ul class="nav ace-nav pull-right">
 
-            {{ $menu }}
+            {{--$menu--}}
+            {{Menu::topMenu()}}
 
             @include('platform::platform._notifications')
 
@@ -111,7 +108,10 @@ Menu::addToMenu("Ass");
     </div>
 </div><!--#sidebar-shortcuts-->
 
-{{ $leftMenu }}
+{{--$leftMenu--}}
+<ul class="nav nav-list">
+    {{Menu::leftMenu()}}
+</ul>
 
 <div id="sidebar-collapse">
     <i class="icon-double-angle-left"></i>

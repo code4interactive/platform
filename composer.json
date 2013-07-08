@@ -14,11 +14,11 @@
     },
     "autoload": {
         "classmap": [
-            "src/migrations"
+            "src/migrations",
+            "src/controllers"
         ],
         "psr-0": {
-            "Code4\\Platform": "src/",
-            "Code4\\Platform\\Menu": "src/"
+            "Code4\\Platform": "src/"
         }
     },
     "minimum-stability": "dev"

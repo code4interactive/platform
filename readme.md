@@ -9,24 +9,14 @@ Wydania będą numerowane wg. następującego formatu:
 * Nowe funkcjonalności które nie wpływają na wsteczną kompatybilność podbijają 'minor' i resetują 'patch'
 * Poprawki i drobne zmiany podbijają 'patch'
 
-'major', 'minor' i 'path' należy ustawiać ręcznie za pomocą githuba.
-Należy je ustawiać tylko wtedy kiedy wydawana jest nowa wersja aplikacji. Bierzące commity które służą tylko wymianie plików między developerami nie mogą wpływać na tagi.
-Komunikaty do tagów należy ustawiać tak aby objaśniały najważniejszą zmianę lub jeśli było ich więcej zwykły opis wersji
+Wersję paczki należy ustawiać ręcznie za pomocą githuba.
 
 Więcej informacji dotyczących oznaczania wersji dla composera pod adresem:
 https://github.com/composer/composer/blob/master/doc/04-schema.md
 
-Aby usunąć tag (tylko w przypadku popełnienia błędu!!!) należy usunąć go lokalnie:
+Informacje o wersjonowaniu aplikacji:
+http://semver.org
 
-```bash
-git tag -d mojTag
-```
-
-A następnie pushować zmianę na serwer:
-
-```bash
-git push origin :refs/tags/mojTag
-```
 
 
 Instalacja

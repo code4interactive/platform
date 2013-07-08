@@ -1,6 +1,7 @@
 @foreach ($menu['topmenu']['root'] as $lp=>$root)
 
 <li class="{{ $root['style'] }}">
+
     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
         @if ($root['icon'])
             <i class="{{ $root['icon'] }}"></i>

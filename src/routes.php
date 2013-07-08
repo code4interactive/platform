@@ -19,7 +19,8 @@ Route::get('/', function()
         Notification::warning("Zamów tokeny");
     }
 
-    Menu::addToMenu("Ass");
+    //Menu::topMenu()->offsetGet(0)->add(array("id"=>"aaa","name"=>"aasas"));
+
     Notification::success('Success message');
     Notification::error("Error message");
     Notification::warning("Warning message");
@@ -32,10 +33,11 @@ Route::get('/', function()
     return $view;
 });
 
+Route::get('test/{id}', 'AdministrationController@showProfile');
+
 Route::post('/', function()
 {
 
-    Menu::addToMenu("Ass");
     Notification::success('Success message');
     Notification::error("Error message");
     Notification::warning("Warning message");
