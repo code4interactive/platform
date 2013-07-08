@@ -81,5 +81,19 @@ return array(
                     )
                 )
             )
+        ),
+        'breadcrumbs' => array(
+            'settings' => array(
+                'layout_template' => 'platform::menus.breadcrumbs.layout',
+                'item_template' => 'platform::menus.breadcrumbs.item'
+            ),
+            'items' => array(
+                0 => array(
+                    'id' => 'home',
+                    'name' => 'Home',
+                    'icon' => Icons::$icon_home,
+                    'url' => 'platformHome'
+                )
+            )
         )
     );

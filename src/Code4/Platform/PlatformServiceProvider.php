@@ -20,8 +20,9 @@ class PlatformServiceProvider extends ServiceProvider {
 	{
 		$this->package('code4/platform');
         include __DIR__.'/../../routes.php';
-        include __DIR__.'/Helpers/helpers.php';
         include __DIR__.'/../../config/icons.php';
+
+        $this->app['platform']->collectViewData();
 	}
 
 	/**
@@ -31,6 +32,9 @@ class PlatformServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+
+        include __DIR__.'/Helpers/helpers.php';
+
         $this->app['platform'] = $this->app->share(function($app)
         {
             return new Platform;
@@ -38,7 +42,6 @@ class PlatformServiceProvider extends ServiceProvider {
 
         $this->app['platform']->registerDependentPackages();
         $this->app['platform']->addPackageAliases();
-        $this->app['platform']->collectViewData();
 
 	}
 

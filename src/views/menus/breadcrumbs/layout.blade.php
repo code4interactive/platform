@@ -11,7 +11,9 @@
 
 {{$menuItem}}
 
-@if ($menuCollection[0]->isLast($menuItem))
+
+
+@if (!$menuCollection[0]->isLast($menuItem))
     <span class="divider">
         <i class="icon-angle-right"></i>
     </span>

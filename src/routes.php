@@ -11,27 +11,25 @@
 |
 */
 
-Route::get('/', function()
+
+Route::get('/', array('as' => 'platformHome', function()
 {
-    $tokens = 100;
 
-    if ($tokens < 10) {
-        Notification::warning("Zamów tokeny");
-    }
 
-    //Menu::topMenu()->offsetGet(0)->add(array("id"=>"aaa","name"=>"aasas"));
+    Menu::breadcrumbs()->add(array('id'=>'test', 'name'=>'Test', 'url'=>URL::route('platformHome')))->at(2);
 
-    Notification::success('Success message');
-    Notification::error("Error message");
-    Notification::warning("Warning message");
-    Notification::info("Info message");
-    $view = View::make('platform::templates.ace.dashboard');
+   // Notification::success('Success message');
+  //  Notification::error("Error message");
+  //  Notification::warning("Warning message");
+  //  Notification::info("Info message");
+    $view = View::make('platform::test');
 
     Notification::clearAll();
-    //Notification::showAll();
+
 
     return $view;
-});
+}));
+
 
 Route::get('test/{id}', 'AdministrationController@showProfile');
 
@@ -48,7 +46,10 @@ Route::post('/', function()
     {
         Notification::success("Yeeeeee");
 
-        return Notification::all()->toJson();
+        $temp = Notification::all()->toJson();
+
+        Notification::clearAll();
+        return $temp;
     }
 
 

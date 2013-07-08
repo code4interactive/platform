@@ -105,18 +105,20 @@
         <div id="page-content" class="clearfix">
             <div class="page-header position-relative">
                 <h1>
-                    Dashboard
+                    @section('header')
+                    {{--Dashboard
                     <small>
                         <i class="icon-double-angle-right"></i>
                         overview &amp; stats
-                    </small>
+                    </small>--}}
+                    @show
                 </h1>
             </div><!--/.page-header-->
 
             <div class="row-fluid">
                 <!--PAGE CONTENT BEGINS HERE-->
 
-                @yeld('content')
+                @yield('content')
 
                 <!--PAGE CONTENT ENDS HERE-->
             </div><!--/row-->

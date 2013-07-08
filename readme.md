@@ -57,3 +57,8 @@ oraz opublikować wszystkie assety:
 ```bash
 php artisan asset:publish code4/platform
 ```
+
+Używanie
+----------
+
+Używamy named routes. Dzięki temu działać będą breadcrumsy. Oczywiście breadcrumbsy nie są w stanie określić całej ścieżki do kontrolera tak więc trzeba je dodawać ręcznie. Ale to jaki jest akuarat aktywny zostanie wykryte automatycznie na podstawie named routy. Wystarczy że będzie taka sama jak url

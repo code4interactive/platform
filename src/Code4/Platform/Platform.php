@@ -10,8 +10,11 @@ namespace Code4\Platform;
 
 class Platform {
 
+    protected $view;
+
     public function __construct() {
 
+        $this->view = new View();
 
     }
 
@@ -19,6 +22,7 @@ class Platform {
     public function registerDependentPackages() {
 
         \App::register('Krucas\Notification\NotificationServiceProvider');
+        \App::register('Code4\Menu\MenuServiceProvider');
 
     }
 
@@ -35,6 +39,8 @@ class Platform {
 
         \View::share('platform', array('assetsPath'=>'/packages/code4/platform'));
 
+        \Menu::loadMenuFromConfig(\Config::get('platform::config'));
+        \Menu::breadcrumbs()->add(array('id'=>'test', 'name'=>'Test', 'url'=>\URL::route('platformHome')));
 
     }
 
@@ -45,6 +51,20 @@ class Platform {
         {
             //Check for notification requests
         }
+
+    }
+
+
+    public function getView() {
+
+        return $this->view;
+
+    }
+
+
+    public function __call($name, $args) {
+
+
 
     }
 
