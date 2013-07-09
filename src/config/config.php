@@ -4,8 +4,8 @@ return array(
 
         'topMenu' => array(
             'settings' => array(
-                'layout_template' => 'menu::topMenu.layout',
-                'item_template' => 'menu::topMenu.item'
+                'layout_template' => 'platform::menus.topMenu.layout',
+                'item_template' => 'platform::menus.topMenu.item'
             ),
             'items' => array(
                 0 => array(
@@ -44,8 +44,8 @@ return array(
         ),
         'leftMenu' => array(
             'settings' => array(
-                'layout_template' => 'menu::leftMenu.layout',
-                'item_template' => 'menu::leftMenu.item'
+                'layout_template' => 'platform::menus.leftMenu.layout',
+                'item_template' => 'platform::menus.leftMenu.item'
             ),
             'items' => array(
                 0 => array(
