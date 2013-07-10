@@ -37,5 +37,6 @@
     <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/css/platform.min.css" />
 
     <!--inline styles if any-->
+
 </head>
 <body>

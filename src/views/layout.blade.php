@@ -27,7 +27,7 @@
 
             </ul><!--/.ace-nav-->
 
-            <div class="pull-right easy-pie-chart percentage code4-time" data-color="#fff" data-size="35" data-percent="0">
+            <div class="pull-right code4-time" data-color="#fff" data-size="35" data-percent="0">
                 <span class="time">{{ date("H:i") }}</span>
             </div>
 
@@ -132,3 +132,12 @@
     <i class="icon-double-angle-up icon-only bigger-110"></i>
 </a>
 @include('platform::templates/ace/_footer')
+
+@section('footer-scripts')
+
+@show
+
+
+
+</body>
+</html>
