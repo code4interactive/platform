@@ -31,6 +31,7 @@ return array(
                             'id' => 'head',
                             'name' => 'Header',
                             'type' => 'subHeader',
+                            'icon' => Icons::$icon_user
                         ),
                         10 => array(
                             'id' => 'userManagment',

@@ -1,6 +1,6 @@
 @include('platform::templates/ace/_header')
 
-<div class="navbar navbar-inverse">
+<div class="navbar">
     <div class="navbar-inner">
         <div class="container-fluid">
             <a href="#" class="brand">
@@ -40,13 +40,13 @@
     </div><!--/.navbar-inner-->
 </div>
 
-<div class="container-fluid" id="main-container">
+<div class="main-container container-fluid">
     <a id="menu-toggler" href="#">
-        <span></span>
+        <span class="menu-text"></span>
     </a>
 
-    <div id="sidebar">
-        <div id="sidebar-shortcuts">
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             {{Menu::sidebarShortcuts()}}
         </div><!--#sidebar-shortcuts-->
 
@@ -54,29 +54,27 @@
             {{Menu::leftMenu()}}
         </ul>
 
-        <div id="sidebar-collapse">
+        <div class="sidebar-collapse" id="sidebar-collapse">
             <i class="icon-double-angle-left"></i>
         </div>
     </div>
 
-    <div id="main-content" class="clearfix">
-        <div id="breadcrumbs">
-
-            {{--Platform::getView()->getBreadcrumbs()--}}
+    <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
 
             {{Menu::breadcrumbs()}}
 
-            <div id="nav-search">
+            <div class="nav-search" id="nav-search">
                 <form class="form-search">
-							<span class="input-icon">
-								<input type="text" placeholder="Search ..." class="input-small search-query" id="nav-search-input" autocomplete="off" />
-								<i class="icon-search" id="nav-search-icon"></i>
-							</span>
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="input-small search-query" id="nav-search-input" autocomplete="off" />
+                        <i class="icon-search" id="nav-search-icon"></i>
+                    </span>
                 </form>
             </div><!--#nav-search-->
         </div>
 
-        <div id="page-content" class="clearfix">
+        <div class="page-content">
             <div class="page-header position-relative">
                 <h1>
                     @section('header')
@@ -90,11 +88,13 @@
             </div><!--/.page-header-->
 
             <div class="row-fluid">
+                <div class="span12">
                 <!--PAGE CONTENT BEGINS HERE-->
 
                 @yield('content')
 
                 <!--PAGE CONTENT ENDS HERE-->
+                </div>
             </div><!--/row-->
         </div><!--/#page-content-->
 
@@ -110,8 +110,6 @@
 @section('footer-scripts')
 
 @show
-
-
 
 </body>
 </html>

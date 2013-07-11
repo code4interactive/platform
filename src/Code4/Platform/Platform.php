@@ -36,7 +36,7 @@ class Platform {
 
     public function collectViewData() {
 
-        \View::share('platform', array('assetsPath'=>'/packages/code4/platform'));
+        \View::share('platform', array('assetsPath'=>'/packages/code4/platform', 'templatePath' => 'assets/ace-1.1.2'));
 
         \Menu::loadMenuFromConfig(\Config::get('platform::config'));
         \Menu::breadcrumbs()->add(array('id'=>'test', 'name'=>'Test', 'url'=>\URL::route('platformHome')));

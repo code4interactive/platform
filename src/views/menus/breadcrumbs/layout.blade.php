@@ -4,20 +4,31 @@
 @foreach ($menuCollection[0]->all() as $menuItem)
 
     @if ($menuItem->isActive())
-    <li class="active">
-        @else
-    <li>
-        @endif
+        <li class="active">
+    @else
+        <li>
+    @endif
 
-{{$menuItem}}
+    @if ($menuItem->getIcon())
+        <i class="{{ $menuItem->getIcon() }}"></i>
+    @endif
+
+    @if (!$menuItem->isActive())
+        <a href="{{$menuItem->getUrl()}}">
+    @endif
+
+    {{$menuItem}}
+
+    @if (!$menuCollection[0]->isLast($menuItem))
+        <span class="divider">
+            <i class="icon-angle-right"></i>
+        </span>
+    @endif
 
 
-
-@if (!$menuCollection[0]->isLast($menuItem))
-    <span class="divider">
-        <i class="icon-angle-right"></i>
-    </span>
-@endif
+    @if (!$menuItem->isActive())
+        </a>
+    @endif
 
     </li>
 
