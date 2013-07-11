@@ -10,14 +10,9 @@ namespace Code4\Platform;
 
 class Platform {
 
-    protected $view;
-
     public function __construct() {
 
-        $this->view = new View();
-
     }
-
 
     public function registerDependentPackages() {
 
