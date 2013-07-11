@@ -23,6 +23,8 @@ class Platform {
 
         \App::register('Krucas\Notification\NotificationServiceProvider');
         \App::register('Code4\Menu\MenuServiceProvider');
+        \App::register('Cartalyst\Sentry\SentryServiceProvider');
+        \App::register('Cartalyst\DataGrid\DataGridServiceProvider');
 
     }
 
@@ -32,6 +34,8 @@ class Platform {
 
         $autoLoader->alias('Platform', 'Code4\Platform\Facades\Platform');
         $autoLoader->alias('Notification', 'Krucas\Notification\Facades\Notification');
+        $autoLoader->alias('Sentry', 'Cartalyst\Sentry\Facades\Laravel\Sentry');
+        $autoLoader->alias('DataGrid', 'Cartalyst\DataGrid\Facades\DataGrid');
 
     }
 
