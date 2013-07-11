@@ -35,9 +35,6 @@
 <script src="{{ $platform['assetsPath'] }}/scripts/notifications.js"></script>
 <script src="{{ $platform['assetsPath'] }}/scripts/platform.js"></script>
 
-<script src="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/ace-elements.min.js"></script>
-<script src="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/ace.min.js"></script>
-
 <script src="{{ $platform['assetsPath'] }}/scripts/tempo.js"></script>
 <script src="{{ $platform['assetsPath'] }}/scripts/data-grid.js"></script>
 

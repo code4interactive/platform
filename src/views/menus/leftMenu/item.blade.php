@@ -1,40 +1,42 @@
 <?php $menuItem = $menuItem[0]; ?>
 
 
-<li class="{{$menuItem->getClass()}}">
-    @if ($menuItem->hasChildren())
+<li class="{{$menuItem->getClass()}} {{$menuItem->getOpen()?'open active':''}}">
+@if ($menuItem->hasChildren())
 
-        <a class="dropdown-toggle" href="{{ $menuItem->getUrl() }}">
+    <a class="dropdown-toggle" href="{{ $menuItem->getUrl() }}">
 
-    @else
+@else
 
-        <a href="{{ $menuItem->getUrl() }}">
+    <a href="{{ $menuItem->getUrl() }}">
 
-    @endif
+@endif
 
-            @if ($menuItem->getLvl() == 0)
+        @if ($menuItem->getIcon())
+            <i class="{{ $menuItem->getIcon() }}"></i>
+        @elseif ($menuItem->getLvl() == 1)
+            <i class="icon-double-angle-right"></i>
+        @elseif ($menuItem->getLvl() > 1)
+            <i class="icon-angle-right"></i>
+        @endif
 
-                @if ($menuItem->getIcon())
-                    <i class="{{ $menuItem->getIcon() }}"></i>
-                @endif
 
-                <span>{{ $menuItem->getName() }}</span>
+        @if ($menuItem->getLvl() == 0)
+            <span class="menu-text">
+        @endif
 
-            @else
+            {{ $menuItem->getName() }}
 
-                @if ($menuItem->getIcon())
-                    <i class="{{ $menuItem->getIcon() }}"></i>
-                @endif
+        @if ($menuItem->getLvl() == 0)
+            </span>
+        @endif
 
-                {{ $menuItem->getName() }}
 
-            @endif
+        @if ($menuItem->hasChildren())
+            <b class="arrow icon-angle-down"></b>
+        @endif
 
-            @if ($menuItem->hasChildren())
-                <b class="arrow icon-angle-down"></b>
-            @endif
-
-        </a>
+    </a>
 
         @if ($menuItem->hasChildren())
 

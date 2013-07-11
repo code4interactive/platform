@@ -78,12 +78,38 @@ return array(
                             'id' => 'head',
                             'name' => 'Header',
                             'type' => 'subHeader',
+                            'icon' => Icons::$icon_user,
                         ),
                         10 => array(
                             'id' => 'userManagment',
                             'name' => 'Użytkownicy',
                             'url' => '#',
-                            'icon' => Icons::$icon_user
+                            'icon' => Icons::$icon_user,
+                            'children' => array(
+                                1 => array(
+                                    'id' => 'head2',
+                                    'name' => 'Header',
+                                    'url' => '#'
+                                ),
+                                2 => array(
+                                    'id' => 'head3',
+                                    'name' => 'Header',
+                                    'url' => '#',
+                                    'children' => array(
+                                        1 => array(
+                                            'id' => 'head4',
+                                            'name' => 'Header',
+                                            'url' => '#'
+                                        ),
+                                        2 => array(
+                                            'id' => 'head5',
+                                            'name' => 'Header',
+                                            'url' => '#'
+                                        )
+                                    )
+                                )
+                            )
+
                         )
                     )
                 )

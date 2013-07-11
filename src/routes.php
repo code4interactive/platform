@@ -30,13 +30,16 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 
 \Route::get('dashboard', array('as' => 'dashboard', function()
 {
+
+    Menu::leftMenu()->setActivePath('head5');
+
     $view = \View::make('platform::dashboard');
     return $view;
 }));
 
 
 
-\Route::get('testInclude', function(){
+\Route::get('testInclude', function() {
    return \View::make('platform::includetest');
 });
 
