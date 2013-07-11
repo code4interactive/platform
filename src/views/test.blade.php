@@ -9,7 +9,7 @@ Zawartość strony
 @stop
 
 
-@section('')
+@section('footer-scripts')
 <script type="text/javascript">
     $(function() {
 

@@ -36,7 +36,9 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 
 
 
-
+\Route::get('testInclude', function(){
+   return \View::make('platform::includetest');
+});
 
 
 
