@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard - Ace Admin</title>
+    <title><?php print_r(\Config::get('platform::platform'));?></title>
 
     <meta name="description" content="overview &amp; stats" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

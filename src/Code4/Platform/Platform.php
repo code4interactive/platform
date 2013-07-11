@@ -10,6 +10,8 @@ namespace Code4\Platform;
 
 class Platform {
 
+
+
     public function __construct() {
 
     }
@@ -35,6 +37,16 @@ class Platform {
     }
 
     public function collectViewData() {
+
+        $configApp = \Config::get('platform');
+        if (!is_array($configApp)) $configApp = array();
+
+        $configPlatform = \Config::get('platform::platform');
+        $config = array_merge($configPlatform, $configApp);
+
+        \Config::set('platform::platform', $config);
+
+
 
         \View::share('platform', array('assetsPath'=>'/packages/code4/platform', 'templatePath' => 'assets/ace-1.1.2'));
 

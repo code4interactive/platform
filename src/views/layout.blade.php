@@ -6,7 +6,7 @@
             <a href="#" class="brand">
                 <small>
                     <i class="icon-cogs"></i>
-                    CODE4 Platform
+                    {{\Config::get('platform::platform.platformName')}}
                 </small>
             </a><!--/.brand-->
 

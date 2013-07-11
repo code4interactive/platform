@@ -33,7 +33,10 @@ class PlatformServiceProvider extends ServiceProvider {
 	public function register()
 	{
 
+        \Config::package('code4/platform', __DIR__.'/../config');
+
         include __DIR__.'/Helpers/helpers.php';
+
 
         $this->app['platform'] = $this->app->share(function($app)
         {

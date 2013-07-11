@@ -1,5 +1,6 @@
 <?php namespace Code4\Platform;
 
+use ClassPreloader\Config;
 use Illuminate\Support\ServiceProvider;
 use Code4\Menu\Facades\Menu;
 use Krucas\Notification\Facades\Notification;
@@ -31,6 +32,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 \Route::get('dashboard', array('as' => 'dashboard', function()
 {
 
+    \Notification::success(\Config::get('platform::platform.platformName'));
     Menu::leftMenu()->setActivePath('head5');
 
     $view = \View::make('platform::dashboard');
