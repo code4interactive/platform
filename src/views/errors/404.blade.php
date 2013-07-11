@@ -1,13 +1,9 @@
 @extends('platform::layout')
 
 @section('header')
-<h1 class="grey lighter smaller">
-									<span class="blue bigger-125">
-										<i class="icon-sitemap"></i>
-										404
-									</span>
-    Page Not Found
-</h1>
+    <i class="icon-sitemap"></i>
+404
+    <small> Page Not Found</small>
 @stop
 
 @section('content')
@@ -18,7 +14,13 @@
 
     <div class="error-container">
         <div class="well">
-
+            <h1 class="grey lighter smaller">
+                <span class="blue bigger-125">
+                    <i class="icon-sitemap"></i>
+                    404
+                </span>
+                Page Not Found
+            </h1>
 
             <hr>
             <h3 class="lighter smaller">We looked everywhere but we couldn't find it!</h3>

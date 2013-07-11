@@ -1,4 +1,9 @@
-<?php
+<?php namespace Code4\Platform;
+
+use Illuminate\Support\ServiceProvider;
+use Code4\Menu\Facades\Menu;
+use Krucas\Notification\Facades\Notification;
+use Cartalyst\DataGrid\Facades\DataGrid;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,46 +17,88 @@
 */
 
 
-Route::get('/', array('as' => 'platformHome', function()
+\Route::controller('administration', 'Code4\Platform\Controllers\Administration_Users');
+
+
+\Route::get('/', array('as' => 'platformHome', function()
 {
+    Menu::breadcrumbs()->add(array('id'=>'test', 'name'=>'Test', 'url'=>\URL::route('platformHome')))->at(2);
+    $view = \View::make('platform::dashboard');
+    return $view;
 
+}));
 
-    Menu::breadcrumbs()->add(array('id'=>'test', 'name'=>'Test', 'url'=>URL::route('platformHome')))->at(2);
-
-   // Notification::success('Success message');
-  //  Notification::error("Error message");
-  //  Notification::warning("Warning message");
-  //  Notification::info("Info message");
-    $view = View::make('platform::test');
-
-    Notification::clearAll();
-
-
+\Route::get('dashboard', array('as' => 'dashboard', function()
+{
+    $view = \View::make('platform::dashboard');
     return $view;
 }));
 
 
-Route::get('test/{id}', 'AdministrationController@showProfile');
 
-Route::post('/', function()
+
+
+
+
+
+
+
+
+
+
+
+\Route::get('administration/createUser', array('as'=>'addUser', 'uses'=>'AdministrationController@addUser'));
+\Route::get('administration/showUsers', array('as'=>'showUsers', 'uses'=>'AdministrationController@showUsers'));
+
+\Route::get('testNamespace', 'Code4\Platform\Controllers_Administration@showUsers');
+
+\Route::get('test/{id}', 'AdministrationController@showProfile');
+
+\Route::post('/', function()
 {
 
-    Notification::success('Success message');
-    Notification::error("Error message");
-    Notification::warning("Warning message");
-    Notification::info("Info message");
     //$view = View::make('platform::templates.ace.dashboard');
 
-    if (Request::ajax())
+    if (\Request::ajax())
     {
-        Notification::success("Yeeeeee");
 
-        $temp = Notification::all()->toJson();
+        $temp = Notification::all()->toArray();
 
         Notification::clearAll();
+
+        \Response::json($temp);
         return $temp;
     }
 
 
     //return $view;
+});
+
+\Route::get('dataSrc', function(){
+
+    $user = new \Code4\Platform\Models_Konta;
+
+    $dataGrid = DataGrid::make($user, array(
+        'id', 'konto', 'opis'
+    ));
+    return $dataGrid;
+});
+
+\App::error(function($exception, $code)
+{
+    switch ($code)
+    {
+       /* case 403:
+            return Response::view('errors.403', array(), 403);*/
+
+        case 404:
+            Menu::breadcrumbs()->add(array('id'=>'404', 'name'=>'404 Page Not Found', 'active'=>true))->at();
+            return \Response::view('platform::errors.404', array(), 404);
+
+        /*case 500:
+            return Response::view('errors.500', array(), 500);
+
+        default:
+            return Response::view('errors.default', array(), $code);*/
+    }
 });

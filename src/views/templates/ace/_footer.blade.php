@@ -32,7 +32,7 @@
 
 
 
-<script src="/packages/cartalyst/data-grid/js/tempo.js"></script>
-<script src="/packages/cartalyst/data-grid/js/data-grid.js"></script>
+<script src="{{ $platform['assetsPath'] }}/scripts/tempo.js"></script>
+<script src="{{ $platform['assetsPath'] }}/scripts/data-grid.js"></script>
 
 <!--inline scripts related to this page-->
