@@ -25,6 +25,7 @@
         "php": ">=5.3.0",
         "illuminate/support": "4.0.x",
         "edvinaskrucas/notification": "1.*@dev",
+        "code4/menu": "1.0.*",
         "cartalyst/sentry": "2.0.*"
     },
     "autoload": {
