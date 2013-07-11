@@ -22,7 +22,7 @@
     <!--fonts-->
 
     {{--<link rel="stylesheet" href="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/css/ace-fonts.css" />--}}
-    <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/css/fonts.css" />
+    <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/css/fonts.min.css" />
 
     <!--ace styles-->
 
