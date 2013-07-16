@@ -20,6 +20,7 @@ class Platform {
 
         \App::register('Krucas\Notification\NotificationServiceProvider');
         \App::register('Code4\Menu\MenuServiceProvider');
+        \App::register('Code4\Form\FormServiceProvider');
         \App::register('Cartalyst\Sentry\SentryServiceProvider');
         \App::register('Cartalyst\DataGrid\DataGridServiceProvider');
 

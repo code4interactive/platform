@@ -13,6 +13,11 @@ class Administration_Users extends \BaseController {
 
 
     public function addUser() {
+
+
+        return \View::make('platform::administration.users.add');
+
+
         $user = Sentry::getUserProvider()->create(array(
             'email'    => 'john.doe@example.com',
             'password' => 'test',

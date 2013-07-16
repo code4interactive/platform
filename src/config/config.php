@@ -29,21 +29,21 @@ return array(
                     'children' => array(
                         1 => array(
                             'id' => 'head',
-                            'name' => 'Header',
+                            'name' => 'Zarządzanie użytkownikami',
                             'type' => 'subHeader',
                             'icon' => Icons::$icon_user
                         ),
                         10 => array(
                             'id' => 'userManagment',
-                            'name' => 'Użytkownicy',
+                            'name' => 'Lista użytkowników',
                             'url' => \URL::action('Code4\Platform\Controllers\Administration_Users@getUsers'),
                             'icon' => Icons::$icon_user
                         ),
                         11 => array(
                             'id' => 'userAdd',
-                            'name' => 'Add user',
-                            'url' => 'addUser',
-                            'icon' => Icons::$icon_user
+                            'name' => 'Dodaj użytkownika',
+                            'url' => \URL::action('Code4\Platform\Controllers\Administration_Users@addUser'),
+                            'icon' => Icons::$icon_plus
                         ),
                     )
                 )

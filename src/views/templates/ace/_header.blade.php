@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title><?php print_r(\Config::get('platform::platform'));?></title>
+    <title>{{\Config::get('platform::platform.platformName')}}</title>
 
     <meta name="description" content="overview &amp; stats" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

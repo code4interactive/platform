@@ -18,7 +18,9 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 */
 
 
-\Route::controller('administration', 'Code4\Platform\Controllers\Administration_Users');
+//\Route::controller('administration', 'Code4\Platform\Controllers\Administration_Users');
+\Route::get('administration/users/add', 'Code4\Platform\Controllers\Administration_Users@addUser');
+\Route::get('administration/users/get', 'Code4\Platform\Controllers\Administration_Users@getUsers');
 
 
 \Route::get('/', array('as' => 'platformHome', function()
@@ -52,14 +54,14 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 
 
 
-
-
+/*
 \Route::get('administration/createUser', array('as'=>'addUser', 'uses'=>'AdministrationController@addUser'));
 \Route::get('administration/showUsers', array('as'=>'showUsers', 'uses'=>'AdministrationController@showUsers'));
 
 \Route::get('testNamespace', 'Code4\Platform\Controllers_Administration@showUsers');
 
 \Route::get('test/{id}', 'AdministrationController@showProfile');
+*/
 
 \Route::post('/', function()
 {
