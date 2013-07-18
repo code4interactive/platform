@@ -24,8 +24,11 @@ function array_get_list($keyList, $array) {
     $temp = array();
 
     if (!is_array($keyList)) {
-        $t = explode(",",$keyList);
-        $keyList[] = trim($t);
+        $ex = explode(",",$keyList);
+        $keyList = array();
+        foreach($ex as $t) {
+            $keyList[] = trim($t);
+        }
     }
 
     foreach($keyList as $key) {
@@ -35,5 +38,11 @@ function array_get_list($keyList, $array) {
     }
 
     return $temp;
+}
+
+function ifelse($var, $default=null) {
+
+    if ($var) return $var;
+    else return $default;
 
 }
