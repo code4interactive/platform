@@ -6,7 +6,7 @@
             <a href="#" class="brand">
                 <small>
                     <i class="icon-cogs"></i>
-                    {{\Config::get('platform::platform.platformName')}}
+                    {{\Config::get('platform::config.platformVersion')}} - {{\Config::get('platform::config.appName')}}
                 </small>
             </a><!--/.brand-->
 

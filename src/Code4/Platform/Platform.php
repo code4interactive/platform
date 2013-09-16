@@ -50,19 +50,17 @@ class Platform {
 
     public function collectViewData() {
 
-        $configApp = \Config::get('platform');
+        $configApp = \Config::get('config');
         if (!is_array($configApp)) $configApp = array();
 
-        $configPlatform = \Config::get('platform::platform');
+        $configPlatform = \Config::get('platform::config');
         $config = array_merge($configPlatform, $configApp);
 
-        \Config::set('platform::platform', $config);
-
-
+        \Config::set('platform::config', $config);
 
         \View::share('platform', array('assetsPath'=>'/packages/code4/platform', 'templatePath' => 'assets/ace-1.1.2'));
 
-        \Menu::loadMenuFromConfig(\Config::get('platform::config'));
+        \Menu::loadMenuFromConfig(\Config::get('platform::menu'));
         \Menu::breadcrumbs()->add(array('id'=>'test', 'name'=>'Test', 'url'=>\URL::route('platformHome')));
 
     }

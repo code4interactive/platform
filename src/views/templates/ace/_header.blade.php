@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>{{\Config::get('platform::platform.platformName')}}</title>
+    <title>{{\Config::get('platform::config.platformVersion')}} - {{\Config::get('platform::config.appName')}}</title>
 
     <meta name="description" content="overview &amp; stats" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
