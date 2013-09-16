@@ -11,7 +11,6 @@ $(function(){
     //parent.getEvents();
 
 
-
     var notification = new platform.notification();
 
     var currentTime = new Date();

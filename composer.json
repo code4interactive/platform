@@ -31,7 +31,8 @@
         "edvinaskrucas/notification": "1.*@dev",
         "code4/menu": "1.0.*",
         "code4/form": "2.0.*",
-        "cartalyst/sentry": "2.0.*"
+        "cartalyst/sentry": "2.0.*",
+        "jasonlewis/basset": "dev-master"
     },
     "autoload": {
         "classmap": [

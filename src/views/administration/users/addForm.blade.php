@@ -1,5 +1,10 @@
 <?php
 
+$config = \Config::get('form.form1');
+C4Form::loadConfig($config);
+C4Form::render();
+/*
+
 echo C4Form::open('testItem')->render();
 
 echo C4Form::text(array(
@@ -7,6 +12,7 @@ echo C4Form::text(array(
     'label' => 'Test label',
     'tooltip' => 'Test tooltip'
 ));
+echo C4Form::close();*/
 /*
 echo C4Form::findBy('id', 'sdfsdfsd')->getValue();
 
