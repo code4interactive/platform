@@ -8,32 +8,43 @@
 
 namespace Code4\Platform;
 
+use Illuminate\Support\Collection;
+use Krucas\Notification\Notification;
+
 class Platform {
 
-
+    protected $script;
+    protected $css;
+    protected $js;
 
     public function __construct() {
-
+        $this->css = new Collection();
+        $this->scripts = new Collection();
+        $this->js = new Collection();
     }
 
     public function registerDependentPackages() {
 
+        $autoLoader = \Illuminate\Foundation\AliasLoader::getInstance();
+
         \App::register('Krucas\Notification\NotificationServiceProvider');
+        $autoLoader->alias('Platform', 'Code4\Platform\Facades\Platform');
+
+        \App::register('Basset\BassetServiceProvider');
+        $autoLoader->alias('Basset', 'Basset\Facade');
+
         \App::register('Code4\Menu\MenuServiceProvider');
         \App::register('Code4\Form\FormServiceProvider');
         \App::register('Cartalyst\Sentry\SentryServiceProvider');
         \App::register('Cartalyst\DataGrid\DataGridServiceProvider');
 
-    }
-
-    public function addPackageAliases () {
-
-        $autoLoader = \Illuminate\Foundation\AliasLoader::getInstance();
-
-        $autoLoader->alias('Platform', 'Code4\Platform\Facades\Platform');
         $autoLoader->alias('Notification', 'Krucas\Notification\Facades\Notification');
         $autoLoader->alias('Sentry', 'Cartalyst\Sentry\Facades\Laravel\Sentry');
         $autoLoader->alias('DataGrid', 'Cartalyst\DataGrid\Facades\DataGrid');
+
+    }
+
+    public function addPackageAliases () {
 
     }
 
@@ -72,7 +83,6 @@ class Platform {
         return $this->view;
 
     }
-
 
     public function __call($name, $args) {
 

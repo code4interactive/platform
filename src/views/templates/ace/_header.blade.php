@@ -18,6 +18,7 @@
     <![endif]-->
 
     <!--page specific plugin styles-->
+    {{ basset_stylesheets('forms') }}
 
     <!--fonts-->
 
@@ -34,7 +35,29 @@
     <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/css/ace-ie.min.css" />
     <![endif]-->
 
+
+    <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/css/platform.min.css" />
+    <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/css/simplemodal.css" />
+
     <!--inline styles related to this page-->
+    {{ basset_stylesheets('application') }}
+
+    <!--[if !IE]>-->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+    </script>
+
+    <!--<![endif]-->
+
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+    </script>
+    <![endif]-->
+
+    <script src="{{ $platform['assetsPath'] }}/scripts/jquery-ui-1.10.3.custom.min.js"></script>
+
 </head>
 
 <body>

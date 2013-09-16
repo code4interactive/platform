@@ -4,19 +4,7 @@
 
 <!--basic scripts-->
 
-<!--[if !IE]>-->
 
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-</script>
-
-<!--<![endif]-->
-
-<!--[if IE]>
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
 
 <script type="text/javascript">
     if("ontouchend" in document) document.write("<script src='{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
@@ -24,6 +12,7 @@
 <script src="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/bootstrap.min.js"></script>
 
 <!--page specific plugin scripts-->
+{{ basset_javascripts('forms') }}
 
 <!--ace scripts-->
 
@@ -37,6 +26,7 @@
 
 <script src="{{ $platform['assetsPath'] }}/scripts/tempo.js"></script>
 <script src="{{ $platform['assetsPath'] }}/scripts/data-grid.js"></script>
+<script src="{{ $platform['assetsPath'] }}/scripts/jquery.simplemodal.1.4.4.min.js"></script>
 
 
 <!--inline scripts related to this page-->

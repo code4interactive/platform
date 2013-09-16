@@ -42,15 +42,16 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 }));
 
 
+\Route::get('administration/users/list/ajax', function() {
+
+    return \View::make('platform::administration.users.list');
+
+});
+
 
 \Route::get('testInclude', function() {
    return \View::make('platform::includetest');
 });
-
-
-
-
-
 
 
 
