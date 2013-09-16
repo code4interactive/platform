@@ -47,3 +47,54 @@
   color: #cb6fd7 !important;
   background: transparent!important;
 }
+.chzn-container > .chzn-single {
+  height: 28px!important;
+}
+.dataTables_wrapper .datagrid-search select {
+  width: auto;
+}
+.dataTables_wrapper .lbl {
+  margin-top: -10px !important;
+}
+.dataTables_wrapper .table_footer {
+  width: 100%;
+}
+.dataTables_wrapper .table_footer td {
+  text-align: center;
+}
+.dataTables_wrapper .table_footer td:first-child {
+  text-align: left;
+  width: 10%;
+  margin: 0;
+  vertical-align: top;
+  /*padding: 4px 0 0 8px;*/
+
+}
+.dataTables_wrapper .table_footer td:first-child > div {
+  background-color: #ddd;
+  padding: 10px 14px 10px 37px;
+  margin: -1px 0 0 -1px;
+  background: #dddddd url(/packages/code4/platform/images/datagrid_toolbar_arrow.png) no-repeat 11px 6px;
+}
+.dataTables_wrapper .table_footer td:last-child {
+  text-align: right;
+  width: 30%;
+}
+.datagrid-search form {
+  margin: 0;
+  display: inline;
+}
+.datagrid-search .input-append {
+  margin-top: 10px;
+}
+.datagrid-search .tag {
+  margin-bottom: 0;
+}
+.datagrid-search .tags {
+  margin: 5px 5px 0 0;
+  float: right;
+  width: auto;
+}
+.dataTables_wrapper .row-fluid:first-child {
+  padding: 0px;
+}

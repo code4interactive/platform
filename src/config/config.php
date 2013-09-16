@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
         'topMenu' => array(
             'settings' => array(
                 'layout_template' => 'platform::menus.topMenu.layout',

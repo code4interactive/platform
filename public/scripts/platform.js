@@ -1,14 +1,18 @@
 $(function(){
 
     //BOOTSTRAP TOOLTIPS and POPOVERS
-    $("[rel=tooltip]").tooltip();
-    $("[rel=popover]").popover();
+    $("[rel=tooltip]").tooltip({html: true});
+    $("[rel=popover]").popover({html:true});
 
-    $('[data-rel=tooltip]').tooltip();
+    $('[data-rel=tooltip]').tooltip({html:true});
     $('[data-rel=popover]').popover({html:true});
+
 
     //Pobieramy eventy
     //parent.getEvents();
+
+    $(".chosen-select").chosen();
+
 
 
     var notification = new platform.notification();
@@ -18,6 +22,36 @@ $(function(){
 
     //$(document).ready( function() {
     notification.check();
+
+
+    $(".table-striped").on("click change", "tbody tr", function() {
+
+        if ($(this).find(".row-checkbox")) {
+
+            if ($(this).find(".row-checkbox").prop('checked')){
+                $(this).find(".row-checkbox").prop('checked', false);
+                $(this).addClass("ui-state-highlight");
+            }
+            else
+                $(this).find(".row-checkbox").prop('checked', true);
+        }
+    });
+
+    $(".table-striped").on("click change", "thead .row-checkbox", function(){
+
+        if ($(this).prop('checked')) {
+            $(this).prop('checked', false);
+            $(this).closest('table').find('tbody .row-checkbox').prop('checked', false);
+        }
+        else {
+            $(this).prop('checked', true);
+            $(this).closest('table').find('tbody .row-checkbox').prop('checked', true);
+        }
+
+
+    });
+
+
 
     //});
 
@@ -57,7 +91,6 @@ $(function(){
     }
 });
 function code4Loading(action) {
-
     if (action == 'start') {
         $('.code4-loading').css('margin-bottom', '0px');
     }
@@ -66,3 +99,4 @@ function code4Loading(action) {
     }
 
 }
+

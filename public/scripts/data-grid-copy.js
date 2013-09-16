@@ -15,10 +15,7 @@
  * @license    BSD License (3-clause)
  * @copyright  (c) 2011 - 2013, Cartalyst LLC
  * @link       http://cartalyst.com
- *
- * Modified by CODE4
  */
-
 ;(function($, window, document, undefined){
 
 	'use strict';
@@ -26,10 +23,10 @@
 	var defaults = {
 		source: null,
 		dividend: 1,
-		threshold: 1,
-		throttle: 10,
-		type: 'single',
-		loader: code4Loading,
+		threshold: 100,
+		throttle: 100,
+		type: 'multiple',
+		loader: undefined,
 		sort: {},
 		tempoOptions: {
 			var_braces: '\\[\\[\\]\\]',
@@ -37,8 +34,7 @@
 			escape: true
 		},
 		searchThreshold: 100,
-		callback: undefined,
-        middlePages: 5
+		callback: undefined
 	};
 
 	var helpers = {
@@ -74,6 +70,8 @@
 		this.opt.pagiThrottle = this.opt.throttle;
 
 		this._init();
+
+
 	}
 
 	DataGrid.prototype = {
@@ -105,20 +103,20 @@
 				this._logError('Missing a results container, make sure you have data-grid set!', this);
 			}
 
-			/*if(!this.$pagination.length){
+			if(!this.$pagination.length){
 				this._logError('Missing a pagination container, make sure you have data-grid set!', this);
 			}
 
 			if(!this.$filters.length){
 				this._logError('Missing a applied filters container, make sure you have data-grid set!', this);
-			}*/
+			}
 
 		},
 
 		_prepTemplates: function(){
 
 			this.opt.tmpl.results = Tempo.prepare(this.$results, this.opt.tempoOptions);
-			//this.opt.tmpl.pagination = Tempo.prepare(this.$pagination, this.opt.tempoOptions);
+			this.opt.tmpl.pagination = Tempo.prepare(this.$pagination, this.opt.tempoOptions);
 			this.opt.tmpl.appliedFilters = Tempo.prepare(this.$filters, this.opt.tempoOptions);
 
 		},
@@ -135,15 +133,6 @@
 				self._ajaxFetch();
 
 			});
-
-            this.$body.on('click', '[data-perpage]'+this.grid, function(e){
-
-                self.opt.throttle = $(this).val();
-                self._clearResults();
-                self._goToPage(1);
-                self._ajaxFetch();
-
-            });
 
 			this.$body.on('click', '[data-filter]'+this.grid, function(e){
 
@@ -163,7 +152,7 @@
 				if(self.opt.type === 'single' || self.opt.type === 'multiple'){
 
 					pageIdx = $(this).data('page');
-					//self.opt.tmpl.pagination.clear();
+					self.opt.tmpl.pagination.clear();
 					self._clearResults();
 
 				}
@@ -183,7 +172,7 @@
 			this.$pagination.on('click', '[data-throttle]', function(e){
 
 				self.opt.throttle += self.opt.pagiThrottle;
-				//self.opt.tmpl.pagination.clear();
+				self.opt.tmpl.pagination.clear();
 				self._clearResults();
 				self._ajaxFetch();
 
@@ -252,8 +241,7 @@
 			this.$body.on('click', '[data-reset]'+this.grid, function(e){
 				e.preventDefault();
 				self._reset();
-                self._goToPage(1);
-                self._ajaxFetch();
+				self._fetch();
 			});
 
 		},
@@ -360,11 +348,11 @@
 		_setSort: function(sort){
 
 			var arr = sort.split(':'),
-				direction = typeof arr[1] !== 'undefined' ? arr[1] : 'sorting_asc';
+				direction = typeof arr[1] !== 'undefined' ? arr[1] : 'asc';
 
 			if(arr[0] === this.opt.sort.column){
 
-				this.opt.sort.direction = (this.opt.sort.direction === 'sorting_asc') ? 'sorting_desc' : 'sorting_asc';
+				this.opt.sort.direction = (this.opt.sort.direction === 'asc') ? 'desc' : 'asc';
 
 			}else{
 
@@ -377,12 +365,12 @@
 
 		_setSortDirection: function(el){
 
-			$('[data-sort]'+this.grid).not(el).removeClass('sorting_asc sorting_desc');
+			$('[data-sort]'+this.grid).not(el).removeClass('asc desc');
 
-			if(el.hasClass('sorting_asc')){
-				el.removeClass('sorting_asc').addClass('sorting_desc');
+			if(el.hasClass('asc')){
+				el.removeClass('asc').addClass('desc');
 			}else{
-				el.removeClass('sorting_desc').addClass('sorting_asc');
+				el.removeClass('desc').addClass('asc');
 			}
 
 		},
@@ -408,7 +396,7 @@
 				self.opt.prevIdx = json.previous_page;
 				self.opt.totalPages = json.pages_count;
 
-                if(self.opt.type !== 'infinite'){
+				if(self.opt.type !== 'infinite'){
 					self.opt.tmpl.results.clear();
 				}
 
@@ -418,20 +406,7 @@
 					self.opt.tmpl.results.append(json.results);
 				}
 
-				//self.opt.tmpl.pagination.render(self._buildPagination(json.page, json.next_page, json.previous_page, json.pages_count));
-
-                self._c4BuildPagination(self._buildPagination(json.page, json.next_page, json.previous_page, json.pages_count), json.results.length);
-
-
-                    var pageStart = json.results.length * json.page - json.results.length + 1;
-                    var pageLimit = json.results.length * json.page;
-
-
-                    //if (self.$body.find('[data-info]'+this.grid) !== 'undefined') {
-                    self.$body.find('[data-info]'+self.grid).html('Wyniki ' + pageStart + ' do ' + pageLimit + ' z ' + self.opt.filterCount);
-                    //}
-
-
+				self.opt.tmpl.pagination.render(self._buildPagination(json.page, json.next_page, json.previous_page, json.pages_count));
 
 				if(json.pages_count <= 1 && self.opt.type === 'infinite'){
 					self.opt.tmpl.pagination.clear();
@@ -489,125 +464,12 @@
 
 			if(typeof this.opt.sort.column !== 'undefined' && typeof this.opt.sort.direction !== 'undefined'){
 				params.sort = this.opt.sort.column;
-				params.direction = this.opt.sort.direction.substring(8);
+				params.direction = this.opt.sort.direction;
 			}
 
 			return $.param(params);
 
 		},
-
-        _c4BuildPagination: function(params, resultsOnPage) {
-
-            var li, a, i, offset, pagiWrapper, pagesCount;
-            params = params[0];
-
-
-            var midpages = this.opt.middlePages;
-            var middleAt = Math.ceil(midpages/2);
-
-            pagiWrapper = this.$pagination.find('ul');
-            pagiWrapper.find('li').remove();
-
-            /* PREV */
-            li = $(document.createElement('li')).addClass('prev');
-
-            a = $(document.createElement('a')).attr('href', '#');
-            i = $(document.createElement('i')).addClass('icon-double-angle-left');
-
-            if (params.prevPage == null) li.addClass('disabled');
-            else a.attr('data-page', params.prevPage);
-
-            a.append(i);
-            li.append(a);
-
-            pagiWrapper.append(li);
-            /* PREV END */
-
-
-            offset = params.page - (middleAt - 1);
-            if (params.page < middleAt) offset = 1;
-            else if (params.page > params.totalPages-middleAt) offset = params.totalPages - (midpages - 1);
-
-            if (params.totalPages <= midpages) offset = 1;
-
-
-            /* FIRST */
-            if (params.totalPages >= midpages && params.page > middleAt) {
-
-                li = $(document.createElement('li'));
-                a = $(document.createElement('a')).attr('href', '#').text(1);
-                a.attr('data-page', 1);
-
-                li.append(a);
-
-                pagiWrapper.append(li);
-
-                li = $(document.createElement('li')).addClass('disabled');
-                a = $(document.createElement('a')).attr('href', '#').text('...');
-                li.append(a);
-                pagiWrapper.append(li);
-
-            }
-            /* FIRST END */
-
-            if (params.totalPages < midpages) pagesCount = params.totalPages;
-            else pagesCount = midpages;
-
-            for(var lp = offset; lp < offset+pagesCount; lp++) {
-
-                li = $(document.createElement('li'));
-                a = $(document.createElement('a')).attr('href', '#').text(lp);
-                a.attr('data-page', lp);
-
-                if (parseInt(params.page) == lp) { li.addClass('active');  }
-
-                li.append(a);
-
-                pagiWrapper.append(li);
-
-            }
-
-
-            /* LAST */
-            if (params.totalPages > midpages && params.page < params.totalPages - (middleAt - 1)) {
-
-
-                li = $(document.createElement('li')).addClass('disabled');
-                a = $(document.createElement('a')).attr('href', '#').text('...');
-                li.append(a);
-                pagiWrapper.append(li);
-
-
-                li = $(document.createElement('li'));
-                a = $(document.createElement('a')).attr('href', '#').text(params.totalPages);
-                a.attr('data-page', params.totalPages);
-
-                li.append(a);
-
-                pagiWrapper.append(li);
-
-
-            }
-            /* LAST END */
-
-
-            /* NEXT */
-            li = $(document.createElement('li')).addClass('next');
-
-            a = $(document.createElement('a')).attr('href', '#');
-            i = $(document.createElement('i')).addClass('icon-double-angle-right');
-
-            if (params.nextPage == null) li.addClass('disabled');
-            else a.attr('data-page', params.nextPage);
-
-            a.append(i);
-            li.append(a);
-
-            pagiWrapper.append(li);
-            /* NEXT END */
-
-
-         },
 
 		_buildPagination: function(page, next, prev, total){
 
@@ -628,7 +490,9 @@
 					pageStart: perPage === 0 ? 0 : (this.opt.pageIdx === 1 ? 1 : (perPage * (this.opt.pageIdx - 1) + 1)),
 					pageLimit: this.opt.pageIdx === 1 ? perPage : (this.opt.totalCount < (perPage * this.opt.pageIdx)) ? this.opt.totalCount : perPage * this.opt.pageIdx,
 					prevPage: prev,
-					nextPage: next,page: page,active: true,
+					nextPage: next,
+					page: page,
+					active: true,
 					totalPages: total,
 					single: true
 				};
@@ -746,7 +610,7 @@
 
 		_reset: function(){
 
-			this.$body.find('[data-sort]').removeClass('sorting_asc sorting_desc');
+			this.$body.find('[data-sort]').removeClass('asc desc');
 			this.$body.find('[data-search]').find('input').val('');
 			this.$body.find('[data-search]').find('select').prop('selectedIndex', 0);
 

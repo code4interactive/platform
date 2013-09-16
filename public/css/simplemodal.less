@@ -1,0 +1,42 @@
+/*
+* Mootools Simple Modal
+* Version 1.0
+* Copyright (c) 2011 Marco Dell'Anna - http://www.plasm.it
+*
+* Markup Modal
+* <div class="simple-modal" id="simple-modal">
+*   <div class="simple-modal-header">
+*     <a class="close" href="#">×</a>
+*     <h1>SimpleModal Title</h1>
+*   </div>
+*   <div class="simple-modal-body">
+*     <div class="contents">
+*       <p>
+*         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+*       </p>
+*     </div>
+*   </div>
+*   <div class="simple-modal-footer">
+*     <a class="btn primary" href="#">Primary</a>
+*     <a class="btn secondary" href="#">Secondary</a>
+*   </div>
+* </div>
+*/
+
+/* Vars */
+
+/* Loading style */
+.simple-modal.loading{
+  .simple-modal-body{
+    min-height:60px;
+  	background:transparent url("../images/loader.gif") no-repeat center center;
+
+  	div.contents{
+      display:none;
+    }
+  }
+  
+  .close, .simple-modal-header, .simple-modal-footer{
+    display:none;
+  }
+}

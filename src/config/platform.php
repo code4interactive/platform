@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'platformName' => 'CODE4 Platform v1.0.5'
+    'platformName' => 'CODE4 Platform v1.1.1'
 );
