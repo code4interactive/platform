@@ -8,6 +8,7 @@ class Administration_Users extends \BaseController {
     }
 
     public function getUsers() {
+//        /\Menu::breadcrumbs()->add(array('id'=>'Administration', 'name'=>'Administration', 'url'=>\URL::route('administration')))->at();
         return \View::make('platform::administration.listUsers');
     }
 
@@ -25,6 +26,7 @@ class Administration_Users extends \BaseController {
     }
 
     public function showUsers() {
+        Menu::breadcrumbs()->add(array('id'=>'test', 'name'=>'Test', 'url'=>\URL::route('platformHome')))->at(2);
 
         return \View::make('platform::administration.listUsers');
 
