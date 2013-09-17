@@ -84,7 +84,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
     //return $view;
 });
 
-\Route::get('dataSrc', function(){
+\Route::post('dataSrc', function(){
 
     $user = new \Code4\Platform\Models_Konta;
 

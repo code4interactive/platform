@@ -116,7 +116,9 @@ class DataGridColumn implements RenderableInterface {
                     $this->sorted = $value;
                     break;
                 case 'sortDirection':
+                case 'sortDir':
                     $this->sortDirection = $value;
+                    $this->sorted = true;
                     break;
                 case 'searchable':
                     $this->searchable = $value;
@@ -172,13 +174,14 @@ class DataGridColumn implements RenderableInterface {
 
     public function setSortDir($sort_dir)
     {
-        $this->sort_dir = $sort_dir;
+        $this->sortDirection = $sort_dir;
+        $this->sorted = true;
         return $this;
     }
 
     public function getSortDir()
     {
-        return $this->sort_dir;
+        return $this->sortDirection;
     }
 
     public function setSortable($sortable)

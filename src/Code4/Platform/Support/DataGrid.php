@@ -183,6 +183,22 @@ class DataGrid {
 
     public function script() {
 
+        $sorted = "";
+        foreach ($this->columns as $column) {
+
+            if ($column->getSorted()) {
+
+                $sorted = "
+                    column: '".$column->getId()."',
+                    direction: '";
+                $sorted .= $column->getSortDir() == "asc" ? "sorting_asc" : "sorting_desc";
+                $sorted .= "'";
+
+            }
+
+        }
+
+
         $out = "
             <script>
             $(function()
@@ -190,8 +206,7 @@ class DataGrid {
                 $.datagrid('{$this->dataGridId}', '.results', '.pagination', '.applied', {
                 loader: code4Loading,
                 sort: {
-                    column: 'id',
-                    direction: 'sorting_asc'
+                    ". $sorted ."
                 },
                 throttle: ". $this->throttle .",
                 middlePages: ". $this->paginationCount .",

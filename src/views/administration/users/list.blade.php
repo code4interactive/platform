@@ -1,7 +1,4 @@
-
 <?php
-
-
 
 $dg = new \Code4\Platform\Support\DataGrid('/dataSrc', 'main8', array(
 
@@ -35,6 +32,8 @@ $dg = new \Code4\Platform\Support\DataGrid('/dataSrc', 'main8', array(
 
 ));
 
+$dg->setPaginationCount(3);
+
 $dg->toolsColumn()->setDecorator(function($object){
     return addEditButton('/edit/[[id]]');
 });
@@ -51,6 +50,4 @@ $dg->setTools(function($object){
     return addEditButton('test').addDeleteButton();
 });
 
-?>
-<?php $dg->render(); ?>
-
+$dg->render();

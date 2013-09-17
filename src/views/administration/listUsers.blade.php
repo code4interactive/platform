@@ -23,7 +23,8 @@ $dg = new \Code4\Platform\Support\DataGrid('/dataSrc', 'main2', array(
     array(
         'id' => 'id',
         'label' => "Id",
-        'width' => '20px'
+        'width' => '20px',
+        'sortDir' => 'asc'
     ),
     array(
         'id' => 'konto',
@@ -42,6 +43,8 @@ $dg = new \Code4\Platform\Support\DataGrid('/dataSrc', 'main2', array(
     )
 
 ));
+
+//$dg->id()->setSortDir('desc');
 
 $dg->toolsColumn()->setDecorator(function($object){
    return addEditButton('/edit/[[id]]');
