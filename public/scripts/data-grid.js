@@ -139,6 +139,7 @@
             this.$body.on('click', '[data-perpage]'+this.grid, function(e){
 
                 self.opt.throttle = $(this).val();
+                self.opt.pagiThrottle = self.opt.throttle;
                 self._clearResults();
                 self._goToPage(1);
                 self._ajaxFetch();
@@ -395,6 +396,7 @@
 
 			$.ajax({
 				url: this.opt.source,
+                type: 'POST',
 				dataType: 'json',
 				data: this._buildFetchData()
 			})

@@ -82,7 +82,7 @@
     td {
       text-align: center;
     }
-    td:first-child {
+    td:first-child, .tools {
       text-align: left;
       width: 10%;
 
@@ -97,9 +97,30 @@
         background: #dddddd url(/packages/code4/platform/images/datagrid_toolbar_arrow.png) no-repeat 11px 6px;
       }
     }
-    td:last-child {
+    .tools {
+      display: inline-block;
+      width: auto;
+      & > div {
+        margin: 0;
+      }
+    }
+    td:last-child, .last {
       text-align: right;
       width: 30%;
+    }
+    .last {
+      display: inline-block;
+      float: right;
+      margin: 5px;
+      width: auto;
+    }
+
+    .middle {
+      display: inline-block;
+      width: 160px;
+      position: absolute;
+      left: 50%;
+      margin-left: -80px;
     }
   }
 
@@ -126,7 +147,11 @@
 }
 
 .dataTables_wrapper .row-fluid:first-child {
-
   padding: 0px;
+}
+
+.pagination ul > li > a, .pagination ul > li > span {
+
+  padding: 4px 5px;
 
 }

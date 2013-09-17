@@ -62,7 +62,8 @@
 .dataTables_wrapper .table_footer td {
   text-align: center;
 }
-.dataTables_wrapper .table_footer td:first-child {
+.dataTables_wrapper .table_footer td:first-child,
+.dataTables_wrapper .table_footer .tools {
   text-align: left;
   width: 10%;
   margin: 0;
@@ -70,15 +71,37 @@
   /*padding: 4px 0 0 8px;*/
 
 }
-.dataTables_wrapper .table_footer td:first-child > div {
+.dataTables_wrapper .table_footer td:first-child > div,
+.dataTables_wrapper .table_footer .tools > div {
   background-color: #ddd;
   padding: 10px 14px 10px 37px;
   margin: -1px 0 0 -1px;
   background: #dddddd url(/packages/code4/platform/images/datagrid_toolbar_arrow.png) no-repeat 11px 6px;
 }
-.dataTables_wrapper .table_footer td:last-child {
+.dataTables_wrapper .table_footer .tools {
+  display: inline-block;
+  width: auto;
+}
+.dataTables_wrapper .table_footer .tools > div {
+  margin: 0;
+}
+.dataTables_wrapper .table_footer td:last-child,
+.dataTables_wrapper .table_footer .last {
   text-align: right;
   width: 30%;
+}
+.dataTables_wrapper .table_footer .last {
+  display: inline-block;
+  float: right;
+  margin: 5px;
+  width: auto;
+}
+.dataTables_wrapper .table_footer .middle {
+  display: inline-block;
+  width: 160px;
+  position: absolute;
+  left: 50%;
+  margin-left: -80px;
 }
 .datagrid-search form {
   margin: 0;
@@ -97,4 +120,8 @@
 }
 .dataTables_wrapper .row-fluid:first-child {
   padding: 0px;
+}
+.pagination ul > li > a,
+.pagination ul > li > span {
+  padding: 4px 5px;
 }

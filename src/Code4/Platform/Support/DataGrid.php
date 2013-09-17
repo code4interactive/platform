@@ -236,16 +236,12 @@ class DataGrid {
                 </div>
             </div>
             <?php echo $this->table(); ?>
-            <table class="table_footer">
-                <tr>
-                    <td><?php echo $this->tools(); ?></td>
-                    <td>
-                        <div data-info data-grid="<?php echo $this->dataGridId; ?>">Showing 1 to 10 of 23 entries</div>
-                        <?php echo $this->pageLimits(); ?>
-                    </td>
-                    <td><?php echo $this->pagination(); ?></td>
-                </tr>
-            </table>
+            <div class="table_footer">
+                <div class="tools"><?php echo $this->tools(); ?></div>
+                <div class="middle"><div data-info data-grid="<?php echo $this->dataGridId; ?>">Showing 1 to 10 of 23 entries</div>
+                    <?php echo $this->pageLimits(); ?></div>
+                <div class="last"><?php echo $this->pagination(); ?></div>
+            </div>
         </div>
 
         <?php
