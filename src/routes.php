@@ -64,7 +64,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 \Route::get('test/{id}', 'AdministrationController@showProfile');
 */
 
-\Route::post('/', function()
+\Route::post('getNotifications', function()
 {
 
     //$view = View::make('platform::templates.ace.dashboard');

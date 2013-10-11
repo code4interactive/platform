@@ -20,6 +20,8 @@
     <!--page specific plugin styles-->
     {{ basset_stylesheets('forms') }}
 
+    <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/css/plugins.min.css" />
+
     <!--fonts-->
 
     {{--<link rel="stylesheet" href="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/css/ace-fonts.css" />--}}
@@ -37,7 +39,6 @@
 
 
     <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/css/platform.min.css" />
-    <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/css/simplemodal.css" />
 
     <!--inline styles related to this page-->
     {{ basset_stylesheets('application') }}

@@ -71,6 +71,7 @@ $dg->setTools(function($object){
 
 
 
+
 <button id="button2">
     Pokaz modal
 </button>
@@ -139,8 +140,6 @@ $dg->setTools(function($object){
 
 
 @stop
-
-
 
 
 

@@ -98,10 +98,11 @@
 }
 .dataTables_wrapper .table_footer .middle {
   display: inline-block;
-  width: 160px;
+  width: 200px;
   position: absolute;
   left: 50%;
-  margin-left: -80px;
+  margin-left: -100px;
+  text-align: center;
 }
 .datagrid-search form {
   margin: 0;

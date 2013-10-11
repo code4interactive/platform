@@ -1,27 +1,57 @@
+(function($, window, document) {
+
+    'use strict';
+
+    var defaults = {
+        path_assets: "/packages/code4/platform/"
+
+    }
+
+    function Platform(options) {
+        this.opt = $.extend({}, defaults, options);
+        this.$body = $(document.body);
+        this.$window = $(window);
+    }
+
+    Platform.prototype = {
+        _init: function(){
+
+            //BOOTSTRAP TOOLTIPS and POPOVERS
+            $('[rel=tooltip],[data-rel=tooltip]').tooltip({html: true});
+            $('[rel=popover],[data-rel=popover]').popover({html:true});
+
+
+        }
+    }
+
+
+    $.platform = new Platform();
+
+})(jQuery, window, document);
+
+
+$( document ).ready( function(){
+
+
+    $.notifications.check();
+
+
+} );
+
+
+
 $(function(){
 
-    //BOOTSTRAP TOOLTIPS and POPOVERS
-    $("[rel=tooltip]").tooltip({html: true});
-    $("[rel=popover]").popover({html:true});
-
-    $('[data-rel=tooltip]').tooltip({html:true});
-    $('[data-rel=popover]').popover({html:true});
-
-
-    //Pobieramy eventy
-    //parent.getEvents();
-
-    $(".chosen-select").chosen();
 
 
 
-    var notification = new platform.notification();
+    //var notification = new platform.notification();
 
     var currentTime = new Date();
     var seconds = currentTime.getSeconds();
 
     //$(document).ready( function() {
-    notification.check();
+    //notification.check();
 
 
     $(".table-striped").on("click change", "tbody tr", function() {

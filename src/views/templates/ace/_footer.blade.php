@@ -27,6 +27,7 @@
 <script src="{{ $platform['assetsPath'] }}/scripts/tempo.js"></script>
 <script src="{{ $platform['assetsPath'] }}/scripts/data-grid.js"></script>
 <script src="{{ $platform['assetsPath'] }}/scripts/jquery.simplemodal.1.4.4.min.js"></script>
+<script src="{{ $platform['assetsPath'] }}/scripts/jquery.gritter.min.js"></script>
 
 
 <!--inline scripts related to this page-->
