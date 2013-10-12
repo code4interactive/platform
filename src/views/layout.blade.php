@@ -15,7 +15,7 @@
 
                 {{Menu::topMenu()}}
 
-                @include('platform::platform._notifications')
+                <!--@include('platform::platform._notifications')-->
 
                 {{-- $userProfile --}}
 

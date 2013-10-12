@@ -19,6 +19,8 @@ class Administration_Users extends \BaseController {
 
 
     public function addUser() {
+        \Notification::success('Success message2')->atPosition(1);
+        \Notification::error('Success message')->atPosition(2);
 
 
         return \View::make('platform::administration.users.add');

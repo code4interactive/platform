@@ -46,6 +46,8 @@ class Platform {
         $autoLoader->alias('C4Former', 'Code4\C4former\Facades\C4Former');
        /* $autoLoader->alias('Former', 'Former\Facades\Former');*/
 
+
+
     }
 
     public function addPackageAliases () {
@@ -84,6 +86,43 @@ class Platform {
 
         return $this->view;
 
+    }
+
+    public function keepNotifications() {
+
+        $flashed = \Session::get('notifications_default');
+
+        if($flashed && true)
+        {
+            \Session::forget('notifications_default');
+
+            $messages = json_decode($flashed);
+
+            if(is_array($messages))
+            {
+                foreach($messages as $key => $message)
+                {
+
+                    $config = array('message' => 'ok', 'format' => ':message');
+
+                    if(isset($message->alias) && !is_null($message->alias))
+                    {
+                        $config['alias'] = $message->alias;
+                    }
+
+                    if(isset($message->position) && !is_null($message->position))
+                    {
+                        $config['position'] = $message->position;
+                    }
+
+                    $el = \Notification::add($message->type, $message->message, true, $message->format);
+
+                    if (array_key_exists('alias', $config)) $el->alias($message->alias);
+                    if (array_key_exists('position', $config)) $el->atPosition($message->position);
+
+                }
+            }
+        }
     }
 
     public function __call($name, $args) {

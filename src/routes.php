@@ -17,6 +17,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 |
 */
 
+//\Session::keep(array('notifications_default'));
 
 //\Route::controller('administration', 'Code4\Platform\Controllers\Administration_Users');
 \Route::get('administration/users/add', 'Code4\Platform\Controllers\Administration_Users@addUser');
@@ -75,6 +76,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
         $temp = Notification::all()->toArray();
 
         Notification::clearAll();
+        \Session::forget('notifications_default');
 
         \Response::json($temp);
         return $temp;

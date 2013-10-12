@@ -23,6 +23,7 @@ class PlatformServiceProvider extends ServiceProvider {
         include __DIR__.'/../../config/icons.php';
 
         $this->app['platform']->collectViewData();
+        $this->app['platform']->keepNotifications();
 	}
 
 	/**
