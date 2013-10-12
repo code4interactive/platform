@@ -101,8 +101,6 @@
 
         showMessage: function (title, text, type, sticky, image) {
 
-            console.log(typeof type);
-
             title = typeof title == 'undefined' ? '' : title;
             text = typeof text == 'undefined' ? '' : text;
             type = typeof type == 'undefined' ? 'info' : type;
