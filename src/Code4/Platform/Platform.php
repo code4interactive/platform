@@ -64,7 +64,9 @@ class Platform {
 
         \Config::set('platform::config', $config);
 
-        \View::share('platform', array('assetsPath'=>'/packages/code4/platform', 'templatePath' => 'assets/ace-1.1.2'));
+        //  \View::share('platform', array('assetsPath'=>'/packages/code4/platform', 'templatePath' => 'assets/ace-1.1.2'));
+        \View::share('platform', array('assetsPath'=>'/packages/code4/platform', 'templatePath' => 'assets/ace-v1.2--bs-v3.0.0'));
+
 
         \Menu::loadMenuFromConfig(\Config::get('platform::menu'));
         \Menu::breadcrumbs()->add(array('id'=>'test', 'name'=>'Test', 'url'=>\URL::route('platformHome')));

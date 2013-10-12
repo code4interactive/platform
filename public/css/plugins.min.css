@@ -69,7 +69,6 @@
   cursor: pointer;
   width: 30px;
   height: 30px;
-  overflow: hidden;
 }
 .gritter-title {
   font-size: 14px;
@@ -104,16 +103,14 @@
 .gritter-light .gritter-title {
   text-shadow: none;
 }
-.gritter-close {
-  padding-left: 10px;
-  overflow: hidden;
-}
-.gritter-close:hover {
-  text-decoration: none;
-}
+/*.gritter-close {
+   padding-left: 10px;
+   overflow: hidden;
+   &:hover { text-decoration: none; }
+ }
 .gritter-close::before {
   margin-right: 10px;
-}
+}*/
 /*
 * Mootools Simple Modal
 * Version 1.0
