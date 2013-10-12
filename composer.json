@@ -14,7 +14,7 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/code4interactive/form"
+            "url": "https://github.com/code4interactive/c4former"
         },
         {
             "type": "vcs",
@@ -30,10 +30,10 @@
         "illuminate/support": "4.0.x",
         "edvinaskrucas/notification": "1.*@dev",
         "code4/menu": "1.0.*",
-        "code4/form": "2.0.*",
+        "code4/c4former": "1.0.*",
         "cartalyst/sentry": "2.0.*",
         "jasonlewis/basset": "dev-master",
-        "anahkiasen/former": "dev-develop"
+        "thomaswelton/laravel-gravatar": "dev-master"
     },
     "autoload": {
         "classmap": [
