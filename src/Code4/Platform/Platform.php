@@ -34,19 +34,16 @@ class Platform {
         $autoLoader->alias('Basset', 'Basset\Facade');
 
         \App::register('Code4\Menu\MenuServiceProvider');
-        /*\App::register('Code4\Form\FormServiceProvider');*/
         \App::register('Cartalyst\Sentry\SentryServiceProvider');
         \App::register('Cartalyst\DataGrid\DataGridServiceProvider');
         \App::register('Code4\C4former\C4formerServiceProvider');
         \App::register('Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider');
-        /*\App::register('Former\FormerServiceProvider');*/
 
         $autoLoader->alias('Notification', 'Krucas\Notification\Facades\Notification');
         $autoLoader->alias('Sentry', 'Cartalyst\Sentry\Facades\Laravel\Sentry');
         $autoLoader->alias('DataGrid', 'Cartalyst\DataGrid\Facades\DataGrid');
         $autoLoader->alias('C4Former', 'Code4\C4former\Facades\C4Former');
         $autoLoader->alias('Gravatar', 'Thomaswelton\LaravelGravatar\Facades\Gravatar');
-       /* $autoLoader->alias('Former', 'Former\Facades\Former');*/
 
 
 
