@@ -64,7 +64,12 @@ $( document ).ready( function(){
 
 
     $.platform._init();
+    $.c4forms._init();
     $.notifications.check();
+
+    $(document).ajaxSuccess(function(event, request, settings) {
+        if (!isset(settings.data.responseVariant)) $.notifications.check();
+    });
 
 
 } );
