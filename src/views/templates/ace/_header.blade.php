@@ -27,6 +27,7 @@
     {{--<link rel="stylesheet" href="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/css/ace-fonts.css" />--}}
     {{--<link rel="stylesheet" href="{{ $platform['assetsPath'] }}/css/fonts.min.css" />--}}
     <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/css/ace-fonts.css" />
+    <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/css/chosen.min.css" />
 
     <!--ace styles-->
 

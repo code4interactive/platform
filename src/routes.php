@@ -22,6 +22,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 //\Route::controller('administration', 'Code4\Platform\Controllers\Administration_Users');
 \Route::get('administration/users/add', 'Code4\Platform\Controllers\Administration_Users@addUser');
 \Route::get('administration/users/get', 'Code4\Platform\Controllers\Administration_Users@getUsers');
+\Route::post('administration/users/add', 'Code4\Platform\Controllers\Administration_Users@saveForm');
 
 
 \Route::get('/', array('as' => 'platformHome', function()

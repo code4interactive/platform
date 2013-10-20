@@ -21,10 +21,12 @@
 
 <script src="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/ace-elements.min.js"></script>
 <script src="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/ace.min.js"></script>
+<script src="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/chosen.jquery.min.js"></script>
 
 <!--code4 scripts-->
 <script src="{{ $platform['assetsPath'] }}/scripts/helpers.js"></script>
 <script src="{{ $platform['assetsPath'] }}/scripts/notifications.js"></script>
+<script src="{{ $platform['assetsPath'] }}/scripts/form.js"></script>
 <script src="{{ $platform['assetsPath'] }}/scripts/platform.js"></script>
 
 <script src="{{ $platform['assetsPath'] }}/scripts/tempo.js"></script>
@@ -32,6 +34,7 @@
 <script src="{{ $platform['assetsPath'] }}/scripts/jquery.simplemodal.1.4.4.min.js"></script>
 <script src="{{ $platform['assetsPath'] }}/scripts/jquery.gritter.min.js"></script>
 <script src="{{ $platform['assetsPath'] }}/scripts/jquery.easy-pie-chart.min.js"></script>
+<script src="{{ $platform['assetsPath'] }}/scripts/jquery.form.min.js"></script>
 
 
 <!--inline scripts related to this page-->
