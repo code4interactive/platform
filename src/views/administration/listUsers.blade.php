@@ -18,12 +18,14 @@ $dg = new \Code4\Platform\Support\DataGrid('/dataSrc', 'main2', array(
         'label' => "",
         'width' => '10px',
         'sortable' => false,
-        'searchable' => false
+        'searchable' => false,
+        'selectRow' => true,
+        'selectAll' => true
     ),
     array(
         'id' => 'id',
         'label' => "Id",
-        'width' => '20px',
+        'width' => '50px',
         'sortDir' => 'asc'
     ),
     array(
@@ -47,7 +49,7 @@ $dg = new \Code4\Platform\Support\DataGrid('/dataSrc', 'main2', array(
 //$dg->id()->setSortDir('desc');
 
 $dg->toolsColumn()->setDecorator(function($object){
-   return addEditButton('/edit/[[id]]');
+   return addDGEditButton('/edit/[[id]]');
 });
 
 $dg->actions()->setDecorator(function($object){
@@ -59,7 +61,7 @@ $dg->actions()->setHeaderDecorator(function($object){
 });
 
 $dg->setTools(function($object){
-    return addEditButton('test').addDeleteButton();
+    return addDGEditButton('test').addDGDeleteButton().addDGButton(\Icons::$icon_apple, \Icons::$color_green, \Icons::$bigger_125, "opis opis");
 });
 
 ?>
@@ -67,10 +69,6 @@ $dg->setTools(function($object){
     Lista wyników
 </div>
 <?php $dg->render(); ?>
-
-
-
-
 
 <button id="button2">
     Pokaz modal

@@ -71,26 +71,33 @@ function addCheckbox($idField) {
 
 }
 
-function addEditButton($url) {
+function addDGEditButton($url, $size='bigger-125') {
     return '<a href="'.$url.'" data-rel="tooltip" data-placement="bottom" class="tooltip-info" data-original-title="Edycja">
-                <i class="icon-pencil blue bigger-125"></i>
+                <i class="icon-pencil blue '.$size.'"></i>
             </a>';
 
 }
 
-function addDeleteButton() {
+function addDGDeleteButton($size='bigger-125') {
     return '<a href="#" data-rel="tooltip" data-placement="bottom" class="tooltip-error" data-original-title="Usuń">
-                <i class="icon-remove red bigger-125"></i>
+                <i class="icon-remove red '.$size.'"></i>
             </a>';
 }
 
-function addButton($icon, $tooltip=null) {
+/**
+ * @param $icon
+ * @param string $color - dark, white, red, light-red, blue, light-blue, green, light-green, orange, light-orange, orange2, purple, pink, pink2, brown, grey, light-grey
+ * @param string $size - bigger-110>bigger-300, 123,175,225,275; smaller-90>smaller-20,75
+ * @param null $tooltip
+ * @return string
+ */
+function addDGButton($icon, $color='blue', $size='bigger-125', $tooltip=null) {
 
     $tooltipstr = !is_null($tooltip) ? 'class="tooltip-info" data-original-title="'.$tooltip.'"' : '';
 
     return '
     <a href="#" '.$tooltipstr.'>
-        <i class="'.$icon.' icon-2x blue"></i>
+        <i class="'.$icon.' '.$color.' '.$size.'"></i>
     </a>';
 
 

@@ -72,6 +72,12 @@
 
 .dataTables_wrapper {
 
+
+  //td:first-child {
+  .check, .check-th2 {
+    background-color: #dddddd!important;
+  }
+
   .datagrid-search {
     select { width: auto; }
   }
@@ -82,49 +88,60 @@
     td {
       text-align: center;
     }
-    td:first-child, .tools {
-      text-align: left;
-      width: 10%;
 
-      margin: 0;
+    .col-sm-4 {
+      padding: 2px 0;
+    }
+
+    .tools {
+      margin: -2px 0 0 0px;
       vertical-align: top;
-      /*padding: 4px 0 0 8px;*/
 
       & > div {
         background-color: #ddd;
-        padding: 10px 14px 10px 37px;
+        /*padding: 10px 14px 10px 37px;*/
+        padding: 5px 8px 4px 8px;
         margin: -1px 0 0 -1px;
-        background: #dddddd url(/packages/code4/platform/images/datagrid_toolbar_arrow.png) no-repeat 11px 6px;
+        /*background: #dddddd url(/packages/code4/platform/images/datagrid_toolbar_arrow.png) no-repeat 11px 6px;*/
       }
     }
     .tools {
-      display: inline-block;
-      width: auto;
+      //display: inline-block;
+      //width: auto;
       & > div {
         margin: 0;
       }
     }
     td:last-child, .last {
-      text-align: right;
-      width: 30%;
+      //text-align: right;
+      //width: 30%;
+    }
+    .showing {
+      padding: 4px;
+      margin-left: 5px;
     }
     .last {
-      display: inline-block;
-      float: right;
-      margin: 5px;
-      width: auto;
+      //display: inline-block;
+      //float: right;
+      //margin: 5px;
+      //width: auto;
+      text-align: right;
+      .pagination { float: right; margin-right: -1px }
     }
 
     .middle {
-      display: inline-block;
-      width: 200px;
-      position: absolute;
-      left: 50%;
-      margin-left: -100px;
       text-align: center;
     }
   }
 
+}
+
+.btn {
+  padding: 2px 6px 3px;
+}
+
+.dataTables_wrapper {
+  margin-bottom: 10px;
 }
 
 .datagrid-search {
@@ -132,9 +149,6 @@
   form {
     margin: 0;
     display: inline;
-  }
-  .input-append {
-    margin-top:10px;
   }
   .tag {
     margin-bottom: 0;
@@ -144,15 +158,29 @@
     float: right;
     width: auto;
   }
+  &.row:first-child {
+    padding-top: 4px;
+    padding-bottom: 4px;
 
+    select { float: left; margin-top: 2px; padding: 0px; }
+    .filter { padding-left: 1px; }
+
+  }
 }
 
 .dataTables_wrapper .row-fluid:first-child {
   padding: 0px;
 }
 
-.pagination ul > li > a, .pagination ul > li > span {
-
-  padding: 4px 5px;
-
+.pagination {
+  margin:0;
 }
+
+.pagination ul > li > a, .pagination ul > li > span {
+  padding: 2px 5px;
+}
+
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+  padding: 4px 8px;
+}
+

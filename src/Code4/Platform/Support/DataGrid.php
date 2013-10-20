@@ -120,7 +120,7 @@ class DataGrid {
 
         $out = '
             <div class="dataTables_paginate paging_bootstrap pagination" data-grid="'.$this->dataGridId.'">
-                <ul>
+                <ul class="pagination">
                     <li class="prev disabled"><a href="#"><i class="icon-double-angle-left"></i></a></li>
                     <li class="active"><a href="#">1</a></li>
                     <li class="next disabled"><a href="#"><i class="icon-double-angle-right"></i></a></li>
@@ -136,7 +136,8 @@ class DataGrid {
 
         $out = '
         <form method="post" action="" accept-charset="utf-8" data-search data-grid="'.$this->dataGridId.'">
-            <div class="input-append">
+            <div class="input-append col-sm-6">
+
                 <select name="column" class="hidden-select chosen-select2" >
                     <option value="all">Wszystkie</option>';
 
@@ -149,21 +150,21 @@ class DataGrid {
                     $out .= '
                 </select>
 
-                <input name="filter" autocomplete="off" type="text" placeholder="Filtruj wg...">
-
-                <button class="btn btn-info search-btn">
-                    <i class="icon-search bigger-110"></i>
-                    Filtruj
-                </button>
-
-                <button class="btn" data-reset data-grid="'.$this->dataGridId.'">
-                    <i class="icon-undo bigger-110"></i>
-                    Reset
-                </button>
+                <div class="input-group col-sm-6 filter">
+                  <input name="filter" autocomplete="off" class="form-control" type="text" placeholder="Filtruj wg...">
+                  <div class="input-group-btn btn-group">
+                    <button class="btn btn-info search-btn">
+                        <span class="icon-search"></span>
+                    </button>
+                    <button class="btn" data-reset data-grid="'.$this->dataGridId.'">
+                        <span class="icon-undo"></span>
+                    </button>
+                  </div>
+                </div>
 
             </div>
         </form>
-        <div class="applied tags" data-grid="'.$this->dataGridId.'">
+        <div class="applied tags col-sm-6" data-grid="'.$this->dataGridId.'">
             <span data-template class="tag">
                 [? if column === undefined ?]
                 [[ valueLabel ]]
@@ -230,18 +231,19 @@ class DataGrid {
         ?>
 
         <div class="dataTables_wrapper" role="grid">
-            <div class="row-fluid datagrid-search">
-                <div class="span12">
-                    <?php echo $this->search(); ?>
-                </div>
+            <div class="row datagrid-search">
+                <?php echo $this->search(); ?>
             </div>
             <?php echo $this->table(); ?>
             <div class="table_footer">
-                <div class="tools"><?php echo $this->tools(); ?></div>
-                <div class="middle"><div data-info data-grid="<?php echo $this->dataGridId; ?>">Showing 1 to 10 of 23 entries</div>
-                    <?php echo $this->pageLimits(); ?></div>
-                <div class="last"><?php echo $this->pagination(); ?></div>
+                <div class="col-sm-4">
+                    <div class="tools"><?php echo $this->tools(); ?></div>
+                    <div class="showing pull-left" data-info data-grid="<?php echo $this->dataGridId; ?>">Showing 1 to 10 of 23 entries</div>
+                </div>
+                <div class="col-sm-4 middle"><?php echo $this->pageLimits(); ?></div>
+                <div class="last col-sm-4"><?php echo $this->pagination(); ?></div>
             </div>
+            <div class="clearfix"></div>
         </div>
 
         <?php

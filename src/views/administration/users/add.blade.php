@@ -24,6 +24,7 @@ $form->test();*/
 \C4Former::text("cc")->before("bb");
 
 \C4Former::select("aaa")->option("test");
+//\C4Former::render();
 //\C4Former::test();
 ?>
 

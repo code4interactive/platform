@@ -27,6 +27,9 @@ class DataGridColumn implements RenderableInterface {
 
     protected $searchable = true;  //tells javascript to search in this column and adds it to filters
 
+    protected $selectRow = false;
+    protected $selectAll = false;
+
     public function __construct($dataGridId, $options = array()) {
 
         $this->dataGridId = $dataGridId;
@@ -47,6 +50,7 @@ class DataGridColumn implements RenderableInterface {
 
     public function renderHeader() {
 
+        $checker = $this->selectAll ? 'check-th' : '';
 
         $width = !is_null($this->width) ? 'style="width: '. $this->width .'"' : '';
         $datasort = $this->sortable ? 'data-sort="'.$this->id.'" class="sortable sorting"' : '';
@@ -55,22 +59,24 @@ class DataGridColumn implements RenderableInterface {
         if(is_callable($this->headerDecorator))
         {
             $d = $this->headerDecorator;
-            return '<th '.$width.' data-grid="'.$this->dataGridId.'" '.$datasort.' >'. $d($this) .'</th>'.PHP_EOL;
+            return '<th class="'.$checker.'" '.$width.' data-grid="'.$this->dataGridId.'" '.$datasort.' >'. $d($this) .'</th>'.PHP_EOL;
         }
 
-        return '<th '.$width.' data-grid="'.$this->dataGridId.'" '.$datasort.' >'. $this->label .'</th>'.PHP_EOL;
+        return '<th class="'.$checker.'" '.$width.' data-grid="'.$this->dataGridId.'" '.$datasort.' >'. $this->label .'</th>'.PHP_EOL;
 
     }
 
     public function renderBody() {
 
+        $checker = $this->selectRow ? 'check' : '';
+
         if(is_callable($this->decorator))
         {
             $d = $this->decorator;
-            return '<td>'. $d($this) .'</td>'.PHP_EOL;
+            return '<td class="'.$checker.'">'. $d($this) .'</td>'.PHP_EOL;
         }
 
-        return '<td>[[ '. $this->id .' ]]</td>'.PHP_EOL;
+        return '<td class="'.$checker.'">[[ '. $this->id .' ]]</td>'.PHP_EOL;
 
     }
 
@@ -125,6 +131,12 @@ class DataGridColumn implements RenderableInterface {
                     break;
                 case 'width':
                     $this->width = $value;
+                    break;
+                case 'selectRow':
+                    $this->selectRow = $value;
+                    break;
+                case 'selectAll':
+                    $this->selectAll = $value;
                     break;
 
             }
