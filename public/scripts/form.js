@@ -81,6 +81,7 @@
             // return false to cancel submit
             $('.error-block').remove();
             $('.form-group').removeClass('has-error');
+            $('#gritter-notice-wrapper').remove();
 
         },
         showResponse: function(responseText, statusText, xhr, $form)  {

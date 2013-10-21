@@ -53,15 +53,12 @@
             $('.code4-time').data('easyPieChart').update(Math.floor((currentTime.getSeconds()/60)*100));
         }
     }
-
-
     $.platform = new Platform();
 
 })(jQuery, window, document);
 
 
 $( document ).ready( function(){
-
 
     $.platform._init();
     $.c4forms._init();
@@ -70,7 +67,6 @@ $( document ).ready( function(){
     $(document).ajaxSuccess(function(event, request, settings) {
         if (!isset(settings.data.responseVariant)) $.notifications.check();
     });
-
 
 } );
 

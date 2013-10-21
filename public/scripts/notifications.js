@@ -14,11 +14,17 @@
         this.opt = $.extend({}, defaults, options);
         this.$body = $(document.body);
         this.$window = $(window);
+        this.id;
     }
 
     Notifications.prototype = {
         _init: function(){
 
+        },
+
+        clear: function() {
+
+            $('#gritter-notice-wrapper').remove();
         },
 
         check: function(async) {
@@ -126,7 +132,7 @@
             }
 
 
-            $.gritter.add({
+            this.id = $.gritter.add({
                 // (string | mandatory) the heading of the notification
                 title: title,
                 // (string | mandatory) the text inside the notification
@@ -139,6 +145,9 @@
                 time: 8000,
                 // (string | optional) the class name you want to apply directly to the notification for custom styling
                 class_name: class_name,
+                fade_in_speed: 'medium', // how fast notifications fade in (string or int)
+                fade_out_speed: 1, // how fast the notices fade out
+
                 // (function | optional) function called before it opens
                 before_open: function(){
                     //alert('I am a sticky called before it opens');
@@ -163,11 +172,9 @@
 
     $.notifications = new Notifications();
 
-
-
 })(jQuery, window, document);
 
-
+/*
 (function ($) {
     "use strict";
 
@@ -305,4 +312,4 @@
 
 
 }(jQuery));
-
+*/

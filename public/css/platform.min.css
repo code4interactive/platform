@@ -47,6 +47,11 @@
   color: #cb6fd7 !important;
   background: transparent!important;
 }
+label i {
+  display: block;
+  float: right;
+  margin: 3px 0 0 7px!important;
+}
 .chzn-container > .chzn-single {
   height: 28px!important;
 }

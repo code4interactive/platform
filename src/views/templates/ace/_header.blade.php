@@ -25,9 +25,7 @@
     <!--fonts-->
 
     {{--<link rel="stylesheet" href="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/css/ace-fonts.css" />--}}
-    {{--<link rel="stylesheet" href="{{ $platform['assetsPath'] }}/css/fonts.min.css" />--}}
-    <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/css/ace-fonts.css" />
-    <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/css/chosen.min.css" />
+    <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/css/fonts.min.css" />
 
     <!--ace styles-->
 
@@ -39,7 +37,7 @@
     <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/css/ace-ie.min.css" />
     <![endif]-->
 
-
+    <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/css/chosen.min.css" />
     <link rel="stylesheet" href="{{ $platform['assetsPath'] }}/css/platform.min.css" />
 
     <!--inline styles related to this page-->
@@ -56,14 +54,10 @@
     <script src="{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/respond.min.js"></script>
     <![endif]-->
 
-
-
     <!--[if !IE]>-->
-
     <script type="text/javascript">
         window.jQuery || document.write("<script src='{{ $platform['assetsPath'] }}/{{ $platform['templatePath'] }}/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
     </script>
-
     <!--<![endif]-->
 
     <!--[if IE]>

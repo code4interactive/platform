@@ -43,11 +43,13 @@ class Administration_Users extends \BaseController {
         $temp = \C4Former::getNewInstance();
         $temp->load('testform.form1');
 
-        $wlasny = array();
-        $wlasny[] = array("id" => "nazwa_klienta", "message"=>"Moj błąd");
+        //$wlasny = array();
+        //$wlasny[] = array("id" => "nazwa_klienta", "message"=>"Moj błąd");
+        $temp->throwError("nazwa_klienta", "Mój błąd");
 
+        $temp->validate();
 
-        return $temp->validate($wlasny);
+        return $temp->response();
 
     }
 
