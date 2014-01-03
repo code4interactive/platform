@@ -31,7 +31,7 @@ $dg = new \Code4\Platform\Support\DataGrid('/dataSrc', 'main2', array(
     array(
         'id' => 'konto',
         'label' => "Konto",
-        'sortable' => false
+        'sortable' => true
     ),
     array(
         'id' => 'opis',

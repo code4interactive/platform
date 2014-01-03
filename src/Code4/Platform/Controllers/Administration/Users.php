@@ -26,7 +26,7 @@ class Administration_Users extends \BaseController {
 
 
         $temp = \C4Former::getNewInstance();
-        
+        $temp->load('testform.form1');
 
 
         return \View::make('platform::administration.users.add');
@@ -47,7 +47,7 @@ class Administration_Users extends \BaseController {
         //$wlasny[] = array("id" => "nazwa_klienta", "message"=>"Moj błąd");
         $temp->throwError("nazwa_klienta", "Mój błąd");
 
-        $temp->validate();
+        $temp->validate(array('!password'));
 
         return $temp->response();
 

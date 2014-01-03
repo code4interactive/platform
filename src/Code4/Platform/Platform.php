@@ -42,7 +42,7 @@ class Platform {
         $autoLoader->alias('Notification', 'Krucas\Notification\Facades\Notification');
         $autoLoader->alias('Sentry', 'Cartalyst\Sentry\Facades\Laravel\Sentry');
         $autoLoader->alias('DataGrid', 'Cartalyst\DataGrid\Facades\DataGrid');
-        $autoLoader->alias('C4Former', 'Code4\C4former\Facades\C4Former');
+        $autoLoader->alias('C4Former', 'Code4\C4former\Facades\C4former');
         $autoLoader->alias('Gravatar', 'Thomaswelton\LaravelGravatar\Facades\Gravatar');
 
 
