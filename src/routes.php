@@ -25,15 +25,18 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 \Route::post('administration/users/add', 'Code4\Platform\Controllers\Administration_Users@saveForm');
 
 
-\Route::get('/', array('as' => 'platformHome', function()
-{
+\Route::get('/', array('as' => 'platformHome', function() {
+
+
+
     Menu::breadcrumbs()->add(array('id'=>'test', 'name'=>'Test', 'url'=>\URL::route('platformHome')))->at(2);
-    $view = \View::make('platform::dashboard');
+    //$view = \View::make('platform::dashboard');
+    $view = \View::make('theme::dashboard');
     return $view;
 
 }));
 
-\Route::get('dashboard', array('as' => 'dashboard', function()
+/*\Route::get('dashboard', array('as' => 'dashboard', function()
 {
 
     \Notification::success(\Config::get('platform::platform.platformName'));
@@ -41,7 +44,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 
     $view = \View::make('platform::dashboard');
     return $view;
-}));
+}));*/
 
 
 \Route::get('administration/users/list/ajax', function() {
@@ -106,7 +109,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 
         case 404:
             Menu::breadcrumbs()->add(array('id'=>'404', 'name'=>'404 Page Not Found', 'active'=>true))->at();
-            return \Response::view('platform::errors.404', array(), 404);
+            return \Response::view('theme::errors.404', array(), 404);
 
         /*case 500:
             return Response::view('errors.500', array(), 500);

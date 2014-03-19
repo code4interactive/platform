@@ -65,7 +65,7 @@ $( document ).ready( function(){
     $.notifications.check();
 
     $(document).ajaxSuccess(function(event, request, settings) {
-        if (!isset(settings.data.responseVariant)) $.notifications.check();
+        if (isset(settings.data) && !isset(settings.data.responseVariant)) $.notifications.check();
     });
 
 } );

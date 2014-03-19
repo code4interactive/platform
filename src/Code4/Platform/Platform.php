@@ -45,8 +45,7 @@ class Platform {
         $autoLoader->alias('C4Former', 'Code4\C4former\Facades\C4former');
         $autoLoader->alias('Gravatar', 'Thomaswelton\LaravelGravatar\Facades\Gravatar');
 
-
-
+        //\View::addNamespace('theme', '/path/to/themes/views');
     }
 
     public function addPackageAliases () {
@@ -55,17 +54,49 @@ class Platform {
 
     public function collectViewData() {
 
+
+        /**
+         * Add custom pathes to theme
+         */
+        
+        \View::addLocation(
+            public_path()
+            .\Config::get('platform::app.publicViewPath')
+            );
+        \View::addNamespace('theme', 
+            public_path()
+            .\Config::get('platform::app.publicViewsPath')
+        );
+
+        \View::addLocation(
+            public_path()
+            .\Config::get('platform::app.themesPath')
+            .\Config::get('platform::config.themeName')
+        );
+        \View::addNamespace('theme',
+            public_path()
+            .\Config::get('platform::app.themesPath')
+            .\Config::get('platform::config.themeName')
+        );
+
+        /**
+         * Merge app config with platform config
+         */
         $configApp = \Config::get('config');
         if (!is_array($configApp)) $configApp = array();
-
         $configPlatform = \Config::get('platform::config');
         $config = array_merge($configPlatform, $configApp);
 
+        //Dodajemy ścieżki do aktywnego szablonu
+        $config['templatePath'] = \Config::get('platform::app.themesPath').\Config::get('platform::config.themeName');
+
         \Config::set('platform::config', $config);
 
-        //  \View::share('platform', array('assetsPath'=>'/packages/code4/platform', 'templatePath' => 'assets/ace-1.1.2'));
-        \View::share('platform', array('assetsPath'=>'/packages/code4/platform', 'templatePath' => 'assets/ace-v1.2--bs-v3.0.0'));
+        //\View::share('platform', \Config::get('platform::app'));
+        \View::share('platform', \Config::get('platform::config'));
 
+        //  \View::share('platform', array('assetsPath'=>'/packages/code4/platform', 'templatePath' => 'assets/ace-1.1.2'));
+        //\View::share('platform', array('assetsPath'=>'/packages/code4/platform', 'templatePath' => 'assets/ace-v1.2--bs-v3.0.0'));
 
         \Menu::loadMenuFromConfig(\Config::get('platform::menu'));
         \Menu::breadcrumbs()->add(array('id'=>'test', 'name'=>'Test', 'url'=>\URL::route('platformHome')));
