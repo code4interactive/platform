@@ -55,10 +55,16 @@ class Platform {
     public function collectViewData() {
 
 
+
+
+
+
+
+
         /**
          * Add custom pathes to theme
          */
-        
+        /*
         \View::addLocation(
             public_path()
             .\Config::get('platform::app.publicViewPath')
@@ -77,7 +83,7 @@ class Platform {
             public_path()
             .\Config::get('platform::app.themesPath')
             .\Config::get('platform::config.themeName')
-        );
+        );*/
 
         /**
          * Merge app config with platform config
@@ -89,10 +95,11 @@ class Platform {
 
         //Dodajemy ścieżki do aktywnego szablonu
         $config['templatePath'] = \Config::get('platform::app.themesPath').\Config::get('platform::config.themeName');
+        $config['assetsPath'] = '/packages/code4/platform';
 
         \Config::set('platform::config', $config);
 
-        //\View::share('platform', \Config::get('platform::app'));
+        \View::share('app', \Config::get('platform::app'));
         \View::share('platform', \Config::get('platform::config'));
 
         //  \View::share('platform', array('assetsPath'=>'/packages/code4/platform', 'templatePath' => 'assets/ace-1.1.2'));

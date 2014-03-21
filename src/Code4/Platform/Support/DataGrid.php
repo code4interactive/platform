@@ -138,7 +138,7 @@ class DataGrid {
         <form method="post" action="" accept-charset="utf-8" data-search data-grid="'.$this->dataGridId.'">
             <div class="input-append col-sm-6">
 
-                <select name="column" class="hidden-select chosen-select2" >
+                <select name="column" class="hidden-select select2 chosen-select2" >
                     <option value="all">Wszystkie</option>';
 
                     foreach ($this->columns as $column) {

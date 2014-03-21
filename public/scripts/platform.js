@@ -20,37 +20,11 @@
             $('[rel=tooltip],[data-rel=tooltip]').tooltip({html: true});
             $('[rel=popover],[data-rel=popover]').popover({html:true});
 
-            this._clockInit();
-
             this._timers();
 
         },
         _timers: function() {
             var self = this;
-            this.opt.clockTimers = setInterval(function() { self.clock(); },1000);
-
-        },
-
-        _clockInit: function() {
-
-            var barColor = 'rgba(255,255,255,0.95)';
-            var trackColor = barColor == 'rgba(255,255,255,0.95)' ? 'rgba(255,255,255,0.25)' : '#E2E2E2';
-            var size = parseInt($('.code4-time').data('size')) || 50;
-            $('.code4-time').easyPieChart({
-                barColor: 'rgba(255,255,255,0.95)',
-                trackColor: trackColor,
-                scaleColor: false,
-                lineCap: 'butt',
-                lineWidth: parseInt(size/10),
-                animate: /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase()) ? false : 1000,
-                size: size
-            })
-        },
-
-        clock: function() {
-            var currentTime = new Date();
-            $('.code4-time .time').html( (currentTime.getHours()<10?'0':'') + currentTime.getHours() + ':' +  (currentTime.getMinutes()<10?'0':'') + currentTime.getMinutes() )
-            $('.code4-time').data('easyPieChart').update(Math.floor((currentTime.getSeconds()/60)*100));
         }
     }
     $.platform = new Platform();
@@ -65,7 +39,7 @@ $( document ).ready( function(){
     $.notifications.check();
 
     $(document).ajaxSuccess(function(event, request, settings) {
-        if (isset(settings.data) && !isset(settings.data.responseVariant)) $.notifications.check();
+        if (!isset(settings.data.responseVariant)) $.notifications.check();
     });
 
 } );
@@ -115,36 +89,12 @@ $(function(){
 
 
 
-    //});
-
-    //var counter=setInterval(clock, 1000);
-
-
-/*
-    var oldie = $.browser.msie && $.browser.version < 9;
-
-    var barColor = 'rgba(255,255,255,0.95)';
-    var trackColor = barColor == 'rgba(255,255,255,0.95)' ? 'rgba(255,255,255,0.25)' : '#E2E2E2';
-    var size = parseInt($('.code4-time').data('size')) || 50;
-    $('.code4-time').easyPieChart({
-        barColor: 'rgba(255,255,255,0.95)',
-        trackColor: trackColor,
-        scaleColor: false,
-        lineCap: 'butt',
-        lineWidth: parseInt(size/10),
-        animate: oldie ? false : 1000,
-        size: size
-    });
-*/
-
-
     function clock() {
         if (seconds > 60) seconds = 1;
         if (seconds == 1)
 
             currentTime = new Date();
-        $('.code4-time .time').html( (currentTime.getHours()<10?'0':'') + currentTime.getHours() + ':' +  (currentTime.getMinutes()<10?'0':'') + currentTime.getMinutes() )
-
+        $('.code4-time .time').html( (currentTime.getHours()<10?'0':'') + currentTime.getHours() + ':' +  (currentTime.getMinutes()<10?'0':'') + currentTime.getMinutes() );
 
         $('.code4-time').data('easyPieChart').update(Math.floor((seconds/60)*100));
 
@@ -152,6 +102,7 @@ $(function(){
         seconds++;
     }
 });
+
 function code4Loading(action) {
     if (action == 'start') {
         $('.code4-loading').css('margin-bottom', '0px');

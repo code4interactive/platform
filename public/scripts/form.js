@@ -18,7 +18,7 @@
             // $.ajax options can be used here too, for example:
             //timeout:   3000
         }
-    }
+    };
 
     function C4forms(options) {
         this.opt = $.extend({}, defaults, options);
@@ -31,16 +31,13 @@
     C4forms.prototype = {
         _init: function(){
 
-            $(".chosen-select").chosen();
-
-
             this._events();
 
         },
         _events: function() {
             var self = this;
 
-            $('form').not('no_ajax').on('submit', function(e){
+            $('form').not('.no_ajax').on('submit', function(e){
                 e.preventDefault();
                 //$(this).submit(function() {
                     // inside event callbacks 'this' is the DOM element so we first
@@ -52,7 +49,7 @@
                     return false;
                // });
 
-            })
+            });
 
         },
 
@@ -121,7 +118,7 @@
 
 
         }
-}
+};
 
     $.c4forms = new C4forms();
 
