@@ -13,18 +13,18 @@
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   src: local('Open Sans Bold'), local('OpenSans'), url(../fonts/OpenSans-Bold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Open Sans';
-  font-style: normal;
+  font-style: italic;
   font-weight: 400;
   src: local('Open Sans Italic'), local('OpenSans'), url(../fonts/OpenSans-Italic.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
+  font-style: italic;
+  font-weight: 700;
   src: local('Open Sans Bold Italic'), local('OpenSans'), url(../fonts/OpenSans-BoldItalic.ttf) format('truetype');
 }

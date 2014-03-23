@@ -1,0 +1,74 @@
+#code4-loading {
+  position: fixed;
+  right: 6px;
+  top: 96px;
+  z-index: 1000;
+  transition: all 1s;
+  -webkit-transition: all 1s;
+  /* Safari */
+
+}
+#code4-loading.code4-hidden {
+  right: -135px;
+}
+#code4-loading.code4-shown {
+  right: 0px;
+}
+#code4-loading:hover {
+  opacity: .5;
+}
+div.dataTables_length {
+  top: 2px;
+  right: auto;
+}
+table.dataTable label {
+  margin-bottom: 0;
+}
+.datagrid_filter {
+  float: left;
+}
+.datagrid_filter input {
+  width: 150px!important;
+  height: 34px!important;
+}
+.filter .btn-group {
+  float: left;
+  height: 34px;
+}
+.filter .btn-group button {
+  padding: 4px 8px 6px;
+}
+.filters-row {
+  position: absolute;
+  top: -39px;
+  left: 20px;
+  right: 20px;
+}
+.filters-row .search-btn {
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0;
+  margin-left: -2px !important;
+}
+.filters-row .col {
+  padding-left: 0;
+}
+.tags-row {
+  min-height: 0;
+  padding: 0 5px;
+}
+.tags-row .btn {
+  margin: 5px 0;
+  margin-right: 5px;
+}
+.tools {
+  padding-left: 10px;
+}
+.tools .btn-group {
+  padding-top: 2px;
+}
+.tools .btn {
+  padding-left: 5px;
+}
+.dt-row.dt-bottom-row {
+  overflow: visible;
+}

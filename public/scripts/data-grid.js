@@ -202,7 +202,7 @@
 
 				e.preventDefault();
 
-				var $input = $(this).find('input');
+				var $input = $(this).find('input[name=filter]');
 				var $select = $(this).find('select');
 
 				if(e.type === 'submit'){
@@ -221,7 +221,7 @@
 					self._ajaxFetch();
 
 					$input.val('').data('old', '');
-					$select.prop('selectedIndex',0);
+					//$select.prop('selectedIndex',0);
 
 					return false;
 
@@ -514,7 +514,7 @@
             li = $(document.createElement('li')).addClass('prev');
 
             a = $(document.createElement('a')).attr('href', '#');
-            i = $(document.createElement('i')).addClass('icon-double-angle-left');
+            i = $(document.createElement('i')).addClass('fa fa-angle-double-left');
 
             if (params.prevPage == null) li.addClass('disabled');
             else a.attr('data-page', params.prevPage);
@@ -597,7 +597,7 @@
             li = $(document.createElement('li')).addClass('next');
 
             a = $(document.createElement('a')).attr('href', '#');
-            i = $(document.createElement('i')).addClass('icon-double-angle-right');
+            i = $(document.createElement('i')).addClass('fa fa-angle-double-right');
 
             if (params.nextPage == null) li.addClass('disabled');
             else a.attr('data-page', params.nextPage);
@@ -750,7 +750,7 @@
 
 			this.$body.find('[data-sort]').removeClass('sorting_asc sorting_desc');
 			this.$body.find('[data-search]').find('input').val('');
-			this.$body.find('[data-search]').find('select').prop('selectedIndex', 0);
+			this.$body.find('[data-search]').find('select').prop('selectedIndex', 0).trigger("change");
 
 			this.opt.appliedFilters = [];
 			this.opt.sort = {};

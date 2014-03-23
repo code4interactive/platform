@@ -1,36 +1,21 @@
-@import "../assets/ace/css/less/variables";
+//@import "../assets/ace/css/less/variables";
 
-.code4-time {
-  color: @ace-white;
-  font-size: 9px;
-  margin: 5px;
-}
 
-.code4-date {
-  color: @ace-white;
-  line-height: 13px;
-  margin: 9px 0 0 0;
-  text-align: right;
-  font-size: 10px;
-}
-
-.code4-loading {
+#code4-loading {
   position: fixed;
-  right: 0;
-  margin: 0;
-  width: 402px;
-  bottom: 0;
+  right: 6px;
+  top: 96px;
   z-index: 1000;
 
-  transition: margin 0.5s;
-  -webkit-transition: margin 0.5s; /* Safari */
+  transition: all 1s;
+  -webkit-transition: all 1s; /* Safari */
 
   &.code4-hidden {
-    margin-bottom:30px;
+    right:-135px;
   }
 
   &.code4-shown {
-    margin-bottom:0px;
+    right:0px;
   }
 
   &:hover {
@@ -38,155 +23,64 @@
   }
 }
 
-.code4-btn-icon-only {
-  i {
-    margin-right: 0!important;
-  }
-}
-
-//Fixes
-.notifications-dropdown {
-  width: auto!important;
-  min-width: 220px;
-}
-.notification-close {
-
-  a {
-    color: @ace-purple;
-
-    &:hover , &:focus {
-      text-decoration: none!important;
-      color:@ace-nav-light-purple!important;
-      background: transparent!important;
-    }
-
-  }
-
-}
-
-label i {
-  display: block;
-  float: right;
-  margin: 3px 0 0 7px!important;
-}
-
-.chzn-container > .chzn-single {
-
-  height: 28px!important;
-
-}
-
-.dataTables_wrapper {
-
-
-  //td:first-child {
-  .check, .check-th2 {
-    background-color: #dddddd!important;
-  }
-
-  .datagrid-search {
-    select { width: auto; }
-  }
-
-  .lbl { margin-top: -10px!important; }
-  .table_footer {
-    width: 100%;
-    td {
-      text-align: center;
-    }
-
-    .col-sm-4 {
-      padding: 2px 0;
-    }
-
-    .tools {
-      margin: -2px 0 0 0px;
-      vertical-align: top;
-
-      & > div {
-        background-color: #ddd;
-        /*padding: 10px 14px 10px 37px;*/
-        padding: 5px 8px 4px 8px;
-        margin: -1px 0 0 -1px;
-        /*background: #dddddd url(/packages/code4/platform/images/datagrid_toolbar_arrow.png) no-repeat 11px 6px;*/
-      }
-    }
-    .tools {
-      //display: inline-block;
-      //width: auto;
-      & > div {
-        margin: 0;
-      }
-    }
-    td:last-child, .last {
-      //text-align: right;
-      //width: 30%;
-    }
-    .showing {
-      padding: 4px;
-      margin-left: 5px;
-    }
-    .last {
-      //display: inline-block;
-      //float: right;
-      //margin: 5px;
-      //width: auto;
-      text-align: right;
-      .pagination { float: right; margin-right: -1px }
-    }
-
-    .middle {
-      text-align: center;
-    }
-  }
-
-}
-
 .btn {
-  padding: 2px 6px 3px;
+  //padding: 2px 6px 3px;
 }
 
-.dataTables_wrapper {
-  margin-bottom: 10px;
+div.dataTables_length {
+  top: 2px;
+  right: auto;
 }
 
-.datagrid-search {
-
-  form {
-    margin: 0;
-    display: inline;
-  }
-  .tag {
+table.dataTable {
+  label {
     margin-bottom: 0;
   }
-  .tags {
-    margin: 5px 5px 0 0;
-    float: right;
-    width: auto;
+}
+
+.datagrid_filter {
+  //display: inline-block!important;
+  float: left;
+  input { width: 150px!important; height: 34px!important; }
+}
+
+.filter {
+  .btn-group {
+    float: left;
+    height: 34px;
+    button {
+      padding: 4px 8px 6px;
+    }
   }
-  &.row:first-child {
-    padding-top: 4px;
-    padding-bottom: 4px;
+}
 
-    select { float: left; margin-top: 2px; padding: 0px; }
-    .filter { padding-left: 1px; }
-
+.filters-row {
+  position: absolute;
+  top: -39px;
+  left: 20px;
+  right: 20px;
+  .search-btn {
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0;
+    margin-left: -2px!important;
+  }
+  .col {
+    padding-left: 0;
   }
 }
 
-.dataTables_wrapper .row-fluid:first-child {
-  padding: 0px;
+.tags-row {
+  min-height: 0;
+  padding: 0 5px;
+  .btn { margin: 5px 0; margin-right: 5px; }
 }
 
-.pagination {
-  margin:0;
+.tools {
+  padding-left: 10px;
+  .btn-group { padding-top: 2px; }
+  .btn { padding-left: 5px; }
 }
 
-.pagination ul > li > a, .pagination ul > li > span {
-  padding: 2px 5px;
+.dt-row.dt-bottom-row {
+  overflow: visible;
 }
-
-.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
-  padding: 4px 8px;
-}
-

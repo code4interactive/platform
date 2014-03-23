@@ -60,16 +60,20 @@ $(function(){
     //notification.check();
 
 
-    $(".table-striped").on("click change", "tbody tr", function() {
+    $(".table-striped").on("click change", "tbody tr", function(e) {
+
+        if (e.target.nodeName === "BUTTON" || e.target.nodeName === "A") return;
 
         if ($(this).find(".row-checkbox")) {
 
             if ($(this).find(".row-checkbox").prop('checked')){
                 $(this).find(".row-checkbox").prop('checked', false);
+                $(this).removeClass("ui-state-highlight");
+            }
+            else {
+                $(this).find(".row-checkbox").prop('checked', true);
                 $(this).addClass("ui-state-highlight");
             }
-            else
-                $(this).find(".row-checkbox").prop('checked', true);
         }
     });
 
@@ -78,37 +82,27 @@ $(function(){
         if ($(this).prop('checked')) {
             $(this).prop('checked', false);
             $(this).closest('table').find('tbody .row-checkbox').prop('checked', false);
+            $(this).closest('table').find('tr').removeClass("ui-state-highlight");
         }
         else {
             $(this).prop('checked', true);
             $(this).closest('table').find('tbody .row-checkbox').prop('checked', true);
+            $(this).closest('table').find('tr').addClass("ui-state-highlight");
         }
 
 
     });
 
+    code4Loading('stop');
 
-
-    function clock() {
-        if (seconds > 60) seconds = 1;
-        if (seconds == 1)
-
-            currentTime = new Date();
-        $('.code4-time .time').html( (currentTime.getHours()<10?'0':'') + currentTime.getHours() + ':' +  (currentTime.getMinutes()<10?'0':'') + currentTime.getMinutes() );
-
-        $('.code4-time').data('easyPieChart').update(Math.floor((seconds/60)*100));
-
-        //$('.code4-time').data('percent', Math.floor((seconds/60)*100) );
-        seconds++;
-    }
 });
 
 function code4Loading(action) {
     if (action == 'start') {
-        $('.code4-loading').css('margin-bottom', '0px');
+        $('#code4-loading').css('right', '0px');
     }
     else {
-        $('.code4-loading').css('margin-bottom', '-40px');
+        $('#code4-loading').css('right', '-135px');
     }
 
 }

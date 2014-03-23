@@ -1,15 +1,39 @@
 @extends('platform::template.layout')
 
 @section('header')
+<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Dashboard <span>&gt; My Dashboard</span></h1>
+
 Lista użytkowników
 @stop
 
 @section('content')
 
 
+
+<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Dashboard <span>&gt; My Dashboard</span></h1>
+
+
+<ul id="dropdown21" class="dropdown-menu">
+    <li>
+        <a href="javascript:void(0);">Action</a>
+    </li>
+    <li>
+        <a href="javascript:void(0);">Another action</a>
+    </li>
+    <li>
+        <a href="javascript:void(0);">Something else here</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+        <a href="javascript:void(0);">Separated link</a>
+    </li>
+</ul>
+
 <?php
 
 
+
+echo ViewHelper::foo();
 
 $dg = new \Code4\Platform\Support\DataGrid('/dataSrc', 'main2', array(
 
@@ -49,7 +73,13 @@ $dg = new \Code4\Platform\Support\DataGrid('/dataSrc', 'main2', array(
 //$dg->id()->setSortDir('desc');
 
 $dg->toolsColumn()->setDecorator(function($object){
-   return addDGEditButton('/edit/[[id]]');
+
+    return '<button class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                Action <span class="caret"></span>
+            </button>';
+    //return 'adas<br/>asdzxc<br/>zxcasc<br/>bcvbcv';
+
+    return addDGEditButton('/edit/[[id]]');
 });
 
 $dg->actions()->setDecorator(function($object){
@@ -65,76 +95,9 @@ $dg->setTools(function($object){
 });
 
 ?>
-<div class="table-header">
-    Lista wyników
-</div>
+
+
 <?php $dg->render(); ?>
-
-<button id="button2">
-    Pokaz modal
-</button>
-
-
-<script>
-
-    $("#button2").on("click", function(){
-
-        $.ajax({
-            url: "/administration/users/list/ajax"
-        }).done(function( html ) {
-
-                $.modal(createWidgetBox(html, {scroll: true}), {
-                    closeHTML:"",
-                    /*containerCss:{
-                        backgroundColor:"#fff",
-                        borderColor:"#fff",
-                        height:450,
-                        padding:0,
-                        width:830
-                    },*/
-                    autoResize: true,
-                    overlayClose:true
-                });
-
-        });
-    });
-
-
-
-    function createWidgetBox(html, params) {
-
-
-        var widgetBox = $(document.createElement('div')).addClass("widget-box");
-
-        var widgetHeader = $(document.createElement('div')).addClass("widget-header").addClass("header-color-green2").html('<h5><i class="icon-table"></i> Default Widget Box</h5>');
-
-        var widgetToolbar = $(document.createElement('div')).addClass("widget-toolbar").html('<a href="#" class="simplemodal-close" data-action="close"><i class="icon-remove"></i></a>');
-
-        widgetHeader.append(widgetToolbar);
-
-        var widgetBody = $(document.createElement('div')).addClass("widget-body");
-        var widgetMain = $(document.createElement('div')).addClass("widget-main");
-
-            if (params && params.scroll) {
-                var widgetScroll = $(document.createElement('div')).addClass("slim-scroll").html(html);;
-                widgetMain.append(widgetScroll);
-            } else {
-                widgetMain.html(html);
-            }
-
-
-
-        widgetBody.append(widgetMain);
-
-        widgetBox.append(widgetHeader).append(widgetBody);
-
-        widgetBox.resizable().draggable({ handle: "div.widget-header" })
-
-        return widgetBox;
-
-    }
-
-</script>
 
 
 @stop

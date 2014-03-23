@@ -21,6 +21,10 @@ class DataGrid {
 
     protected $toolTray = null;
 
+    protected $tableHeader = "Tabela";
+    protected $tableHeaderIcon = "fa-table";
+    protected $tableHeaderColor = null;
+
 
     public function __construct($dataSrc = null, $dataGridId = null, $columns = array()) {
 
@@ -28,6 +32,12 @@ class DataGrid {
         $this->dataSrc = $dataSrc;
         $this->setColumns($columns);
 
+    }
+
+    public function setHeader($tableHeader, $tableHeaderIcon=null, $tableHeaderColor=null) {
+        $this->tableHeader = $tableHeader;
+        $this->tableHeaderColor = $tableHeaderColor;
+        $this->tableHeaderIcon = $tableHeaderIcon;
     }
 
 
@@ -71,7 +81,7 @@ class DataGrid {
                 }
             $out .= '</tr>
                 <tr data-results-fallback style="display:none;">
-                    <td colspan="4">No Results</td>
+                    <td colspan="4">Brak wyników</td>
                 </tr>
             </tbody>
 
@@ -83,6 +93,50 @@ class DataGrid {
 
 
     public function tools() {
+
+
+        $a = '<div class="col-sm-2 tools">';
+
+        $a .= '<div class="btn-group">
+                <span class="btn btn-no-button txt-color-white bg-color-blue">
+                   <i class="fa fa-long-arrow-up"></i>&nbsp;&nbsp; zaznaczone:
+                </span>
+                <button class="btn dropdown-toggle bg-color-blue txt-color-white" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:void(0);">Action</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">Another action</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">Something else here</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="javascript:void(0);">Separated link</a>
+                    </li>
+                </ul>
+            </div>';
+
+
+
+        //$a .= '<div class="btn-group">
+        //                            <button class="btn bg-color-blueDark txt-color-white">
+        //                                <i class="fa fa-gear"></i> z zaznaczeniem
+        //                            </button>
+        //                            <button class="btn btn-primary dropdown-toggle">
+        //                                <span class="caret"></span>
+        //                            </button>
+        //                        </div>';
+        //$a .= '<i class="fa fa-lg fa-caret-square-o-up"></i>';
+        //$a .= '<button class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+        //           <i class="fa fa-lg fa-caret-square-o-up"></i> Action <span class="caret"></span>
+        //       </button>';
+        $a .= '</div>';
+        return $a; 
 
         if (is_callable($this->toolTray)) {
 
@@ -111,6 +165,24 @@ class DataGrid {
         $out .= '</select> </label></div>';
 
 
+
+        $out  = '<div id="dt_basic_length" class="dataTables_length">';
+        $out .= '    <span class="smart-form">';
+        $out .= '        <label class="select" style="width:60px">';
+        $out .= '            <select size="1" name="dt_basic_length" aria-controls="dt_basic" data-perPage data-grid="'.$this->dataGridId.'>';
+
+        foreach($this->perPageLimits as $limit) {
+            $selected = $limit == $this->throttle ? 'selected="selected"' : "";
+
+            $out .= '               <option value="'. $limit .'" '.$selected.' >'.$limit.'</option>';
+        }
+        $out .= '            </select>';
+        $out .= '            <i></i>';
+        $out .= '        </label>';
+        $out .= '    </span>';
+        $out .= '</div>';
+
+
         return $out;
 
     }
@@ -121,9 +193,9 @@ class DataGrid {
         $out = '
             <div class="dataTables_paginate paging_bootstrap pagination" data-grid="'.$this->dataGridId.'">
                 <ul class="pagination">
-                    <li class="prev disabled"><a href="#"><i class="icon-double-angle-left"></i></a></li>
+                    <li class="prev disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
                     <li class="active"><a href="#">1</a></li>
-                    <li class="next disabled"><a href="#"><i class="icon-double-angle-right"></i></a></li>
+                    <li class="next disabled"><a href="#"><i class="fa fa-angle-right"></i></a></li>
                 </ul>
             </div>
         ';
@@ -135,45 +207,48 @@ class DataGrid {
     public function search() {
 
         $out = '
-        <form method="post" action="" accept-charset="utf-8" data-search data-grid="'.$this->dataGridId.'">
-            <div class="input-append col-sm-6">
 
-                <select name="column" class="hidden-select select2 chosen-select2" >
+        <form class="smart-form no_ajax" method="post" action="" accept-charset="utf-8" data-search data-grid="'.$this->dataGridId.'">
+
+        <div class="row filters-row">
+            <div class="col col-2 filter">
+                <select name="column" class="hidden-select select2" >
                     <option value="all">Wszystkie</option>';
-
                     foreach ($this->columns as $column) {
-
                         if ($column->searchable())
                             $out .= '<option value="'.$column->getId().'">'.$column->getLabel().'</option>';
-
                     }
                     $out .= '
                 </select>
-
-                <div class="input-group col-sm-6 filter">
-                  <input name="filter" autocomplete="off" class="form-control" type="text" placeholder="Filtruj wg...">
-                  <div class="input-group-btn btn-group">
-                    <button class="btn btn-info search-btn">
-                        <span class="icon-search"></span>
-                    </button>
-                    <button class="btn" data-reset data-grid="'.$this->dataGridId.'">
-                        <span class="icon-undo"></span>
-                    </button>
-                  </div>
-                </div>
-
             </div>
-        </form>
-        <div class="applied tags col-sm-6" data-grid="'.$this->dataGridId.'">
-            <span data-template class="tag">
-                [? if column === undefined ?]
-                [[ valueLabel ]]
-                [? else ?]
-                [[ valueLabel ]] in [[ columnLabel ]]
-                [? endif ?]
-                <button type="button" class="close">×</button>
-             </span>
+
+            <div class="col col-6 filter">
+                <label class="input datagrid_filter"><input  name="filter" type="text" placeholder="Filtruj wg..."></label>
+                <div class=" btn-group">
+                    <button class="btn btn-primary btn-lg search-btn">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <button class="btn btn-primary btn-lg" data-reset data-grid="'.$this->dataGridId.'">
+                        <i class="fa fa-undo"></i>
+                    </button>
+                </div>
+            </div>
         </div>
+        
+        <div class="widget-body-toolbar tags-row">
+                <div class="applied tags" data-grid="'.$this->dataGridId.'">
+                    <button data-template class="btn btn-primary btn-xs">
+                     [? if column === undefined ?]
+                        [[ valueLabel ]]
+                        [? else ?]
+                        [[ valueLabel ]] w [[ columnLabel ]]
+                        [? endif ?]
+                     <span class="fa fa-times"></span></button>
+                </div>
+        </div>
+
+        
+        </form>
 
         ';
 
@@ -229,21 +304,37 @@ class DataGrid {
     public function render() {
 
         ?>
-
-        <div class="dataTables_wrapper" role="grid">
-            <div class="row datagrid-search">
-                <?php echo $this->search(); ?>
-            </div>
-            <?php echo $this->table(); ?>
-            <div class="table_footer">
-                <div class="col-sm-4">
-                    <div class="tools"><?php echo $this->tools(); ?></div>
-                    <div class="showing pull-left" data-info data-grid="<?php echo $this->dataGridId; ?>">Showing 1 to 10 of 23 entries</div>
+        
+        <div class="jarviswidget <?php echo $this->tableHeaderColor; ?>" data-widget-editbutton="false" data-widget-custombutton="false" role="widget" style="">
+            <header role="heading"> 
+                <?php if ($this->tableHeaderIcon) { ?><span class="widget-icon"> <i class="fa <?php echo $this->tableHeaderIcon; ?>"></i> </span><?php } ?>
+                <h2><?php echo $this->tableHeader; ?></h2>
+            </header>
+            <div role="content">
+                <div class="widget-body no-padding">
+                    <div class="widget-body-toolbar"></div>
+                    <div class="dataTables_wrapper form-inline" role="grid">
+                        <div class="dt-top-row">
+                            <?php echo $this->search(); ?>
+                        </div>
+                        <div class="dt-wrapper">
+                            <?php echo $this->table(); ?>
+                        </div>
+                        <div class="dt-row dt-bottom-row">
+                            <div class="row">
+                                    <?php echo $this->tools(); ?>
+                                <div class="col-sm-4">
+                                    <?php echo $this->pageLimits(); ?>
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    <?php echo $this->pagination(); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
-                <div class="col-sm-4 middle"><?php echo $this->pageLimits(); ?></div>
-                <div class="last col-sm-4"><?php echo $this->pagination(); ?></div>
             </div>
-            <div class="clearfix"></div>
         </div>
 
         <?php

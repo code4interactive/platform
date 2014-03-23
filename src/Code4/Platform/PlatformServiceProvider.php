@@ -44,6 +44,12 @@ class PlatformServiceProvider extends ServiceProvider {
         });
 
 
+        \App::singleton('viewhelper', function()
+		{
+		    return new Helpers\ViewHelperSingleton;
+		});
+
+
         $this->app['platform']->registerDependentPackages();
         $this->app['platform']->addPackageAliases();
 

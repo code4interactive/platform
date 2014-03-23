@@ -29,6 +29,7 @@ class Platform {
 
         \App::register('Krucas\Notification\NotificationServiceProvider');
         $autoLoader->alias('Platform', 'Code4\Platform\Facades\Platform');
+        $autoLoader->alias('ViewHelper', 'Code4\Platform\Facades\ViewHelper');
 
         \App::register('Basset\BassetServiceProvider');
         $autoLoader->alias('Basset', 'Basset\Facade');

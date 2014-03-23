@@ -1,4 +1,4 @@
-@extends('platform::layout')
+@extends('platform::template.layout')
 
 @section('header')
     Dodaj użytkownika

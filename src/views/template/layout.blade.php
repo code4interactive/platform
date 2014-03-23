@@ -17,6 +17,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<!-- Basic Styles -->
+		<link rel="stylesheet" type="text/css" media="screen" href="{{$platform['assetsPath']  }}/css/fonts.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="{{$platform['templatePath']}}/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="{{$platform['templatePath']}}/css/font-awesome.min.css">
 
@@ -27,7 +28,7 @@
 		<!-- We recommend you use "your_style.css" to override SmartAdmin
 		     specific styles this will also ensure you retrain your customization with each SmartAdmin update.
 		<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
-		<link rel="stylesheet" type="text/css" media="screen" href="{{ $platform['assetsPath'] }}/css/platform.min.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ $platform['assetsPath'] }}/css/platform.css" />
 
 
 		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
@@ -247,6 +248,9 @@
 
 			</div>
 			<!-- END MAIN CONTENT -->
+			<a href="javascript:void(0);" id="code4-loading" class="btn bg-color-purple txt-color-white font-md">
+				<i class="fa fa-refresh fa-spin"></i>  Ładowanie
+			</a>
 
 		</div>
 		<!-- END MAIN PANEL -->
