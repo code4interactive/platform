@@ -152,7 +152,7 @@ class DataGrid {
 
         $out = '<div class="dataTables_length">
             <label>Pokaż
-                <select size="1" name="sample-table-2_length" data-perPage data-grid="'.$this->dataGridId.'">';
+                <select size="1" name="sample-table-2_length" data-perpage data-grid="'.$this->dataGridId.'">';
 
 
         foreach($this->perPageLimits as $limit) {
@@ -169,13 +169,15 @@ class DataGrid {
         $out  = '<div id="dt_basic_length" class="dataTables_length">';
         $out .= '    <span class="smart-form">';
         $out .= '        <label class="select" style="width:60px">';
-        $out .= '            <select size="1" name="dt_basic_length" aria-controls="dt_basic" data-perPage data-grid="'.$this->dataGridId.'>';
+        $out .= '            <select size="1" name="dt_basic_length" aria-controls="dt_basic" data-perpage data-grid="'.$this->dataGridId.'">';
 
         foreach($this->perPageLimits as $limit) {
             $selected = $limit == $this->throttle ? 'selected="selected"' : "";
 
             $out .= '               <option value="'. $limit .'" '.$selected.' >'.$limit.'</option>';
+
         }
+
         $out .= '            </select>';
         $out .= '            <i></i>';
         $out .= '        </label>';
@@ -303,9 +305,13 @@ class DataGrid {
 
     public function render() {
 
-        ?>
-        
-        <div class="jarviswidget <?php echo $this->tableHeaderColor; ?>" data-widget-editbutton="false" data-widget-custombutton="false" role="widget" style="">
+        ?>        <div class="jarviswidget <?php echo $this->tableHeaderColor; ?>" id="widget-<?php echo $this->dataGridId; ?>"
+            data-widget-sortable="true"
+            data-widget-togglebutton="false" 
+            data-widget-editbutton="false" 
+            data-widget-colorbutton="false" 
+            data-widget-deletebutton="false"  >
+
             <header role="heading"> 
                 <?php if ($this->tableHeaderIcon) { ?><span class="widget-icon"> <i class="fa <?php echo $this->tableHeaderIcon; ?>"></i> </span><?php } ?>
                 <h2><?php echo $this->tableHeader; ?></h2>

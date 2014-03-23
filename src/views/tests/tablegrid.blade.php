@@ -1,17 +1,10 @@
 @extends('platform::template.layout')
 
 @section('header')
-<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Dashboard <span>&gt; My Dashboard</span></h1>
-
-Lista użytkowników
+    <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Datagrid <span>&gt; test page</span></h1>
 @stop
 
 @section('content')
-
-
-
-<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> Dashboard <span>&gt; My Dashboard</span></h1>
-
 
 <div class="jarviswidget" id="xcbvxcvb" data-widget-colorbutton="false" data-widget-editbutton="true">
 
@@ -26,7 +19,6 @@ Lista użytkowników
     data-widget-custombutton="false"
     data-widget-collapsed="true"
     data-widget-sortable="false"
-
     -->
 
     <header>
@@ -48,11 +40,7 @@ Lista użytkowników
 </div>
 
 
-
 <?php
-
-
-
 //echo ViewHelper::foo();
 
 $dg = new \Code4\Platform\Support\DataGrid('/dataSrc', 'main2', array(
@@ -97,7 +85,6 @@ $dg->toolsColumn()->setDecorator(function($object){
     return '<button class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
                 Action <span class="caret"></span>
             </button>';
-    //return 'adas<br/>asdzxc<br/>zxcasc<br/>bcvbcv';
 
     return addDGEditButton('/edit/[[id]]');
 });
@@ -116,10 +103,7 @@ $dg->setTools(function($object){
 
 ?>
 
-
 <?php $dg->render(); ?>
-
-
 @stop
 
 
@@ -129,22 +113,15 @@ $dg->setTools(function($object){
 @section('footer-scripts')
 
 <script>
-    $(function()
-    {
+    $(function() {
         $.datagrid('main', '.results', '.pagination', '.applied', {
-        loader: code4Loading,
-        sort: {
-            column: 'id',
-            direction: 'asc'
-        },
-        callback: function(obj){
-
-            //Leverage the Callback to show total counts or filtered count
-           // $('#filtered').val(obj.filterCount);
-           // $('#total').val(obj.totalCount);
-
-        }
-    });
+            loader: code4Loading,
+            sort: {
+                column: 'id',
+                direction: 'asc'
+            },
+            callback: function(obj){}
+        });
     });
 </script>
 

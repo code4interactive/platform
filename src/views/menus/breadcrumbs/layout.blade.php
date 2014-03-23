@@ -1,4 +1,4 @@
-
+<?php if (false) { ?>
 <ul class="breadcrumb">
 
 @foreach ($menuCollection[0]->all() as $menuItem)
@@ -35,3 +35,10 @@
 @endforeach
 
 </ul><!--.breadcrumb-->
+<?php } ?>
+
+<ol class="breadcrumb">
+    @foreach ($menuCollection[0]->all() as $menuItem)
+    <li>{{$menuItem}}</li>
+    @endforeach
+</ol>

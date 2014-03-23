@@ -13,11 +13,7 @@ class ViewHelperSingleton {
 	public function button($params = array()) {
 
 
-
 	}
-
-
-
 
 
 }

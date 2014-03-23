@@ -67,6 +67,25 @@ return array(
                     'children' => null,
                     'childrenClass' => null
                 ),
+                10 => array (
+                    'id' => 'tests',
+                    'name' => 'Testy',
+                    'type' => null,
+                    'url' => '#',
+                    //'icon' => Icons::$icon_cog,
+                    'icon' => IconFactory::get('cog', 'fa-lg'),
+                    'class' => 'grey',
+                    'childrenClass' => null,
+                    'children' => array(
+                        1 => array(
+                            'id' => 'datagridtest1',
+                            'name' => 'Datagrid test1',
+                            'url' => '/tests/datagridTest1',
+                            //'icon' => Icons::$icon_user,
+                            //'icon' => IconFactory::get('user', 'fa-lg'),
+                        )
+                    )
+                ),
                 100 => array (
                     'id' => 'admin',
                     'name' => 'Administracja',

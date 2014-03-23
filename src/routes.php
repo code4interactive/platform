@@ -6,6 +6,16 @@ use Code4\Menu\Facades\Menu;
 use Krucas\Notification\Facades\Notification;
 use Cartalyst\DataGrid\Facades\DataGrid;
 
+
+/**
+ * TESTS
+ */
+
+\Route::get('tests/datagridTest1', 'Code4\Platform\Controllers\Tests_Tablegrid@datagridTest1');
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -17,17 +27,11 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 |
 */
 
-//\Session::keep(array('notifications_default'));
-
-//\Route::controller('administration', 'Code4\Platform\Controllers\Administration_Users');
 \Route::get('administration/users/add', 'Code4\Platform\Controllers\Administration_Users@addUser');
 \Route::get('administration/users/get', 'Code4\Platform\Controllers\Administration_Users@getUsers');
 \Route::post('administration/users/add', 'Code4\Platform\Controllers\Administration_Users@saveForm');
 
-
 \Route::get('/', array('as' => 'platformHome', function() {
-
-
 
     Menu::breadcrumbs()->add(array('id'=>'test', 'name'=>'Test', 'url'=>\URL::route('platformHome')))->at(2);
     //$view = \View::make('platform::dashboard');
@@ -35,17 +39,6 @@ use Cartalyst\DataGrid\Facades\DataGrid;
     return $view;
 
 }));
-
-/*\Route::get('dashboard', array('as' => 'dashboard', function()
-{
-
-    \Notification::success(\Config::get('platform::platform.platformName'));
-    Menu::leftMenu()->setActivePath('head5');
-
-    $view = \View::make('platform::dashboard');
-    return $view;
-}));*/
-
 
 \Route::get('administration/users/list/ajax', function() {
 
@@ -59,21 +52,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 });
 
 
-
-/*
-\Route::get('administration/createUser', array('as'=>'addUser', 'uses'=>'AdministrationController@addUser'));
-\Route::get('administration/showUsers', array('as'=>'showUsers', 'uses'=>'AdministrationController@showUsers'));
-
-\Route::get('testNamespace', 'Code4\Platform\Controllers_Administration@showUsers');
-
-\Route::get('test/{id}', 'AdministrationController@showProfile');
-*/
-
-\Route::post('getNotifications', function()
-{
-
-    //$view = View::make('platform::templates.ace.dashboard');
-
+\Route::post('getNotifications', function(){
     if (\Request::ajax())
     {
 
@@ -85,9 +64,6 @@ use Cartalyst\DataGrid\Facades\DataGrid;
         \Response::json($temp);
         return $temp;
     }
-
-
-    //return $view;
 });
 
 \Route::post('dataSrc', function(){
@@ -100,8 +76,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
     return $dataGrid;
 });
 
-\App::error(function($exception, $code)
-{
+\App::error(function($exception, $code){
     switch ($code)
     {
        /* case 403:
@@ -109,7 +84,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 
         case 404:
             Menu::breadcrumbs()->add(array('id'=>'404', 'name'=>'404 Page Not Found', 'active'=>true))->at();
-            return \Response::view('theme::errors.404', array(), 404);
+            return \Response::view('platform::errors.404', array(), 404);
 
         /*case 500:
             return Response::view('errors.500', array(), 500);

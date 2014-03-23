@@ -46,58 +46,56 @@
 </a>
 
 <div id="sidebar">
-<div id="sidebar-shortcuts">
-    <div id="sidebar-shortcuts-large">
-        <button class="btn btn-small btn-success">
-            <i class="icon-signal"></i>
-        </button>
+    <div id="sidebar-shortcuts">
+        <div id="sidebar-shortcuts-large">
+            <button class="btn btn-small btn-success">
+                <i class="icon-signal"></i>
+            </button>
 
-        <button class="btn btn-small btn-info">
-            <i class="icon-pencil"></i>
-        </button>
+            <button class="btn btn-small btn-info">
+                <i class="icon-pencil"></i>
+            </button>
 
-        <button class="btn btn-small btn-warning">
-            <i class="icon-group"></i>
-        </button>
+            <button class="btn btn-small btn-warning">
+                <i class="icon-group"></i>
+            </button>
 
-        <button class="btn btn-small btn-danger">
-            <i class="icon-cogs"></i>
-        </button>
+            <button class="btn btn-small btn-danger">
+                <i class="icon-cogs"></i>
+            </button>
+        </div>
+
+        <div id="sidebar-shortcuts-mini">
+            <span class="btn btn-success"></span>
+
+            <span class="btn btn-info"></span>
+
+            <span class="btn btn-warning"></span>
+
+            <span class="btn btn-danger"></span>
+        </div>
+    </div><!--#sidebar-shortcuts-->
+
+    <ul class="nav nav-list">
+        {{Menu::leftMenu()}}
+    </ul>
+
+    <div id="sidebar-collapse">
+        <i class="icon-double-angle-left"></i>
     </div>
-
-    <div id="sidebar-shortcuts-mini">
-        <span class="btn btn-success"></span>
-
-        <span class="btn btn-info"></span>
-
-        <span class="btn btn-warning"></span>
-
-        <span class="btn btn-danger"></span>
-    </div>
-</div><!--#sidebar-shortcuts-->
-
-<ul class="nav nav-list">
-    {{Menu::leftMenu()}}
-</ul>
-
-<div id="sidebar-collapse">
-    <i class="icon-double-angle-left"></i>
-</div>
 </div>
 
 <div id="main-content" class="clearfix">
 <div id="breadcrumbs">
 
     {{--Platform::getView()->getBreadcrumbs()--}}
-
     {{Menu::breadcrumbs()}}
-
     <div id="nav-search">
         <form class="form-search">
-							<span class="input-icon">
-								<input type="text" placeholder="Search ..." class="input-small search-query" id="nav-search-input" autocomplete="off" />
-								<i class="icon-search" id="nav-search-icon"></i>
-							</span>
+			<span class="input-icon">
+				<input type="text" placeholder="Search ..." class="input-small search-query" id="nav-search-input" autocomplete="off" />
+				<i class="icon-search" id="nav-search-icon"></i>
+			</span>
         </form>
     </div><!--#nav-search-->
 </div>
