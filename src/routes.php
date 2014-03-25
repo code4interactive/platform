@@ -12,6 +12,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
  */
 
 \Route::get('tests/datagridTest1', 'Code4\Platform\Controllers\Tests_Tablegrid@datagridTest1');
+\Route::get('tests/formsTest1', 'Code4\Platform\Controllers\Tests_Forms@formsTest1');
 
 
 

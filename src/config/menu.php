@@ -83,6 +83,13 @@ return array(
                             'url' => '/tests/datagridTest1',
                             //'icon' => Icons::$icon_user,
                             //'icon' => IconFactory::get('user', 'fa-lg'),
+                        ),
+                        2 => array(
+                            'id' => 'formstest1',
+                            'name' => 'Forms test1',
+                            'url' => '/tests/formsTest1',
+                            //'icon' => Icons::$icon_user,
+                            //'icon' => IconFactory::get('user', 'fa-lg'),
                         )
                     )
                 ),

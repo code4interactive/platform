@@ -36,7 +36,7 @@
 			tag_braces: '\\[\\?\\?\\]',
 			escape: true
 		},
-		searchThreshold: 100,
+		searchThreshold: 500,
 		callback: undefined,
         middlePages: 5
 	};
@@ -137,6 +137,7 @@
 			});
 
             this.$body.on('click', '[data-perpage]'+this.grid, function(e){
+            	console.log($(this));
 
                 self.opt.throttle = $(this).val();
                 self.opt.pagiThrottle = self.opt.throttle;

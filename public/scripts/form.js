@@ -76,23 +76,16 @@
             // [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ]
 
             // return false to cancel submit
-            $('.error-block').remove();
-            $('.form-group').removeClass('has-error');
+            $('.note-error').remove();
+            $('label').removeClass('state-error');
             $('#gritter-notice-wrapper').remove();
+
+
+            code4Loading('start');
 
         },
         showResponse: function(responseText, statusText, xhr, $form)  {
             var self = this;
-            // for normal html responses, the first argument to the success callback
-            // is the XMLHttpRequest object's responseText property
-
-            // if the ajaxSubmit method was passed an Options Object with the dataType
-            // property set to 'xml' then the first argument to the success callback
-            // is the XMLHttpRequest object's responseXML property
-
-            // if the ajaxSubmit method was passed an Options Object with the dataType
-            // property set to 'json' then the first argument to the success callback
-            // is the json data object returned by the server
 
             /*alert('status: ' + statusText + '\n\nresponseText: \n' + responseText +
                 '\n\nThe output div should have already been updated with the responseText.');*/
@@ -103,8 +96,8 @@
 
                     if (responseText[lp].id !=='undefined') {
 
-                        var markup = '<span class="error-block help-block col-xs-12 col-sm-reset inline text-danger"><span class="middle">'+ responseText[lp].message+'</span></span>';
-                        $('#'+responseText[lp].id).closest('.form-group').addClass('has-error').append(markup);
+                        var markup = '<div class="note note-error">'+ responseText[lp].message+'</div>';
+                        $('#'+responseText[lp].id).parent().addClass('state-error').parent().append(markup);
 
                     }
 
@@ -112,11 +105,11 @@
 
             }
 
+
+            code4Loading('stop');
         },
         showErrors: function(id, message) {
-
-
-
+            code4Loading('stop');
         }
 };
 

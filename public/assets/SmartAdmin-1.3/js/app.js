@@ -984,7 +984,7 @@ function setup_widgets_desktop() {
 
 	if ($.fn.jarvisWidgets && $.enableJarvisWidgets) {
 
-		$('#widget-grid').jarvisWidgets({
+		$('.widget-grid').jarvisWidgets({
 
 			grid : 'article',
 			widgets : '.jarviswidget',
@@ -1021,6 +1021,7 @@ function setup_widgets_desktop() {
 			fullscreenClass : 'fa fa-resize-full | fa fa-resize-small',
 			fullscreenDiff : 3,
 			onFullscreen : function() {
+				console.log('fullscreen');
 			},
 			// custom btn
 			customButton : false,
