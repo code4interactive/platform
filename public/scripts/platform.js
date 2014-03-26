@@ -38,8 +38,11 @@ $( document ).ready( function(){
     $.c4forms._init();
     $.notifications.check();
 
+
+    //Automatycznie sprawdza notyfikacje po kazdym wywolaniu przez ajax
+    //wyjątkiem jest sytuacja kiedy wywolanie to sprawdzenie notyfikacji 
     $(document).ajaxSuccess(function(event, request, settings) {
-        if (!isset(settings.data.responseVariant)) $.notifications.check();
+        //if (!isset(settings.data.responseVariant)) $.notifications.check();
     });
 
 } );

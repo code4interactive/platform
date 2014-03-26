@@ -72,3 +72,7 @@ table.dataTable label {
 .dt-row.dt-bottom-row {
   overflow: visible;
 }
+.note.c4error {
+  margin-top: 0px;
+  color: red;
+}

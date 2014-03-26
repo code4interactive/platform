@@ -7,8 +7,14 @@
             responseTarget: "default",
             responseVariant: "getEvents",
             responseType: "json"
+        },
+        colors: {
+            success: "#739E73",
+            warning: "#C79121",
+            error: "#C46A69",
+            info: "#3276B1"
         }
-    }
+    };
 
     function Notifications(options) {
         this.opt = $.extend({}, defaults, options);
@@ -112,25 +118,40 @@
             type = typeof type == 'undefined' ? 'info' : type;
             sticky = typeof sticky == 'undefined' ? false : sticky;
             image = typeof image == 'undefined' ? false : image;
-            var class_name = 'gritter-info';
+           
 
+
+            var color;
+            /*success: "#739E73",
+            warning: "#C79121",
+            info: "#C46A69",
+            error: "#3276B1"*/
 
             switch(type) {
 
                 case 'info':
-                    class_name = 'gritter-info';
+                    color = this.opt.colors.info;
                     break;
                 case 'success':
-                    class_name = 'gritter-success';
+                    color = this.opt.colors.success;
                     break;
                 case 'warning':
-                    class_name = 'gritter-warning';
+                    color = this.opt.colors.warning;
                     break;
                 case 'error':
-                    class_name = 'gritter-error';
+                    color = this.opt.colors.error;
                     break;
             }
 
+
+            $.smallBox({
+                title : title,
+                content : text,
+                color : "#5384AF",
+                //timeout: 8000,
+                icon : "fa fa-bell"
+            });
+/*
 
             this.id = $.gritter.add({
                 // (string | mandatory) the heading of the notification
@@ -165,7 +186,7 @@
                 after_close: function(){
                     //alert('I am a sticky called after it closes');
                 }
-            });
+            });*/
 
         }
     }

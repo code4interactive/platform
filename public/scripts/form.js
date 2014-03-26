@@ -96,8 +96,8 @@
 
                     if (responseText[lp].id !=='undefined') {
 
-                        var markup = '<div class="note note-error">'+ responseText[lp].message+'</div>';
-                        $('#'+responseText[lp].id).parent().addClass('state-error').parent().append(markup);
+                        var markup = '<div class="note note-error c4error">'+ responseText[lp].message+'</div>';
+                        $('#'+responseText[lp].id).parent().addClass('state-error').parent().find('label').last().after(markup);
 
                     }
 

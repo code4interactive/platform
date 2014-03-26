@@ -6,7 +6,7 @@ return array(
         array(
             'id'=>'formOpen',
             'type'=>'open',
-            'action'=>'administration/users/add',
+            'action'=>'/tests/formsTest1Validate',
             'method'=>'post'
         ),
 
@@ -31,7 +31,7 @@ return array(
                     'section' => 'col col-6',
                     'value' => 'test',
                     'description' => 'To jest description pola',
-                    'validaton' => array(
+                    'validation' => array(
                         'required', 'num_only', 'min'=>3
                     )
                 ),
@@ -47,7 +47,7 @@ return array(
                     'section' => 'col col-6',
                     'value' => 'test',
                     'description' => 'To jest description pola',
-                    'validaton' => array(
+                    'validation' => array(
                         'required', 'num_only', 'min'=>3
                     )
                 ),
@@ -66,10 +66,10 @@ return array(
                 'rows'=>5,
                 'icon' => 'fa-user',
                 'iconposition' => 'right',
-                'section' => 'col col-6',
+                'section' => 'col col-4',
                 'value' => 'test',
                 'description' => 'To jest description pola',
-                'validaton' => array(
+                'validation' => array(
                     'required', 'num_only', 'min'=>3
                 )
             ),
@@ -77,10 +77,39 @@ return array(
             array(
                 'id'=>'selector',
                 'type'=>'select',
-                'label'=>'select',
+                'label'=>'Multiple select - Select 2',
                 'value'=>'Value2',
-                'select2'=>'true',
-                'section' => 'col col-6',
+                'select2'=>true,
+                'multiple'=>true,
+                'section' => 'col col-4',
+                'placeholder'=>'Wybierz no coś',
+                'value'=>'Value3',
+                'collection'=>array(
+                    array(
+                        'id'=>'option1',
+                        'value'=>'Value1',
+                        'type'=>'option'
+                    ),
+                    array(
+                        'id'=>'option2',
+                        'value'=>'Value2',
+                        'type'=>'option'
+                    ),
+                    array(
+                        'id'=>'option3',
+                        'value'=>'Value3',
+                        'type'=>'option'
+                    )
+                )
+            ),
+
+            array(
+                'id'=>'selector2',
+                'type'=>'select',
+                'label'=>'Select - Select 2',
+                'value'=>'Value2',
+                'select2'=>true,
+                'section' => 'col col-4',
                 'placeholder'=>'Wybierz no coś',
                 'value'=>'Value3',
                 'collection'=>array(
@@ -102,19 +131,30 @@ return array(
                 )
             ),
         )
+    ),
+    array(
+
+        'type' => 'row',
+        'collection' => array(
+            array(
+                'id'=>'password',
+                'type'=>'password',
+                'value'=>'',
+                'label'=>'Wprowadź hasło',
+                'tooltip'=>'Minimum 8 znaków',
+                'placeholder'=>'Haslo',
+
+                'icon' => 'fa-lock',
+                'iconposition' => 'right',
+                'section' => 'col col-4',
+                'description' => 'To jest description pola',
+            )
+        )
     )
 
 
 /*
-        array(
-            'id'=>'password',
-            'type'=>'password',
-            'value'=>'',
-            'label'=>'Wprowadź hasło',
-            'tooltip'=>'Minimum 8 znaków',
-            'placeholder'=>'Haslo',
-            'preaddon'=>'zł'
-        ),
+        ,
         array(
             'id' => 'hidden',
             'type' => 'hidden',
