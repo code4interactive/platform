@@ -55,15 +55,14 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 
 
 \Route::post('getNotifications', function(){
-    if (\Request::ajax())
-    {
+    if (\Request::ajax()) {
 
-        $temp = Notification::all()->toArray();
+        $temp = array("type"=>"notifications", "d" => \Notification::all()->toArray());
 
-        Notification::clearAll();
+        \Notification::clearAll();
         \Session::forget('notifications_default');
 
-        \Response::json($temp);
+        return \Response::json($temp);
         return $temp;
     }
 });
