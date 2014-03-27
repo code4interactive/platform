@@ -1,5 +1,7 @@
 (function($, window, document) {
 
+$.sound_path = "/packages/code4/platform/assets/SmartAdmin-1.3/sound/";
+
     'use strict';
 
     var defaults = {
@@ -20,7 +22,7 @@
         this.opt = $.extend({}, defaults, options);
         this.$body = $(document.body);
         this.$window = $(window);
-        this.id;
+//        this.id;
     }
 
     Notifications.prototype = {
@@ -29,12 +31,11 @@
         },
 
         clear: function() {
-
-            $('#gritter-notice-wrapper').remove();
+            $("#divSmallBoxes").empty();
         },
 
         check: function(async) {
-            var self = this
+            var self = this;
             async = typeof async !== 'undefined' ? async : false;
             $.ajax({
                     url: "/getNotifications",
@@ -44,10 +45,12 @@
                     data: self.opt.requestData,
                     dataType: "json",
                     beforeSend: function(data){
-
                     },
                     success: function( data, textStatus, jqXHR ){
-                        self._handleServerSuccess(data, textStatus, jqXHR);
+                        //data = $.parseJSON(data);
+                        if (isset(data.type) && data.type === 'notifications') {
+                            self._handleServerSuccess(data.d, textStatus, jqXHR);
+                        }
                     },
                     complete: function(eCode){
                         //loadingLayer(false);
@@ -147,7 +150,7 @@
             $.smallBox({
                 title : title,
                 content : text,
-                color : "#5384AF",
+                color : color,
                 //timeout: 8000,
                 icon : "fa fa-bell"
             });

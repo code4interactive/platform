@@ -42,8 +42,13 @@ $( document ).ready( function(){
     //Automatycznie sprawdza notyfikacje po kazdym wywolaniu przez ajax
     //wyjątkiem jest sytuacja kiedy wywolanie to sprawdzenie notyfikacji 
     $(document).ajaxSuccess(function(event, request, settings) {
-        //if (!isset(settings.data.responseVariant)) $.notifications.check();
+        //console.log(settings);
+        //if (!(isset(settings.data) && isset(settings.data.responseVariant))) $.notifications.check();
     });
+
+    $(document).ajaxComplete(function(event, XMLHttpRequest, ajaxOptions){
+        //console.log(ajaxOptions);
+    })
 
 } );
 

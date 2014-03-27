@@ -78,8 +78,8 @@
             // return false to cancel submit
             $('.note-error').remove();
             $('label').removeClass('state-error');
-            $('#gritter-notice-wrapper').remove();
 
+            $.notifications.clear();
 
             code4Loading('start');
 
@@ -105,8 +105,8 @@
 
             }
 
-
             code4Loading('stop');
+            $.notifications.check();
         },
         showErrors: function(id, message) {
             code4Loading('stop');
