@@ -20,10 +20,11 @@ class PlatformServiceProvider extends ServiceProvider {
 	{
 		$this->package('code4/platform');
         include __DIR__.'/../../routes.php';
+        include __DIR__.'/../../filters.php';
         include __DIR__.'/../../config/icons.php';
 
         $this->app['platform']->collectViewData();
-        $this->app['platform']->keepNotifications();
+        //$this->app['platform']->keepNotifications();
 	}
 
 	/**

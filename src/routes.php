@@ -61,9 +61,10 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 
         \Notification::clearAll();
         \Session::forget('notifications_default');
+        \Session::save();
 
         return \Response::json($temp);
-        return $temp;
+        //return $temp;
     }
 });
 

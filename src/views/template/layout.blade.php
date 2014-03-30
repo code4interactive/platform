@@ -278,7 +278,7 @@
 		<script src="{{$platform['templatePath']}}/js/bootstrap/bootstrap.min.js"></script>
 
 		<!-- CUSTOM NOTIFICATION -->
-		<script src="{{$platform['templatePath']}}/js/notification/SmartNotification.min.js"></script>
+		<script src="{{$platform['templatePath']}}/js/notification/SmartNotification.js"></script>
 
 		<!-- JARVIS WIDGETS -->
 		<script src="{{$platform['templatePath']}}/js/smartwidgets/jarvis.widget.js"></script>
