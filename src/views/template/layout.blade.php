@@ -148,7 +148,7 @@
 
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
-					<span> <a href="login.html" title="Sign Out"><i class="fa fa-sign-out"></i></a> </span>
+					<span> <a href="/logout" title="Wyloguj"><i class="fa fa-sign-out"></i></a> </span>
 				</div>
 				<!-- end logout button -->
 
@@ -186,7 +186,27 @@
 						<!--<img src="img/avatars/sunny.png" alt="me" class="online" /> -->
 						<i class="fa fa-user"></i>
 						<span>
-							john.doe 
+								<!--<a href="javascript:void(0);" id="show-shortcut">-->
+					<a href="#">
+						<!--<img src="img/avatars/sunny.png" alt="me" class="online" /> -->
+						<i class="fa fa-user"></i>
+						<span>
+							<!--<a href="javascript:void(0);" id="show-shortcut">-->
+							<a href="#">
+								<!--<img src="img/avatars/sunny.png" alt="me" class="online" /> -->
+								<i class="fa fa-user"></i>
+								<span>
+									@if(Sentry::check())
+									{{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }}
+									@else
+									Niezalogowany
+									@endif
+								</span>
+								<!--<i class="fa fa-angle-down"></i>-->
+							</a>
+						</span>
+						<!--<i class="fa fa-angle-down"></i>-->
+					</a>
 						</span>
 						<i class="fa fa-angle-down"></i>
 					</a> 
