@@ -3,7 +3,7 @@
 
 \App::before(function($request)
 {
-	if (\Request::is('getNotifications')) {
+	if (! \Request::is('getNotifications')) {
 		\Platform::keepNotifications();
 	}
 	
