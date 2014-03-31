@@ -194,14 +194,15 @@
 							<!--<a href="javascript:void(0);" id="show-shortcut">-->
 							<a href="#">
 								<!--<img src="img/avatars/sunny.png" alt="me" class="online" /> -->
-								<i class="fa fa-user"></i>
-								<span>
-									@if(Sentry::check())
-									{{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }}
-									@else
-									Niezalogowany
-									@endif
-								</span>
+								<div style="color:#FFFFFF !important"><i class="fa fa-user fa-fw fa-lg"></i>
+									<span>
+										@if(Sentry::check())
+										{{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }}
+										@else
+										Niezalogowany
+										@endif
+									</span>
+								</div>
 								<!--<i class="fa fa-angle-down"></i>-->
 							</a>
 						</span>
