@@ -51,7 +51,7 @@ var ExistMsg = 0,
         if (isIE8orlower() == 0) {
             var audioElement = document.createElement('audio');
             audioElement.setAttribute('src', $.sound_path + 'messagebox.mp3');
-            $.get();
+            //$.get();
             audioElement.addEventListener("load", function () {
                 audioElement.play();
             }, true);
@@ -434,7 +434,7 @@ var SmallBoxes = 0,
                 else
                     audioElement.setAttribute('src', $.sound_path + 'smallbox.mp3');
 
-                $.get();
+                //$.get();
                 audioElement.addEventListener("load", function () {
                     audioElement.play();
                 }, true);
