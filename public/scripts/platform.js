@@ -5,7 +5,7 @@
     var defaults = {
         path_assets: "/packages/code4/platform/"
 
-    }
+    };
 
     function Platform(options) {
         this.opt = $.extend({}, defaults, options);
@@ -25,8 +25,12 @@
         },
         _timers: function() {
             var self = this;
+        },
+        jsRedirect: function(redirectPath) {
+            code4Loading('start');
+            window.location=redirectPath;
         }
-    }
+    };
     $.platform = new Platform();
 
 })(jQuery, window, document);
@@ -48,7 +52,7 @@ $( document ).ready( function(){
 
     $(document).ajaxComplete(function(event, XMLHttpRequest, ajaxOptions){
         //console.log(ajaxOptions);
-    })
+    });
 
 } );
 

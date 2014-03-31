@@ -55,13 +55,6 @@ class Platform {
 
     public function collectViewData() {
 
-
-
-
-
-
-
-
         /**
          * Add custom pathes to theme
          */
@@ -128,7 +121,9 @@ class Platform {
 
     }
 
-    public function keepNotifications() {
+
+    //Przetrzymuje notyfikacje do kolejnego requesta
+    public static function keepNotifications() {
 
         $flashed = \Session::get('notifications_default');
 
@@ -165,10 +160,13 @@ class Platform {
         }
     }
 
-    public function __call($name, $args) {
-
-
-
+    //Zapisuje w sesji info o konieczności wykonania redirecta
+    //Wywoływane jest przez skrypt wraz z pobraniem informacji o notyfikacjach
+    public static function jsredirect($url) {
+        \Session::put('jsRedirect', $url);
     }
+
+
+    public function __call($name, $args) { }
 
 }

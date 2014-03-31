@@ -39,8 +39,7 @@ class PlatformServiceProvider extends ServiceProvider {
 
         include __DIR__.'/Helpers/helpers.php';
 
-        $this->app['platform'] = $this->app->share(function($app)
-        {
+        $this->app['platform'] = $this->app->share(function($app) {
             return new Platform;
         });
 

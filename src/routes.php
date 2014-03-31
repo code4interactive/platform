@@ -43,9 +43,7 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 }));
 
 \Route::get('administration/users/list/ajax', function() {
-
     return \View::make('platform::administration.users.list');
-
 });
 
 
@@ -57,6 +55,18 @@ use Cartalyst\DataGrid\Facades\DataGrid;
 \Route::post('getNotifications', function(){
     if (\Request::ajax()) {
 
+        //Jeżeli było jsRedirect - przetrzymujemy notyfikację do następnego requestu
+        if (\Session::get('jsRedirect')) {
+
+        \Log::error(\Session::all());
+
+            Platform::keepNotifications();
+            $temp = array("type"=>"jsRedirect", "url" => \Session::get('jsRedirect'));
+            \Session::forget('jsRedirect');
+            return \Response::json($temp);
+        }
+
+        //W przeciwnym wypadku zwracamy notyfikacje i usuwamy je z pamięci
         $temp = array("type"=>"notifications", "d" => \Notification::all()->toArray());
 
         \Notification::clearAll();

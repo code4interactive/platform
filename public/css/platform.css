@@ -1,3 +1,21 @@
+#logo {
+  display: inline-block;
+  width: 155px;
+  margin-top: 6px;
+  margin-left: 29px;
+}
+.login-info h3 {
+  display: block;
+  float: left;
+  margin: 6px 0 0 13px;
+}
+.login-info i {
+  float: left;
+  margin: 13px 0 0 12px;
+}
+.minified #left-panel h3 {
+  display: none;
+}
 #code4-loading {
   position: fixed;
   right: 6px;
@@ -71,6 +89,13 @@ table.dataTable label {
 }
 .dt-row.dt-bottom-row {
   overflow: visible;
+}
+.dataTables_length .smart-form {
+  float: left;
+}
+.dataTables_length .total {
+  float: left;
+  margin: 9px;
 }
 .note.c4error {
   margin-top: 0px;

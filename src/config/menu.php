@@ -154,7 +154,7 @@ return array(
                 0 => array(
                     'id' => 'home',
                     'name' => 'Home',
-                    'icon' => Icons::$icon_home,
+                    'icon' => 'fa-home',
                     'url' => 'platformHome'
                 )
             )
@@ -230,5 +230,19 @@ return array(
                     'class' => 'btn-danger tooltip-error'
                 )
             )
-        )
+        ),
+        'userMenu' => array(
+            'settings' => array(
+                'layout_template' => 'platform::menus.userMenu.layout',
+                'item_template' => 'platform::menus.userMenu.item'
+            ),
+            'items' => array(
+                0 => array(
+                    'id' => 'home',
+                    'name' => 'Home',
+                    'icon' => 'fa-home',
+                    'url' => 'platformHome'
+                )
+            )
+        ),
 );

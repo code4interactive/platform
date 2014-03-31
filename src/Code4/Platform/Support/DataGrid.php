@@ -182,6 +182,7 @@ class DataGrid {
         $out .= '            <i></i>';
         $out .= '        </label>';
         $out .= '    </span>';
+        $out .= '    <span class="total">z <span>0</span></span>';
         $out .= '</div>';
 
 
@@ -292,7 +293,7 @@ class DataGrid {
 
                         //Leverage the Callback to show total counts or filtered count
                         // $('#filtered').val(obj.filterCount);
-                        // $('#total').val(obj.totalCount);
+                        $('#widget-{$this->dataGridId} .total span').html(obj.totalCount);
 
                 }
                 });

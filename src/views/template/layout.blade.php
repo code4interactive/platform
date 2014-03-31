@@ -68,7 +68,7 @@
 
 				<!-- Note: The activity badge color changes when clicked and resets the number to 0
 				Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
-				<span id="activity" class="activity-dropdown"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>
+				<span id="activity" class="activity-dropdown"> <i class="fa fa-user"></i> <!--<b class="badge"> 21 </b>--> </span>
 
 				<!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
 				<div class="ajax-dropdown">
@@ -113,23 +113,21 @@
 			<!-- projects dropdown -->
 			<div id="project-context">
 
-				<span class="label">Projects:</span>
-				<span id="project-selector" class="popover-trigger-element dropdown-toggle" data-toggle="dropdown">Recent projects <i class="fa fa-angle-down"></i></span>
+				<span class="label">Zalogowany użytkownik:</span>
+				<span id="project-selector" class="popover-trigger-element dropdown-toggle" data-toggle="dropdown">
+					@if(Sentry::check())
+					{{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }}
+					@else
+					Gość (Niezalogowany)
+					@endif
+				 <i class="fa fa-angle-down"></i></span>
 
 				<!-- Suggestion: populate this list with fetch and push technique -->
 				<ul class="dropdown-menu">
-					<li>
-						<a href="javascript:void(0);">Online e-merchant management system - attaching integration with the iOS</a>
-					</li>
-					<li>
-						<a href="javascript:void(0);">Notes on pipeline upgradee</a>
-					</li>
-					<li>
-						<a href="javascript:void(0);">Assesment Report for merchant account</a>
-					</li>
+	                	{{Menu::userMenu()}}
 					<li class="divider"></li>
 					<li>
-						<a href="javascript:void(0);"><i class="fa fa-power-off"></i> Clear</a>
+						<a href="javascript:void(0);"><i class="fa fa-power-off"></i> Wyloguj</a>
 					</li>
 				</ul>
 				<!-- end dropdown-menu-->
@@ -147,9 +145,9 @@
 				<!-- end collapse menu -->
 
 				<!-- logout button -->
-				<div id="logout" class="btn-header transparent pull-right">
+				<!--<div id="logout" class="btn-header transparent pull-right">
 					<span> <a href="/logout" title="Wyloguj"><i class="fa fa-sign-out"></i></a> </span>
-				</div>
+				</div>-->
 				<!-- end logout button -->
 
 				<!-- search mobile button (this is hidden till mobile view port) -->
@@ -180,40 +178,14 @@
 
 			<!-- User info -->
 			<div class="login-info">
-				<span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
-					
-					<a href="javascript:void(0);" id="show-shortcut">
-						<!--<img src="img/avatars/sunny.png" alt="me" class="online" /> -->
-						<i class="fa fa-user"></i>
-						<span>
-								<!--<a href="javascript:void(0);" id="show-shortcut">-->
-					<a href="#">
-						<!--<img src="img/avatars/sunny.png" alt="me" class="online" /> -->
-						<i class="fa fa-user"></i>
-						<span>
-							<!--<a href="javascript:void(0);" id="show-shortcut">-->
-							<a href="#">
-								<!--<img src="img/avatars/sunny.png" alt="me" class="online" /> -->
-								<div style="color:#FFFFFF !important"><i class="fa fa-user fa-fw fa-lg"></i>
-									<span>
-										@if(Sentry::check())
-										{{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }}
-										@else
-										Niezalogowany
-										@endif
-									</span>
-								</div>
-								<!--<i class="fa fa-angle-down"></i>-->
-							</a>
-						</span>
-						<!--<i class="fa fa-angle-down"></i>-->
-					</a>
-						</span>
-						<i class="fa fa-angle-down"></i>
-					</a> 
-					
-				</span>
+
+				<i class="fa fa-lg fa-fw fa-windows"></i>
+
+				<h3>Menu</h3>
+
 			</div>
+
+
 			<!-- end user info -->
 
 			<!-- NAVIGATION : This navigation is also responsive
