@@ -127,7 +127,7 @@
 	                	{{Menu::userMenu()}}
 					<li class="divider"></li>
 					<li>
-						<a href="javascript:void(0);"><i class="fa fa-power-off"></i> Wyloguj</a>
+						<a href="/logout"><i class="fa fa-power-off"></i> Wyloguj</a>
 					</li>
 				</ul>
 				<!-- end dropdown-menu-->
