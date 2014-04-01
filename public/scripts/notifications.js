@@ -54,7 +54,7 @@ $.sound_path = "/packages/code4/platform/assets/SmartAdmin-1.3/sound/";
 
                         //jsRedirect
                         if (isset(data.type) && data.type === 'jsRedirect') {
-                            $.platform.jsRedirect(data.d);
+                            $.platform.jsRedirect(data.url);
                         }
                     },
                     complete: function(eCode){
