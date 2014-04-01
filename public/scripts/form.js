@@ -32,6 +32,7 @@
         _init: function(){
 
             this._events();
+            this.customConfirm();
 
         },
         _events: function() {
@@ -51,6 +52,31 @@
 
             });
 
+        },
+
+        customConfirm: function() {
+
+            $('body').on('click', '[data-confirm]', function(e){
+
+                var text = $(this).data('confirm');
+                var self = this;
+
+                $.SmartMessageBox({
+                    title : "Potwierdzenie",
+                    content : text,
+                    buttons : '[Nie][Tak]'
+                }, function(ButtonPressed) {
+                    if (ButtonPressed === "Tak") {
+                        $(self).closest('form').submit();
+                    }
+                    if (ButtonPressed === "Nie") {
+                        
+                    }
+        
+                });
+                e.preventDefault();
+
+            });
         },
 
         submitForm: function() {

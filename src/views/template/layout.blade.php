@@ -308,6 +308,7 @@
 
 		<!--code4 scripts-->
 		<script src="{{ $platform['assetsPath'] }}/scripts/helpers.js"></script>
+		<script src="{{ $platform['assetsPath'] }}/scripts/jquery.cookie.js"></script>
 		<script src="{{ $platform['assetsPath'] }}/scripts/jquery.form.min.js"></script>
 		<script src="{{ $platform['assetsPath'] }}/scripts/notifications.js"></script>
 		<script src="{{ $platform['assetsPath'] }}/scripts/form.js"></script>

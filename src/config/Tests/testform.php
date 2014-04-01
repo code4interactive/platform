@@ -181,6 +181,7 @@ return array(
             'id'=>'submitButton',
             'type'=>'submit',
             'label'=>'Zapisz',
+            'confirm' => 'Komunikat dla confirmu. Ustawiany w konfiguracji formsa',
             'class'=>'btn-primary btn-lg',
             'icon'=>'fa-save'
         ),

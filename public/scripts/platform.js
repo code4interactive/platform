@@ -3,8 +3,8 @@
     'use strict';
 
     var defaults = {
-        path_assets: "/packages/code4/platform/"
-
+        path_assets: "/packages/code4/platform/",
+        menuMinified: false
     };
 
     function Platform(options) {
@@ -15,13 +15,21 @@
 
     Platform.prototype = {
         _init: function(){
-
             //BOOTSTRAP TOOLTIPS and POPOVERS
             $('[rel=tooltip],[data-rel=tooltip]').tooltip({html: true});
             $('[rel=popover],[data-rel=popover]').popover({html:true});
 
-            this._timers();
+            //Load from cookies
+            var retrievedObject = $.cookie('platform');
 
+            if (retrievedObject) {
+
+                this.opt = $.extend({}, this.opt, JSON.parse(retrievedObject));
+            }
+
+            if (this.opt.menuMinified) { $('body').addClass('minified'); }
+
+            this._timers();
         },
         _timers: function() {
             var self = this;
@@ -29,6 +37,11 @@
         jsRedirect: function(redirectPath) {
             code4Loading('start');
             window.location=redirectPath;
+        },
+        store: function(item, value) {
+            this.opt[item] = value;
+            $.removeCookie('platform');
+            $.cookie('platform', JSON.stringify(this.opt), { expires: 365, path: '/' });
         }
     };
     $.platform = new Platform();
@@ -38,6 +51,7 @@
 
 $( document ).ready( function(){
 
+    //$.cookie.json = true;
     $.platform._init();
     $.c4forms._init();
     $.notifications.check();
@@ -54,15 +68,36 @@ $( document ).ready( function(){
         //console.log(ajaxOptions);
     });
 
+
+
+    // COLLAPSE LEFT NAV
+    //$('.minifyme').off('click');
+    $('body').on('click', '.minifyme', function(e) {
+
+        if ($('body').hasClass('minified')) {
+            $('body').removeClass('minified');
+            $(this).effect("highlight", {}, 500);
+            $.platform.store('menuMinified', false);
+        } else {
+            $('body').addClass('minified');
+            $(this).effect("highlight", {}, 500);
+            $.platform.store('menuMinified', true);
+        }
+
+        //$('body').toggleClass("minified");
+        
+
+        //$.platform.store('menuMinified', true);
+
+        e.preventDefault();
+    });
+
+
 } );
 
 
 
 $(function(){
-
-
-
-
     //var notification = new platform.notification();
 
     var currentTime = new Date();
