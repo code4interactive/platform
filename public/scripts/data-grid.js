@@ -57,6 +57,9 @@
 	function DataGrid(grid, results, pagination, filters, options){
 
 		this.opt = $.extend({}, defaults, options, helpers);
+		this.opt.isFirst = true;
+
+		this.cookieData = this._c4readFetchData();
 
 		//Binding Key
 		this.grid = '[data-grid='+grid+']';
@@ -92,7 +95,10 @@
 
 			}
 
+			this._c4readFetchData();
+
 			this._ajaxFetch();
+
 		},
 
 		_checkDeps: function(){
@@ -137,7 +143,6 @@
 			});
 
             this.$body.on('click', '[data-perpage]'+this.grid, function(e){
-            	console.log($(this));
 
                 self.opt.throttle = $(this).val();
                 self.opt.pagiThrottle = self.opt.throttle;
@@ -395,6 +400,11 @@
 
 			var self = this;
 
+			if (self.opt.isFirst) {
+				self._c4buildFilters();
+				self.opt.isFirst = false;
+			}
+
 			$.ajax({
 				url: this.opt.source,
                 type: 'POST',
@@ -404,6 +414,8 @@
 			.done(function(json){
 
 				self.opt.isActive = false;
+
+				
 
 				self.opt.totalCount = json.total_count;
 				self.opt.filterCount = json.filtered_count;
@@ -449,6 +461,9 @@
 				self._loading('stop');
 				self._callback();
 
+				self._c4storeFetchData();
+
+
 			})
 			.error(function(jqXHR, textStatus, errorThrown) {
 				self._logError('ajaxFetch '+jqXHR.status ,errorThrown);
@@ -463,6 +478,58 @@
 			}
 
 		},
+
+		_c4buildFilters: function() {
+			if (this.cookieData) {
+				console.log(this.cookieData);
+				if (typeof this.cookieData.filters !== 'undefined') {
+					for (var key in this.cookieData.filters) {
+						this._setFilter(key + ":" + this.cookieData.filters[key]);
+					}
+				}
+
+				if (typeof this.cookieData.filtersAll !== 'undefined') {
+					for (var key in this.cookieData.filtersAll) {
+						this._setFilter('all:' + this.cookieData.filtersAll[key]);
+					}
+				}
+			}
+		},
+
+		_c4readFetchData: function() {
+
+			if ($.cookie('datagrid') !== undefined) {
+
+				var temp = $.cookie('datagrid');
+				this.cookieData = JSON.parse(temp);
+
+				this.opt.pageIdx = this.cookieData.page;
+				this.opt.dividend = this.cookieData.dividend;
+				this.opt.threshold = this.cookieData.threshold;
+				this.opt.throttle = this.cookieData.throttle;
+
+				if(typeof this.cookieData.sort !== 'undefined' && typeof this.cookieData.direction !== 'undefined'){
+					this.opt.sort.column = this.cookieData.sort;
+					this.opt.sort.direction = 'sorting_' + this.cookieData.direction;
+				}
+				
+			} else {
+
+				return null;
+
+			}
+			
+		},
+
+		_c4storeFetchData: function() {
+
+			this._buildFetchData();
+			var serialized = JSON.stringify(this.cookieData);
+
+			$.cookie('datagrid', serialized, { expires: 1 });
+
+		},
+
 
 		_buildFetchData: function(){
 
@@ -495,9 +562,43 @@
 				params.direction = this.opt.sort.direction.substring(8);
 			}
 
-			return $.param(params);
 
+			this.cookieData = {};
+			this.cookieData.page = this.opt.pageIdx;
+			this.cookieData.dividend = this.opt.dividend;
+			this.cookieData.threshold = this.opt.threshold;
+			this.cookieData.throttle = this.opt.throttle;
+
+			if(typeof this.opt.sort.column !== 'undefined' && typeof this.opt.sort.direction !== 'undefined'){
+				this.cookieData.sort = this.opt.sort.column;
+				this.cookieData.direction = this.opt.sort.direction.substring(8);
+			}
+
+
+			this.cookieData.filtersAll = [];
+			this.cookieData.filters = [];
+
+			for(var i = 0; i < this.opt.appliedFilters.length; i++){
+
+				if(typeof this.opt.appliedFilters[i].column === 'undefined'){
+
+					this.cookieData.filtersAll.push(this.opt.appliedFilters[i].value);
+
+				} else {
+
+					var filter = {};
+					filter[this.opt.appliedFilters[i].column] = this.opt.appliedFilters[i].value;
+					this.cookieData.filters.push(filter);
+
+				}
+
+			}
+
+			//this.cookieData.filters = this.opt.appliedFilters;
+
+			return $.param(params);
 		},
+
 
         _c4BuildPagination: function(params, resultsOnPage) {
 
@@ -517,7 +618,7 @@
             a = $(document.createElement('a')).attr('href', '#');
             i = $(document.createElement('i')).addClass('fa fa-angle-double-left');
 
-            if (params.prevPage == null) li.addClass('disabled');
+            if (params.prevPage === null) li.addClass('disabled');
             else a.attr('data-page', params.prevPage);
 
             a.append(i);
@@ -562,7 +663,7 @@
                 a = $(document.createElement('a')).attr('href', '#').text(lp);
                 a.attr('data-page', lp);
 
-                if (parseInt(params.page) == lp) { li.addClass('active');  }
+                if (parseInt(params.page) === lp) { li.addClass('active'); }
 
                 li.append(a);
 
