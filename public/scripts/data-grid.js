@@ -63,6 +63,7 @@
 
 		//Binding Key
 		this.grid = '[data-grid='+grid+']';
+        this.gridId = grid;
 
 		//Cache Our Selectors
 		this.$results = $(results + this.grid);
@@ -497,9 +498,9 @@
 
 		_c4readFetchData: function() {
 
-			if ($.cookie('datagrid') !== undefined) {
+			if ($.cookie('datagrid'+this.gridId) !== undefined) {
 
-				var temp = $.cookie('datagrid');
+				var temp = $.cookie('datagrid'+this.gridId);
 				this.cookieData = JSON.parse(temp);
 
 				this.opt.pageIdx = this.cookieData.page;
@@ -525,7 +526,7 @@
 			this._buildFetchData();
 			var serialized = JSON.stringify(this.cookieData);
 
-			$.cookie('datagrid', serialized, { expires: 1 });
+			$.cookie('datagrid'+this.gridId, serialized, { expires: 1 });
 
 		},
 
