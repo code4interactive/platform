@@ -481,14 +481,13 @@
 
 		_c4buildFilters: function() {
 			if (this.cookieData) {
-				console.log(this.cookieData);
-				if (typeof this.cookieData.filters !== 'undefined') {
+				if (typeof this.cookieData.filters === 'object' && this.cookieData.filters.length > 0 ) {
 					for (var key in this.cookieData.filters) {
-						this._setFilter(key + ":" + this.cookieData.filters[key]);
+						this._setFilter(this.cookieData.filters[key].column + ":" + this.cookieData.filters[key].value);
 					}
 				}
 
-				if (typeof this.cookieData.filtersAll !== 'undefined') {
+				if (typeof this.cookieData.filtersAll === 'object' && this.cookieData.filtersAll.length > 0 ) {
 					for (var key in this.cookieData.filtersAll) {
 						this._setFilter('all:' + this.cookieData.filtersAll[key]);
 					}
@@ -586,15 +585,14 @@
 
 				} else {
 
-					var filter = {};
-					filter[this.opt.appliedFilters[i].column] = this.opt.appliedFilters[i].value;
-					this.cookieData.filters.push(filter);
+					var myFilter = {};
+					myFilter.column = this.opt.appliedFilters[i].column;
+					myFilter.value = this.opt.appliedFilters[i].value;
+					this.cookieData.filters.push(myFilter);
 
 				}
 
 			}
-
-			//this.cookieData.filters = this.opt.appliedFilters;
 
 			return $.param(params);
 		},
