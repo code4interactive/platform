@@ -150,7 +150,7 @@ return array(
                 'description' => 'To jest description pola',
             )
         )
-    )
+    ),
 
 
 /*
@@ -169,21 +169,26 @@ return array(
         array(
             'id'=>'submitButton',
             'type'=>'button'
-        )*/,
+        )*/
         array(
-            'id'=>'Button',
-            'type'=>'button',
-            'label'=>'Zapisz',
-            'class'=>'bg-color-greenDark txt-color-white btn-xs',
-            'icon'=>'fa-save'
-        ),
-        array(
-            'id'=>'submitButton',
-            'type'=>'submit',
-            'label'=>'Zapisz',
-            'confirm' => 'Komunikat dla confirmu. Ustawiany w konfiguracji formsa',
-            'class'=>'btn-primary btn-lg',
-            'icon'=>'fa-save'
+            'type' => 'footer',
+            'collection' => array(
+                array(
+                    'id'=>'Button',
+                    'type'=>'button',
+                    'label'=>'Zapisz',
+                    'class'=>'bg-color-greenDark txt-color-white btn-xs',
+                    'icon'=>'fa-save'
+                ),
+                array(
+                    'id'=>'submitButton',
+                    'type'=>'submit',
+                    'label'=>'Zapisz',
+                    'confirm' => 'Komunikat dla confirmu. Ustawiany w konfiguracji formsa',
+                    'class'=>'btn-primary',
+                    'icon'=>'fa-save'
+                )
+            )
         ),
         array(
             'id'=>'formClose',

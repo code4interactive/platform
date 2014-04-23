@@ -247,6 +247,8 @@
 				<i class="fa fa-refresh fa-spin"></i>  Ładowanie
 			</a>
 
+			<div class="clearfix"></div>
+
 		</div>
 		<!-- END MAIN PANEL -->
 

@@ -324,6 +324,7 @@ class DataGrid {
                         <div class="dt-top-row">
                             <?php echo $this->search(); ?>
                         </div>
+                        <div class="clearfix"></div>
                         <div class="dt-wrapper">
                             <?php echo $this->table(); ?>
                         </div>

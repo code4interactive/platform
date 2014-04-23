@@ -40,6 +40,8 @@
 </div>
 
 
+<button class="btn btn-primary">asdasda</button>
+
 <?php
 //echo ViewHelper::foo();
 
