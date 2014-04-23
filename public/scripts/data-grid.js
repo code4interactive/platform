@@ -852,6 +852,8 @@
 			this.$body.find('[data-search]').find('input').val('');
 			this.$body.find('[data-search]').find('select').prop('selectedIndex', 0).trigger("change");
 
+			$.removeCookie('datagrid');
+
 			this.opt.appliedFilters = [];
 			this.opt.sort = {};
 			this.opt.pageIdx = 1;
