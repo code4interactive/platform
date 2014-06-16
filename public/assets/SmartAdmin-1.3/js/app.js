@@ -2762,4 +2762,7 @@ $('body').on('click', function(e) {
 		}
 	});
 }); 
+<<<<<<< HEAD
 >>>>>>> e54224bfb062349139d9c0758e7c85a1e492e80a
+=======
+>>>>>>> b88784e... Update app.js
