@@ -32,7 +32,6 @@
         "code4/c4former": "1.0.*",
         
         "cartalyst/sentry": "2.0.*",
-        "jasonlewis/basset": "dev-master",
         "thomaswelton/laravel-gravatar": "dev-master",
         "anahkiasen/underscore-php" : "dev-master"
     },
