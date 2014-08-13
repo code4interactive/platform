@@ -19,15 +19,11 @@
         {
             "type": "vcs",
             "url": "https://github.com/code4interactive/menu"
-        },
-        {
-            "type": "composer",
-            "url": "http://packages.cartalyst.com"
         }
     ],
     "require": {
-        "php": ">=5.3.0",
-        "edvinaskrucas/notification": "2.*",
+        "php": ">=5.4.0",
+        "edvinaskrucas/notification": "2.*@dev",
         "code4/menu": "1.0.*",
         "code4/c4former": "1.0.*",
         
@@ -37,7 +33,8 @@
     },
     "autoload": {
         "classmap": [
-            "src/migrations"
+            "src/migrations",
+            "vendor/cartalyst/data-grid"
         ],
         "psr-0": {
             "Code4\\Platform": "src/"

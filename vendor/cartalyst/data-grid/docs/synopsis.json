@@ -1,0 +1,9 @@
+{
+	"name" : "Data Grid",
+	"type" : "package",
+	"public" : false,
+	"branch" : "master",
+	"github" : "cartalyst/data-grid",
+	"travis" : false,
+	"demo" : "http://demo.cartalyst.com/data-grid"
+}
