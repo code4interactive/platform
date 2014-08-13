@@ -145,9 +145,9 @@
 				<!-- end collapse menu -->
 
 				<!-- logout button -->
-				<!--<div id="logout" class="btn-header transparent pull-right">
+				<div id="logout" class="btn-header transparent pull-right">
 					<span> <a href="/logout" title="Wyloguj"><i class="fa fa-sign-out"></i></a> </span>
-				</div>-->
+				</div>
 				<!-- end logout button -->
 
 				<!-- search mobile button (this is hidden till mobile view port) -->

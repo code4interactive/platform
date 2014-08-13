@@ -31,8 +31,6 @@ class Platform {
         $autoLoader->alias('Platform', 'Code4\Platform\Facades\Platform');
         $autoLoader->alias('ViewHelper', 'Code4\Platform\Facades\ViewHelper');
 
-        \App::register('Basset\BassetServiceProvider');
-        $autoLoader->alias('Basset', 'Basset\Facade');
 
         \App::register('Code4\Menu\MenuServiceProvider');
         \App::register('Cartalyst\Sentry\SentryServiceProvider');
