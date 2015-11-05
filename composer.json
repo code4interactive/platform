@@ -30,7 +30,7 @@
         {
             "type": "vcs",
             "url": "https://github.com/code4interactive/DataTable"
-        },
+        }
     ],
     "require": {
         "illuminate/support" : "~5.0",
