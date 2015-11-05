@@ -1,0 +1,152 @@
+@import "theme/variables";
+
+*:focus {outline:none!important;}
+
+.nav-third-level li.active {
+  border: none!important;
+}
+
+.table-responsive {
+  position: relative;
+
+}
+
+.processingIndicator, .redirectOverlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  .sk-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+  }
+}
+
+.redirectOverlay {
+  background: rgba(0,0,0,0.2);
+}
+
+.search-dropdown {
+  border: medium none;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 3px rgba(86, 96, 117, .7);
+  box-shadow: 0 0 3px rgba(86, 96, 117, .7);
+  display: block;
+  float: left;
+  font-size: 12px;
+  left: 10px;
+  list-style: none outside none;
+  position: absolute;
+  text-shadow: none;
+  top: 100%;
+  z-index: 1000;
+  background-color: #fff;
+  width: 620px;
+  padding: 10px;
+  .divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+  }
+  .b-r {
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    width: 63px;
+    padding: 10px 0 10px 9px;
+    text-align: center;
+  }
+  .highlight {
+    text-decoration: underline;
+  }
+}
+
+#webcodecam-canvas-holder {
+  padding: 0!important;
+  button {
+    margin: 30px;
+    .fa {
+      font-size: 4em;
+    }
+  }
+}
+
+.mini-navbar {
+  #webcodecam-canvas-holder {
+    button {
+      margin: 10px;
+      .fa {
+        font-size: 2em;
+      }
+      span {
+        display: none;
+      }
+    }
+  }  
+}
+
+.dropdown-menu {
+  li {
+    a {
+      padding: 4px 10px!important;
+      font-size: 12px!important;
+      &:focus, &:hover {
+        background-color: @dark-gray;
+      }
+      &.active {
+        background-color: @navy;
+      }
+    }
+  }
+}
+
+/*.nav {
+  .profile-menu-badge {
+    a, img {
+    }
+    img {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      margin-top: -24px;
+    }
+    a {
+      padding: 0 0 0 80px;
+      .text-muted {
+        font-size: 12px;
+      }
+    }
+  }
+}
+*/
+/** TABLE **/
+.table {
+  tbody {
+    tr {
+      th {
+        padding-top: 15px !important;
+        label {
+          margin-bottom: 0;
+        }
+      }
+      td {
+        padding: 4px;
+      }
+    }
+  }
+}
+
+/** END TABLE **/
+
+
+
+
+
+
+
+
