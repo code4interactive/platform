@@ -1,0 +1,95 @@
+{
+  "dependencies": {
+    "main.js": {
+      "files": [
+        "scripts/form.js",
+        "scripts/modal.js",
+        "scripts/main.js"
+      ],
+      "main": true
+    },
+    "main.css": {
+      "files": [
+        "styles/main.less"
+      ]
+    },
+    "plugins.css": {
+      "files": [
+        "styles/plugins/iCheck/custom.css",
+        "styles/plugins/Chosen/chosen.css",
+        "styles/plugins/DataTables/dataTables.bootstrap.css",
+        "styles/plugins/DataTables/dataTables.responsive.css",
+        "styles/plugins.less"
+      ],
+      "main": true
+    },
+    "plugins.js": {
+      "bower": ["pace","slimScroll", "toastr", "iCheck","chosen","jquery-form","jQuery.print","bootstrap3-typeahead","jasny-bootstrap"],
+      "files": [
+        "scripts/plugins/DataTables/jquery.dataTables.js",
+        "scripts/plugins/DataTables/dataTables.bootstrap.js",
+        "scripts/plugins/jquery.peity.min.js",
+        "scripts/plugins.js"
+      ]
+    },
+    "theme.js": {
+      "files": ["scripts/inspinia.js"]
+    },
+
+
+    "theme.css": {
+      "files": ["styles/theme/style.less"]
+    },
+    "toastr.css": {
+      "bower": ["toastr"]
+    },
+    "jquery.gritter.css": {
+      "files": ["bower_components/gritter/css/jquery.gritter.css"]
+    },
+    "animate.css": {
+      "bower": ["animate.css"]
+    },
+    "bootstrap.css": {
+      "bower": ["bootstrap"]
+    },
+
+
+    "bootstrap.js": {
+      "bower": ["bootstrap"]
+    },
+    "jquery.js": {
+      "bower": ["jquery"]
+    },
+    "jqueryui.js": {
+      "bower": ["jqueryui"]
+    },
+    "modernizr.js": {
+      "bower": ["modernizr"]
+    },
+    "pace.js": {
+      "bower": ["pace"]
+    },
+
+    "qrreader.js": {
+      "files": [
+        "scripts/plugins/QrReader/DecoderWorker.js",
+        "scripts/plugins/QrReader/qrcodelib.js",
+        "scripts/plugins/QrReader/webcodecamjquery.js",
+        "scripts/plugins/QrReader/main.js"
+      ]
+    },
+
+    "fonts": {
+      "files": ["bower_components/font-awesome/fonts/**/*"]
+    }
+  },
+  "config": {
+    "devUrl": "https://pegas-erp.10.1.1.18.xip.io:8890"
+  },
+  "paths": {
+    "dist": "../../../public/build/",
+    "distProd": "../../../public/prod/",
+    "source": "",
+    "root": "../../../"
+  }
+}

@@ -1,2 +1,4 @@
 vendor
 composer.lock
+resources/assets/frontend/bower_components
+resources/assets/frontend/node_modules

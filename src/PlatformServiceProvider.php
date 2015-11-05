@@ -10,7 +10,7 @@ use Illuminate\Support\ServiceProvider;
 class PlatformServiceProvider extends ServiceProvider {
 
     public function register() {
-        $this->mergeConfigFrom( __DIR__ . '/../config/platform-original.php', 'platform' );
+        $this->mergeConfigFrom( __DIR__ . '/../config/platform.php', 'platform' );
         \View::addNamespace('c4form', app_path().'/Components/C4Form/Views');
 
         $this->registerProviders();

@@ -18,7 +18,19 @@
         {
             "type": "vcs",
             "url": "https://github.com/code4interactive/settings"
-        }
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/code4interactive/menu"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/code4interactive/notifications"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/code4interactive/DataTable"
+        },
     ],
     "require": {
         "illuminate/support" : "~5.0",
@@ -26,13 +38,15 @@
         "cartalyst/sentinel": "2.0.*",
         "cartalyst/alerts": "2.0.*",
         "laravelcollective/html": "~5.0",
-        "caffeinated/menus": "~2.0",
         "nesbot/carbon": "~1.14",
         "thomaswelton/laravel-gravatar": "~1.0",
         "symfony/yaml": "2.7.*",
         "barryvdh/laravel-dompdf": "0.6.*",
         "code4interactive/settings" : "~0.1",
+        "code4interactive/menu" : "~1.1",
         "code4interactive/notifications" : "~0.1",
+        "code4interactive/DataTable" : "~0.1",
+        "code4interactive/view" : "~0.2",
         "cmgmyr/messenger" : "~2.8"
     },
     "require-dev": {
