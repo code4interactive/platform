@@ -1,0 +1,12 @@
+name:
+  type: text
+  attributes:
+    class: form-control
+    placeholder: Nazwa roli
+
+slug:
+  type: text
+  attributes:
+    class: form-control
+    disabled:
+    placeholder: Slug

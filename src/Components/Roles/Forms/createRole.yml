@@ -1,0 +1,29 @@
+name:
+  type: text
+  attributes:
+    class: form-control
+    placeholder: Nazwa roli
+
+slug:
+  type: text
+  attributes:
+    class: form-control
+    placeholder: Slug
+
+ptrue:
+  id:
+  type: radio
+  name: permission
+  value: "true"
+
+pfalse:
+  id:
+  type: radio
+  name: permission
+  value: "false"
+
+pnotset:
+  id:
+  type: radio
+  name: permission
+  value: "notset"

@@ -1,64 +1,56 @@
-Versioning
-----------
+# Platform
 
-Wydania będą numerowane wg. następującego formatu:
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status][ico-travis]][link-travis]
+[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
+[![Quality Score][ico-code-quality]][link-code-quality]
+[![Total Downloads][ico-downloads]][link-downloads]
 
-`<major>.<minor>.<patch>`
+This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
+PSRs you support to avoid any confusion with users and contributors.
 
-* Zmiany uniemożliwiające wsteczną kompatybilność podbijają 'major' i resetują 'minor' i 'patch'
-* Nowe funkcjonalności które nie wpływają na wsteczną kompatybilność podbijają 'minor' i resetują 'patch'
-* Poprawki i drobne zmiany podbijają 'patch'
+## Install
 
-Wersję paczki należy ustawiać ręcznie za pomocą githuba.
+Via Composer
 
-Więcej informacji dotyczących oznaczania wersji dla composera pod adresem:
-https://github.com/composer/composer/blob/master/doc/04-schema.md
-
-Informacje o wersjonowaniu aplikacji:
-http://semver.org
-
-
-
-Instalacja
-----------
-
-Jeśli nie zostały wcześniej wygenerowane należy wg. poniższej instrukcji wygenerować klucze ssh bez których composer nie połączy się z githubem.
-https://help.github.com/articles/generating-ssh-keys
-
-Do pliku composer.json należy dopisać prywatne repozytorium:
-
-```javascript
-"repositories": [
-    {
-        "type": "vcs",
-        "url": "https://github.com/code4interactive/platform"
-    }
-]
+``` bash
+composer require lykegenes/Platform
 ```
 
-oraz wymaganą paczkę:
+## Usage
 
-```javascript
-"require": {
-		"code4/platform": "1.0.*"
-	},
+``` php
+$skeleton = new Lykegenes\Skeleton();
+echo $skeleton->echoPhrase('Hello, Lykegenes!');
 ```
 
-Należy pamiętać aby "minimum-stability" było ustawione na "dev"
+## Testing
 
-Po zainstalowaniu przez composera paczki platformy należy dopisać do pliku app/config/app.php w sekcji "providers" linijkę:
-
-```php
-'Code4\Platform\PlatformServiceProvider'
+``` bash
+composer test
 ```
 
-oraz opublikować wszystkie assety:
+## Credits
 
-```bash
-php artisan asset:publish code4/platform
-```
+- [Artur Bartczak][link-author]
+- [All Contributors][link-contributors]
 
-Używanie
-----------
+## License
 
-Używamy named routes. Dzięki temu działać będą breadcrumsy. Oczywiście breadcrumbsy nie są w stanie określić całej ścieżki do kontrolera tak więc trzeba je dodawać ręcznie. Ale to jaki jest akuarat aktywny zostanie wykryte automatycznie na podstawie named routy. Wystarczy że będzie taka sama jak url
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+[ico-version]: https://img.shields.io/packagist/v/lykegenes/Platform.svg?style=flat-square
+[ico-license]: https://img.shields.io/packagist/l/lykegenes/Platform.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/Lykegenes/Platform/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/lykegenes/Platform.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/lykegenes/Platform.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/lykegenes/Platform.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/lykegenes/Platform
+[link-travis]: https://travis-ci.org/lykegenes/Platform
+[link-scrutinizer]: https://scrutinizer-ci.com/g/lykegenes/Platform/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/lykegenes/Platform
+[link-downloads]: https://packagist.org/packages/lykegenes/Platform
+[link-author]: https://github.com/:author_username
+[link-contributors]: ../../contributors

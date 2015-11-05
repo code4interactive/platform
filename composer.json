@@ -1,44 +1,63 @@
 {
     "name": "code4/platform",
-    "description": "",
+    "description": "Larave platform",
+    "keywords": [
+        "platform"
+    ],
+    "homepage": "https://github.com/code4interactive/platform",
+    "license": "MIT",
     "authors": [
         {
             "name": "Artur Bartczak",
-            "email": "artur.bartczak@code4.pl"
+            "email": "artur.bartczak@code4.pl",
+            "homepage": "http://code4.pl",
+            "role": "Developer"
         }
     ],
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/code4interactive/platform"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/code4interactive/c4former"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/code4interactive/menu"
+            "url": "https://github.com/code4interactive/settings"
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "edvinaskrucas/notification": "4.*@dev",
-        "code4/menu": "1.0.*",
-        "code4/c4former": "1.0.*",
-        
-        "cartalyst/sentry": "2.0.*",
-        "thomaswelton/laravel-gravatar": "dev-master",
-        "anahkiasen/underscore-php" : "dev-master"
+        "illuminate/support" : "~5.0",
+        "laravel/framework": "5.1.*",
+        "cartalyst/sentinel": "2.0.*",
+        "cartalyst/alerts": "2.0.*",
+        "laravelcollective/html": "~5.0",
+        "caffeinated/menus": "~2.0",
+        "nesbot/carbon": "~1.14",
+        "thomaswelton/laravel-gravatar": "~1.0",
+        "symfony/yaml": "2.7.*",
+        "barryvdh/laravel-dompdf": "0.6.*",
+        "code4interactive/settings" : "~0.1",
+        "code4interactive/notifications" : "~0.1",
+        "cmgmyr/messenger" : "~2.8"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~4.0",
+        "barryvdh/laravel-ide-helper": "~2.0.6",
+        "barryvdh/laravel-debugbar": "^2.0"
     },
     "autoload": {
-        "classmap": [
-            "src/migrations",
-            "vendor/cartalyst/data-grid"
-        ],
-        "psr-0": {
-            "Code4\\Platform": "src/"
+        "psr-4": {
+            "Code4\\Platform\\": "src"
         }
     },
-    "minimum-stability": "dev"
+    "autoload-dev": {
+        "psr-4": {
+            "Code4\\Platform\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
 }

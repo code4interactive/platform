@@ -1,0 +1,23 @@
+settings:
+  title: Ustawienia
+  url: settings
+  icon: wrench
+  collection:
+    ogolne:
+      title: Ogólne
+      url: settings/general
+
+    docnumbers:
+      title: Numeracja dokumentów
+      url: settings/numerator
+
+    users:
+      title: Użytkownicy
+      url: administration/users
+      icon: users
+
+    roles:
+      title: Role
+      url: administration/roles
+      permission: roles
+      icon: lock

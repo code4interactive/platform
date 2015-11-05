@@ -1,107 +1,31 @@
-<?php namespace Code4\Platform;
+<?php
 
-use ClassPreloader\Config;
-use Illuminate\Support\ServiceProvider;
-use Code4\Menu\Facades\Menu;
-use Krucas\Notification\Facades\Notification;
-use Cartalyst\DataGrid\Facades\DataGrid;
+/** LOGIN **/
+Route::get('/login', [ 'as' => 'login', 'uses' => 'Code4\Platform\Controllers\LoginController@index' ]);
+Route::post('/login', ['uses'=>'Code4\Platform\Controllers\LoginController@postLogin']);
+Route::get('/logout', [ 'as' => 'logout', 'uses' => 'Code4\Platform\Controllers\LoginController@logout' ]);
+/** END LOGIN **/
 
+Route::group(['middleware' => ['auth']], function (){
 
-/**
- * TESTS
- */
+    /** DASHBOARD **/
+    Route::get('dashboard', function(){
+        return view('platform::dashboard');
+    });
 
-\Route::get('tests/datagridTest1', 'Code4\Platform\Controllers\Tests_Tablegrid@datagridTest1');
-\Route::get('tests/formsTest1', 'Code4\Platform\Controllers\Tests_Forms@formsTest1');
-\Route::post('tests/formsTest1Validate', 'Code4\Platform\Controllers\Tests_Forms@formTestValidation');
+    /** USERS **/
+    Route::post('administration/users/index', 'Code4\Platform\Controllers\UsersController@indexDataTable');
+    Route::get('administration/users/{id}/delete', 'Code4\Platform\Controllers\UsersController@destroy');
+    Route::resource('administration/users', 'Code4\Platform\Controllers\UsersController');
 
+    /** ROLES **/
+    Route::post('administration/roles/index', 'Code4\Platform\Controllers\RolesController@indexDataTable');
+    Route::get('administration/roles/{id}/delete', 'Code4\Platform\Controllers\RolesController@destroy');
+    Route::resource('administration/roles', 'Code4\Platform\Controllers\RolesController');
 
+    /** SETTINGS **/
+    Route::get('settings/general', 'Code4\Platform\Controllers\SettingsController@general');
 
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
-
-\Route::get('administration/users/add', 'Code4\Platform\Controllers\Administration_Users@addUser');
-\Route::get('administration/users/get', 'Code4\Platform\Controllers\Administration_Users@getUsers');
-\Route::post('administration/users/add', 'Code4\Platform\Controllers\Administration_Users@saveForm');
-
-\Route::get('/', array('as' => 'platformHome', function() {
-
-    Menu::breadcrumbs()->add(array('id'=>'test', 'name'=>'Test', 'url'=>\URL::route('platformHome')))->at(2);
-    //$view = \View::make('platform::dashboard');
-    $view = \View::make('theme::dashboard');
-    return $view;
-
-}));
-
-\Route::get('administration/users/list/ajax', function() {
-    return \View::make('platform::administration.users.list');
-});
-
-
-\Route::get('testInclude', function() {
-   return \View::make('platform::includetest');
-});
-
-
-\Route::post('getNotifications', function(){
-    if (\Request::ajax()) {
-
-        //Jeżeli było jsRedirect - przetrzymujemy notyfikację do następnego requestu
-        if (\Session::get('jsRedirect')) {
-
-        \Log::error(\Session::all());
-
-            Platform::keepNotifications();
-            $temp = array("type"=>"jsRedirect", "url" => \Session::get('jsRedirect'));
-            \Session::forget('jsRedirect');
-            return \Response::json($temp);
-        }
-
-        //W przeciwnym wypadku zwracamy notyfikacje i usuwamy je z pamięci
-        $temp = array("type"=>"notifications", "d" => \Notification::all()->toArray());
-
-        \Notification::clearAll();
-        \Session::forget('notifications_default');
-        \Session::save();
-
-        return \Response::json($temp);
-        //return $temp;
-    }
-});
-
-\Route::post('dataSrc', function(){
-
-    $user = new \Code4\Platform\Models_Konta;
-
-    $dataGrid = DataGrid::make($user, array(
-        'id', 'konto', 'opis'
-    ));
-    return $dataGrid;
-});
-
-\App::error(function($exception, $code){
-    switch ($code)
-    {
-       /* case 403:
-            return Response::view('errors.403', array(), 403);*/
-
-        case 404:
-            Menu::breadcrumbs()->add(array('id'=>'404', 'name'=>'404 Page Not Found', 'active'=>true))->at();
-            return \Response::view('platform::errors.404', array(), 404);
-
-        /*case 500:
-            return Response::view('errors.500', array(), 500);
-
-        default:
-            return Response::view('errors.default', array(), $code);*/
-    }
+    /** GLOBAL SEARCH **/
+    Route::post('search', 'Code4\Platform\Controllers\SearchController@index');
 });
