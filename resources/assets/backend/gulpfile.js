@@ -18,6 +18,7 @@ var path = manifest.paths;
 //Jeżeli środowisko produkcyjne - używamy innej ścieżki
 if (argv.production) {
     path.dist = path.distProd;
+    path.packageDist = path.packageDistProd;
 }
 
 // `config` - Store arbitrary configuration values here.
@@ -54,6 +55,7 @@ var enabled = {
 
 // Path to the compiled assets manifest in the dist directory
 var revManifest = path.dist + 'assets.json';
+var packageRevManifest = path.packageDist + 'assets.json';
 
 // ## Reusable Pipelines
 // See https://github.com/OverZealous/lazypipe
@@ -131,6 +133,19 @@ var writeToManifest = function(directory) {
         .pipe(gulp.dest, path.dist)();
 };
 
+var prodWriteToManifest = function(directory) {
+    return lazypipe()
+        .pipe(gulp.dest, path.packageDist + directory)
+        .pipe(function() {
+            return $.if('**/*.{js,css}', browserSync.reload({stream:true}));
+        })
+        .pipe($.rev.manifest, packageRevManifest, {
+            base: path.packageDist,
+            merge: true
+        })
+        .pipe(gulp.dest, path.packageDist)();
+};
+
 // ## Gulp tasks
 // Run `gulp -T` for a task summary
 
@@ -152,7 +167,8 @@ gulp.task('styles', ['wiredep'], function() {
             .pipe(cssTasksInstance));
     });
     return merged
-        .pipe(writeToManifest('styles'));
+        .pipe(writeToManifest('styles'))
+        .pipe(prodWriteToManifest('styles'));
 });
 
 // ### Scripts
@@ -167,7 +183,8 @@ gulp.task('scripts', [], function() {
         );
     });
     return merged
-        .pipe(writeToManifest('scripts'));
+        .pipe(writeToManifest('scripts'))
+        .pipe(prodWriteToManifest('scripts'));
 });
 
 // ### Fonts
@@ -176,7 +193,8 @@ gulp.task('scripts', [], function() {
 gulp.task('fonts', function() {
     return gulp.src(globs.fonts)
         .pipe($.flatten())
-        .pipe(gulp.dest(path.dist + 'fonts'));
+        .pipe(gulp.dest(path.dist + 'fonts'))
+        .pipe(gulp.dest(path.packageDist + 'fonts'));
 });
 
 // ### Images
@@ -188,7 +206,8 @@ gulp.task('images', function() {
             interlaced: true,
             svgoPlugins: [{removeUnknownsAndDefaults: false}]
         }))
-        .pipe(gulp.dest(path.dist + 'images'));
+        .pipe(gulp.dest(path.dist + 'images'))
+        .pipe(gulp.dest(path.packageDist + 'images'));
 });
 
 // ### JSHint
@@ -204,7 +223,7 @@ gulp.task('jshint', function() {
 
 // ### Clean
 // `gulp clean` - Deletes the build folder entirely.
-gulp.task('clean', require('del').bind(null, [path.dist],{force: true}));
+gulp.task('clean', require('del').bind(null, [path.dist, path.packageDist],{force: true}));
 
 // ### Watch
 // `gulp watch` - Use BrowserSync to proxy your dev server and synchronize code
