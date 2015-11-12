@@ -3,7 +3,6 @@
 namespace Code4\Platform\Models;
 
 use App\Interfaces\IActivities;
-use App\Interfaces\IQrHash;
 use Code4\Platform\Components\Search\SearchTrait;
 use Code4\Platform\Components\Search\SearchInterface;
 use App\Traits\ActivitiesTrait;
@@ -11,7 +10,7 @@ use App\Traits\IsUnique;
 use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends EloquentUser implements SearchInterface, IQrHash, IActivities
+class User extends EloquentUser implements SearchInterface, IActivities
 {
     use SoftDeletes;
     use ActivitiesTrait;

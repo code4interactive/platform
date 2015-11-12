@@ -30,6 +30,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/code4interactive/DataTable"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/code4interactive/view"
         }
     ],
     "require": {
