@@ -37,6 +37,7 @@ function showResponse(responseText, statusText, xhr, $form)  {
 
 // Iterując po tablicy błędów wyświetla je przy ospowiednich polach
 function showFieldErrors($form, errors) {
+
     $('.processingIndicator').css( 'display', 'none');
     $('button[type="submit"], input[type="submit"]').attr("disabled", false);
 
@@ -62,7 +63,7 @@ function showFieldErrors($form, errors) {
             for (var lp = 0; lp < messageArray.length; lp++) {
                 errorLabel += '<label id="' + fieldName + '-error" class="error field-error" for="' + fieldName + '">' + messageArray[lp] + '</label>';
             }
-            $form.find('#form-' + fieldName).addClass('error').parent().append(errorLabel);
+            $form.find("[name='" + fieldName + "']").addClass('error').parent().append(errorLabel);
         }
     });
     return true;
@@ -71,7 +72,14 @@ function showFieldErrors($form, errors) {
 // onError callback
 function showErrors(response, status, statusText, $form) {
     toastr.error("W przesłanym formularzu są błędy", "Błąd formularza");
-    return showFieldErrors($form, response.responseText);
+
+    if ("formErrors" in response.responseText) {
+        showFieldErrors($form, response.responseText);
+    }
+    if ("notifications" in response.responseText) {
+        //notifications($form, response.responseText);
+    }
+    return true;
 }
 
 function ajaxSuccess() {

@@ -4,6 +4,7 @@
       "files": [
         "scripts/form.js",
         "scripts/modal.js",
+        "scripts/platform.js",
         "scripts/main.js"
       ],
       "main": true
@@ -29,7 +30,9 @@
         "scripts/plugins/DataTables/jquery.dataTables.js",
         "scripts/plugins/DataTables/dataTables.bootstrap.js",
         "scripts/plugins/jquery.peity.min.js",
-        "scripts/plugins.js"
+        "scripts/plugins/SmartNotification.js",
+        "scripts/plugins.js",
+        "scripts/notifications.js"
       ]
     },
     "theme.js": {

@@ -6,6 +6,13 @@ Route::post('/login', ['uses'=>'Code4\Platform\Controllers\LoginController@postL
 Route::get('/logout', [ 'as' => 'logout', 'uses' => 'Code4\Platform\Controllers\LoginController@logout' ]);
 /** END LOGIN **/
 
+/** NOTIFICATIONS **/
+Route::post('/getNotifications', function(){
+    \Notifications::error("test");
+    return ['notifications' => \Notifications::all()];
+});
+/** END NOTIFICATIONS **/
+
 Route::group(['middleware' => ['auth']], function (){
 
     /** DASHBOARD **/
