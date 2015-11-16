@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Roles\DataTables;
+namespace Code4\Platform\Components\Roles\DataTables;
 
 use Code4\DataTable\DataTable;
 use Code4\Platform\Models\Role;

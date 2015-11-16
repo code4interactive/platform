@@ -1,4 +1,4 @@
-@extends('theme.layout')
+@extends('platform::theme.layout')
 
 @section('page-heading')
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -12,7 +12,7 @@
                     <a>Administracja</a>
                 </li>
                 <li>
-                    <a href="{{action('RolesController@index')}}">Role</a>
+                    <a href="{{action('\Code4\Platform\Controllers\RolesController@index')}}">Role</a>
                 </li>
                 <li class="active">
                     <strong>Nowa rola</strong>
@@ -28,7 +28,7 @@
 @section('content')
     <div class="wrapper wrapper-content">
         <div class="row">
-            <form class="form-horizontal ajax" role="form" method="post" action="{{action('RolesController@store')}}">
+            <form class="form-horizontal ajax" role="form" method="post" action="{{action('\Code4\Platform\Controllers\RolesController@store')}}">
                 <div class="col-lg-6">
                     <div class="ibox">
                         <div class="ibox-title">

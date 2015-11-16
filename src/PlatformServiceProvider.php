@@ -20,8 +20,10 @@ class PlatformServiceProvider extends ServiceProvider {
 
         $this->app->singleton('platform', function($app) {
             $user = $app->make('sentinel')->getUser();
-            return new Platform($user, $app->make('request'));
+            return new Platform($user, $app->make('request'), $app->make('redirect'), $app->make('Illuminate\Contracts\Routing\ResponseFactory'));
         });
+
+        $this->app->bind('Code4\Platform\Contracts\Auth', 'Code4\Platform\Components\Auth\SentinelEngine');
     }
 
     public function boot() {
@@ -76,5 +78,9 @@ class PlatformServiceProvider extends ServiceProvider {
         $aliasLoader->alias('Platform', Facades\Platform::class);
     }
 
+
+    public function provides() {
+        return ['\Code4\Platform\Contracts\Auth'];
+    }
 
 }

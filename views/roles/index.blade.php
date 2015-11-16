@@ -1,4 +1,4 @@
-@extends('theme.layout')
+@extends('platform::theme.layout')
 
 @section('page-heading')
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -29,7 +29,7 @@
                 <div class="ibox">
                     <div class="ibox-title">
                         <div class="pull-left" style="margin-top: -3px;">
-                            <a href="{{action('RolesController@create')}}" class="btn btn-primary btn-xs " type="button"><i class="fa fa-book"></i> Dodaj nową rolę</a>
+                            <a href="{{action('\Code4\Platform\Controllers\RolesController@create')}}" class="btn btn-primary btn-xs " type="button"><i class="fa fa-book"></i> Dodaj nową rolę</a>
                         </div>
                         <h5 class="pull-left" style="padding-left: 10px">Lista ról</h5>
                     </div>

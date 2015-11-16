@@ -3,6 +3,7 @@
 namespace Code4\Platform\Middleware;
 
 use Closure;
+use Code4\Platform\Contracts\Auth;
 
 class Authenticate
 {
@@ -13,6 +14,10 @@ class Authenticate
      */
     protected $auth;
 
+    public function __construct(Auth $auth) {
+        $this->auth = $auth;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -22,20 +27,14 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        if (\Sentinel::guest()) {
+     //   if (\Sentinel::guest()) {
+        if ($this->auth->guest()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
                 return redirect()->guest('/login');
             }
         }
-
-        /*$credentials = [
-            'email'    => 'artur.bartczak@code4.pl',
-            'password' => 'c4chronchol',
-        ];
-
-        $user = \Sentinel::forceAuthenticate($credentials);*/
 
         return $next($request);
     }

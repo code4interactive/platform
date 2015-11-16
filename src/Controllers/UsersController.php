@@ -4,10 +4,12 @@ namespace Code4\Platform\Controllers;
 
 use App\Http\Controllers\Controller;
 
-use App\Components\C4Form\C4Form;
-
-use Code4\Platform\Components\Users\DT\UsersDataTable;
+use Code4\Platform\Components\Users\CreateUserForm;
+use Code4\Platform\Components\Users\UsersDataTable;
+use Code4\Platform\Contracts\Auth;
 use Code4\Platform\Models\User;
+use Code4\View\Facades\ViewHelper;
+use Illuminate\Contracts\Logging\Log;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -36,10 +38,10 @@ class UsersController extends Controller
      * Tworzenie nowego usera
      * @return \Illuminate\View\View
      */
-    public function create() {
+    public function create(Auth $auth) {
         //Sprawdzamy uprawnienia do zasobu
-        //\Sentinel::check('user.create');
-        if (\Platform::permission('user.create')) {
+        if (!$auth->hasAccess('users.create')) {
+            \Notifications::error('Brak uprawnień do tworzenia tego zasobu');
             return redirect()->back();
         }
 
@@ -48,10 +50,13 @@ class UsersController extends Controller
 
         $permissions = \Config::get('permissions');
 
-        $roleRepo = \Sentinel::getRoleRepository()->createModel();
+        $roleRepo = $auth->getRolesModel();
         $roles = $roleRepo->all();
 
-        return view('platform::users.create', compact('permissions','roles'));
+        $form = new CreateUserForm();
+        $form->get('role')->options($roles);
+
+        return view('platform::users.create', compact('permissions','roles', 'form'));
     }
 
     /**
@@ -60,8 +65,14 @@ class UsersController extends Controller
      * @param  Requests\UserStoreRequest  $request
      * @return Response
      */
-    public function store(Requests\UserStoreRequest $request)
+    public function store(Request $request, Auth $auth)
     {
+        $form = new CreateUserForm();
+        if (!$form->validate($request)) {
+            return $form->response();
+        }
+
+
         //Ustalamy czy user ma być od razu aktywowany
         $activate = $request->has('activate') && $request->get('activate') ? true : false;
 
@@ -87,12 +98,15 @@ class UsersController extends Controller
         ];
 
         //Rejestracja użytkownika
-        $user = \Sentinel::register($credentials, $activate);
+        //$user = \Sentinel::register($credentials, $activate);
+        $userId = $auth->addUser($credentials, $activate);
 
         //Dodawanie użytkownika do ról
-        foreach($request->get('role') as $rId) {
-            $r = \Sentinel::findRoleById($rId);
-            $r->users()->attach($user);
+        foreach($request->get('role') as $roleId) {
+            $auth->addUserToRole($userId, $roleId);
+
+            //$r = \Sentinel::findRoleById($roleId);
+            //$r->users()->attach($user);
         }
 
         //Listowanie przesłanych uprawnień
@@ -113,16 +127,17 @@ class UsersController extends Controller
         }
 
         //Zapisujemy uprawnienia
-        $user->permissions = $permissions;
-        $user->save();
+        $auth->addUserPermissions($userId, $permissions);
+//        $user->permissions = $permissions;
+//        $user->save();
 
-        \Alert::success('Użytkownik utworzony');
+        \Notifications::success('Użytkownik utworzony');
 
         if ($activate) {
-            \Alert::info('Użytkownik '.$request->get('email').' aktywowany');
+            \Notifications::info('Użytkownik '.$request->get('email').' aktywowany');
         }
 
-        return C4Form::jsRedirect(action('UsersController@index'));
+        return ViewHelper::jsRedirect(action('\Code4\Platform\Controllers\UsersController@index'));
     }
 
     /**
@@ -170,15 +185,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Requests\UserUpdateRequest $request, $id)
+    public function update(Requests\UserUpdateRequest $request, $userId, Auth $auth)
     {
-        $user = User::find($id);
-
-        $user->roles()->detach();
-        //Aktualizowanie ról użytkownika
-        foreach($request->get('role') as $rId) {
-            $r = \Sentinel::findRoleById($rId);
-            $r->users()->attach($user);
+        if (!($user = User::find($userId))) {
+            return response('User not found!', 404);
         }
 
         //Listowanie danych do zapisania
@@ -187,36 +197,25 @@ class UsersController extends Controller
             'last_name' => $request->get('last_name'),
             'job_title' => $request->get('job_title'),
         ];
-        \Sentinel::update($user, $credentials);
-
         if ($request->has('password') && $request->get('password') != '') {
-            \Sentinel::update($user, array('password' => $request->get('password')));
+            $credentials['password'] = $request->get('password');
         }
 
         if ($request->has('email') && $request->get('email') != '') {
-            \Sentinel::update($user, array('email' => $request->get('email')));
+            $credentials['email'] = $request->get('email');
         }
 
-        //Ustalamy czy user aktywowany czy nie
+        $auth->editUser($userId, $credentials);
+
+        //Aktualizowanie ról użytkownika
+        $roleIds = [];
+        foreach($request->get('role') as $rId) {
+            $roleIds[] = $rId;
+        }
+        $auth->syncUserRoles($userId, $roleIds);
+
+        //Ustalamy czy user ma być aktywowany czy nie
         $activate = $request->has('activate') && $request->get('activate') ? true : false;
-
-        if ($activate)
-        {
-            if (!\Activation::completed($user)) {
-
-                if (\Activation::exists($user)) {
-                    $activation = \Activation::exists($user);
-                } else {
-                    $activation = \Activation::create($user);
-                }
-
-                $code = $activation->code;
-                \Activation::complete($user, $code);
-            }
-
-        } else {
-            \Activation::remove($user);
-        }
 
         //Listowanie przesłanych uprawnień
         $permissions = [];

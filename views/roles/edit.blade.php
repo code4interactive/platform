@@ -1,4 +1,4 @@
-@extends('theme.layout')
+@extends('platform::theme.layout')
 
 @section('page-heading')
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -12,7 +12,7 @@
                     <a>Administracja</a>
                 </li>
                 <li>
-                    <a href="{{action('RolesController@index')}}">Role</a>
+                    <a href="{{action('\Code4\Platform\Controllers\RolesController@index')}}">Role</a>
                 </li>
                 <li class="active">
                     <strong>Edycja roli</strong>
@@ -28,7 +28,7 @@
 @section('content')
     <div class="wrapper wrapper-content">
         <div class="row">
-            <form class="form-horizontal ajax" role="form" method="post" action="{{action('RolesController@update', $role->id)}}">
+            <form class="form-horizontal ajax" role="form" method="post" action="{{action('\Code4\Platform\Controllers\RolesController@update', $role->id)}}">
                 <input type="hidden" name="_method" value="put" />
                 <input type="hidden" name="id" value="{{$role->id}}"/>
                 <div class="col-lg-6">
@@ -41,11 +41,11 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label class="col-lg-2 control-label">Nazwa roli</label>
-                                        <div class="col-lg-10">{!!$form->get('name')->value($role->name)!!}</div>
+                                        <div class="col-lg-10">{!!$form->get('name')!!}</div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-2 control-label">Slug</label>
-                                        <div class="col-lg-10">{!!$form->get('slug')->value($role->slug)!!}</div>
+                                        <div class="col-lg-10">{!!$form->get('slug')!!}</div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div>

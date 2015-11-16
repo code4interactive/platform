@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Code4\Platform\Controllers;
 
-use App\Components\C4Form\C4Form;
-use App\Modules\Roles\DataTables\RolesDataTable;
+//use App\Components\C4Form\C4Form;
+use Code4\Platform\Components\Roles\DataTables\RolesDataTable;
+use Code4\Platform\Components\Roles\Forms\CreateRoleForm;
 use Code4\Platform\Models\Role;
 use Cartalyst\Alerts\Laravel\Facades\Alert;
+use Code4\View\Facades\ViewHelper;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -20,7 +22,7 @@ class RolesController extends Controller
     public function index()
     {
         $dt = \DataTable::make(RolesDataTable::class);
-        return view('administration.roles.index', compact('dt'));
+        return view('platform::roles.index', compact('dt'));
     }
 
     /**
@@ -39,9 +41,10 @@ class RolesController extends Controller
      */
     public function create()
     {
-        $form = new C4Form('Modules/Roles/Forms/createRole');
+        \Menu::get('main')->setActiveByPath('settings.roles');
+        $form = new CreateRoleForm();
         $permissions = \Config::get('permissions');
-        return view('administration.roles.create', compact('permissions','form'));
+        return view('platform::roles.create', compact('permissions','form'));
     }
 
     /**
@@ -74,7 +77,7 @@ class RolesController extends Controller
             }
         }
 
-        \Sentinel::getRoleRepository()->setModel('App\Models\Role');
+        \Sentinel::getRoleRepository()->setModel('Code4\Platform\Models\Role');
 
         $role = \Sentinel::getRoleRepository()->createModel()->create([
             'name' => $request->get('name'),
@@ -86,8 +89,8 @@ class RolesController extends Controller
 
         Alert::success('Rola zapisana');
 
-        return C4Form::jsRedirect(action('RolesController@index'));
-
+        return ViewHelper::jsRedirect(action('\Code4\Platform\Controllers\RolesController@index'));
+        //return C4Form::jsRedirect(action('RolesController@index'));
     }
 
     /**
@@ -109,12 +112,20 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        \Menu::get('main-menu')->setActiveByPath('settings.roles');
-        $form = new C4Form('Modules/Roles/Forms/editRole');
+        //check permissions
+        if (!\Platform::permission('roles.edit')) {
+            redirect(action('\Code4\Platform\Controllers\RolesController@index'));
+        }
+
+        \Menu::get('main')->setActiveByPath('settings.roles');
+
         $permissions = \Config::get('permissions');
         $role = Role::find($id);
 
-        return view('administration.roles.edit', compact('role', 'permissions', 'form'));
+        $form = new CreateRoleForm();
+        $form->values($role);
+
+        return view('platform::roles.edit', compact('role', 'permissions', 'form'));
     }
 
     /**
@@ -131,7 +142,7 @@ class RolesController extends Controller
             'name' => 'required|max:255'
         ]);
 
-        \Sentinel::getRoleRepository()->setModel('App\Models\Role');
+        \Sentinel::getRoleRepository()->setModel('Code4\Platform\Models\Role');
 
         $role = \Sentinel::findRoleById($request->id);
         $role->name = $request->get('name');
@@ -158,7 +169,7 @@ class RolesController extends Controller
 
         Alert::success('Rola zapisana');
 
-        return C4Form::jsRedirect(action('RolesController@index'));
+        return ViewHelper::jsRedirect(action('\Code4\Platform\Controllers\RolesController@index'));
     }
 
     /**

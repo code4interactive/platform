@@ -39,39 +39,35 @@
                             <div class="col-sm-12">
                                 <div class="messageBox"></div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">Email</label>
-                                    <div class="col-lg-10"><input id="form-email" type="email" name="email" placeholder="Adres email" class="form-control"></div>
+                                    <label class="col-lg-2 control-label">{!! $form->title('email') !!}</label>
+                                    <div class="col-lg-10">{!! $form->get('email') !!}</div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">Hasło</label>
-                                    <div class="col-lg-10"><input id="form-password" type="password" name="password" autocomplete="off" placeholder="Hasło" class="form-control"></div>
+                                    <label class="col-lg-2 control-label">{!! $form->title('password') !!}</label>
+                                    <div class="col-lg-10">{!! $form->get('password') !!}</div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">Powtórz hasło</label>
-                                    <div class="col-lg-10"><input id="form-password2" type="password" name="password2" autocomplete="off" placeholder="Powtórz hasło" class="form-control"></div>
+                                    <label class="col-lg-2 control-label">{!! $form->title('password2') !!}</label>
+                                    <div class="col-lg-10">{!! $form->get('password2') !!}</div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">Rola</label>
+                                    <label class="col-lg-2 control-label">{!! $form->title('role') !!}</label>
                                     <div class="col-lg-10">
-                                    <select id="form-role" class="form-control chosen-select m-b" multiple name="role[]" data-placeholder="Wybierz role ...">
-                                        @foreach($roles as $role)
-                                            <option value="{{$role->id}}">{{$role->name}}</option>
-                                        @endforeach
-                                    </select>
+                                        {!! $form->get('role') !!}
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">Imię</label>
-                                    <div class="col-lg-10"><input type="text" name="first_name" placeholder="Imię" class="form-control"></div>
+                                    <label class="col-lg-2 control-label fa-">Imię</label>
+                                    <div class="col-lg-10">{!! $form->get('first_name') !!}</div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label">Nazwisko</label>
-                                    <div class="col-lg-10"><input type="text" name="last_name" placeholder="Nazwisko" class="form-control"></div>
+                                    <div class="col-lg-10">{!! $form->get('last_name') !!}</div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label">Tytuł / Stanowisko</label>
-                                    <div class="col-lg-10"><input type="text" name="job_title" placeholder="Tytuł / Stanowisko" class="form-control"></div>
+                                    <div class="col-lg-10">{!! $form->get('job_title') !!}</div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label">Aktywny</label>
@@ -89,7 +85,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">
-                                        <label> <input type="checkbox" name="send_email" value="true" class="i-checks"> Powiadom mailowo </label>
+                                        <label>{!! $form->get('send_email') !!} Powiadom mailowo </label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -106,7 +102,7 @@
             <div class="col-lg-6">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h3>Uprawnienia</h3>
+                    <h3>Uprawnienia <small>Naspisują uprawnienia nadane w roli</small></h3>
                 </div>
                 <div class="ibox-content">
                     <div class="row">

@@ -1,5 +1,5 @@
 <?php
-namespace Code4\Platform\Components\Users\DT;
+namespace Code4\Platform\Components\Users;
 
 use Code4\Platform\Models\User;
 use Carbon\Carbon;

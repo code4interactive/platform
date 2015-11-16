@@ -1,0 +1,67 @@
+email:
+  type: email
+  title: E-mail
+  rules: email|required|unique:users
+  attributes:
+    class: form-control
+    placeholder: Adres email
+password:
+  type: password
+  title: Hasło
+  rules: required|same:password2
+  attributes:
+    class: form-control
+    placeholder: Hasło
+    autocomplete: off
+
+password2:
+  type: password
+  title: Powtórz hasło
+  rules: required
+  attributes:
+    class: form-control
+    placeholder: Powtórz hasło
+    autocomplete: off
+
+role:
+  name: role[]
+  title: Rola
+  type: select
+  attributes:
+    class: form-control chosen-select m-b
+    multiple:
+    data-placeholder: Wybierz role ...
+  options:
+    el1: opis1
+    el2: opis2
+    el3: opis3
+  option-keys: [id, name]
+
+first_name:
+  type: text
+  attributes:
+    class: form-control
+    placeholder: Imię
+
+last_name:
+  type: text
+  attributes:
+    class: form-control
+    placeholder: Nazwisko
+
+job_title:
+  type: text
+  attributes:
+    class: form-control
+    placeholder: Tytuł / Stanowisko
+
+activate:
+  type: onOffSwitch
+  value: 1
+
+send_email:
+  type: checkbox
+  title: Powiadom mailowo
+  value: true
+  attributes:
+    class: i-checks
