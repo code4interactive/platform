@@ -78,9 +78,7 @@ class PlatformServiceProvider extends ServiceProvider {
         $aliasLoader->alias('Auth', Facades\Auth::class);
     }
 
-
     public function provides() {
         return ['\Code4\Platform\Contracts\Auth'];
     }
-
 }

@@ -70,6 +70,7 @@ class LoginController extends Controller {
     public function lockout($userId, Auth $auth) {
         if (!($user = $auth->getUser($userId))) {
             return response('/login', 302);
+            //return \Platform::action()->
         }
         echo \View::make('platform::auth.lockout', compact('user'))->render();
     }
@@ -88,7 +89,7 @@ class LoginController extends Controller {
             ));
         }
 
-        return response(['actions' => ['exitLockout'=>null, 'eval'=>'alert("ok");']], 200);
+        return response(['actions' => ['exitLockout'=>null]], 200);
     }
 
 }

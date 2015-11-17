@@ -54,13 +54,10 @@
                     type: "POST",
                     data: self.opt.requestData,
                     dataType: "json",
-                    beforeSend: function(data){
-                    },
-                    success: function( data, textStatus, jqXHR ){
-                        self.handleNotifications(data, textStatus, jqXHR);
-                    },
-                    complete: function(eCode){
-                        //loadingLayer(false);
+                    success: function( data ){
+                        //No notifiactions in data? Exit!
+                        if (!('notifications' in data)) { console.log('No notifications field in received data'); return false; }
+                        self.handleNotifications(data.notifications);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         self._handleServerError(jqXHR, textStatus, errorThrown);
@@ -74,11 +71,8 @@
             $.platform._handleServerError(jqXHR, textStatus, errorThrown);
         },
 
-        handleNotifications: function (data, textStatus, jqXHR) {
+        handleNotifications: function (data) {
             var self = this;
-
-            //No notifiactions in data? Exit!
-            if (!('notifications' in data)) { return true; }
 
             /*[
              0: {type: "error", notification: "Brak uprawnień do tworzenia tego zasobu", icon: "fa-times"}
@@ -86,7 +80,7 @@
              2: {type: "error", notification: "Brak uprawnień do tworzenia tego zasobu", icon: "fa-times"}
             ]*/
 
-            $.each(data.notifications, function(l, notification){
+            $.each(data, function(l, notification){
 
                 if ('type' in notification) {
 

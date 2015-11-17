@@ -86,6 +86,9 @@
                         if (action == 'eval') {
                             eval(command);
                         }
+                        if (action == 'notifications') {
+                            $.notifications.handleNotifications(command);
+                        }
                     });
                 }
             }

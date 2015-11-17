@@ -14,7 +14,8 @@ Route::group(['middleware' => ['auth']], function (){
     Route::post('/getNotifications', function(){
         //return response('Unauthorized', 401);
         \Alert::error("To jest testowa wiadomość");
-        return ['notifications' => \Notifications::all()];
+        //return ['notifications' => \Notifications::all()];
+        return \Platform::makeResponse(\Alert::all(), 'notifications');
     });
     /** END NOTIFICATIONS **/
 

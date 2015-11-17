@@ -27,7 +27,6 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-     //   if (\Sentinel::guest()) {
         if ($this->auth->guest()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
@@ -35,7 +34,6 @@ class Authenticate
                 return redirect()->guest('/login');
             }
         }
-
         return $next($request);
     }
 }

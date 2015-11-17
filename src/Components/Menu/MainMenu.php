@@ -19,7 +19,8 @@ class MainMenu extends AbstractMenu {
      * @return bool
      */
     public function hasAccess($permission) {
-        return true;
+        return \Auth::hasAccess($permission);
+        //return true;
     }
 
     /**
