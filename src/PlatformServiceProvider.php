@@ -18,12 +18,12 @@ class PlatformServiceProvider extends ServiceProvider {
             return new C4Form();
         });
 
-        $this->app->singleton('platform', function($app) {
-            $user = $app->make('sentinel')->getUser();
-            return new Platform($user, $app->make('request'), $app->make('redirect'), $app->make('Illuminate\Contracts\Routing\ResponseFactory'));
-        });
-
         $this->app->bind('Code4\Platform\Contracts\Auth', 'Code4\Platform\Components\Auth\SentinelEngine');
+
+        $this->app->singleton('platform', function($app) {
+            $auth = $app->make('Code4\Platform\Contracts\Auth');
+            return new Platform($auth, $app->make('request'), $app->make('redirect'), $app->make('Illuminate\Contracts\Routing\ResponseFactory'));
+        });
     }
 
     public function boot() {
@@ -63,7 +63,6 @@ class PlatformServiceProvider extends ServiceProvider {
     private function registerProviders() {
         $this->app->register(\Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class);
         $this->app->register(\Collective\Html\HtmlServiceProvider::class);
-        $this->app->register(\Cartalyst\Alerts\Laravel\AlertsServiceProvider::class);
         $this->app->register(\Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class);
         $this->app->register(\Code4\View\ViewServiceProvider::class);
         $this->app->register(\Code4\Forms\FormsServiceProvider::class);
@@ -76,6 +75,7 @@ class PlatformServiceProvider extends ServiceProvider {
     private function registerAliases() {
         $aliasLoader = AliasLoader::getInstance();
         $aliasLoader->alias('Platform', Facades\Platform::class);
+        $aliasLoader->alias('Auth', Facades\Auth::class);
     }
 
 

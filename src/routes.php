@@ -4,16 +4,20 @@
 Route::get('/login', [ 'as' => 'login', 'uses' => 'Code4\Platform\Controllers\LoginController@index' ]);
 Route::post('/login', ['uses'=>'Code4\Platform\Controllers\LoginController@postLogin']);
 Route::get('/logout', [ 'as' => 'logout', 'uses' => 'Code4\Platform\Controllers\LoginController@logout' ]);
+Route::get('/lockout/{userId}', 'Code4\Platform\Controllers\LoginController@lockout');
+Route::post('/lockout', 'Code4\Platform\Controllers\LoginController@postLockout');
 /** END LOGIN **/
 
-/** NOTIFICATIONS **/
-Route::post('/getNotifications', function(){
-    \Notifications::error("test");
-    return ['notifications' => \Notifications::all()];
-});
-/** END NOTIFICATIONS **/
-
 Route::group(['middleware' => ['auth']], function (){
+
+    /** NOTIFICATIONS **/
+    Route::post('/getNotifications', function(){
+        //return response('Unauthorized', 401);
+        \Alert::error("To jest testowa wiadomość");
+        return ['notifications' => \Notifications::all()];
+    });
+    /** END NOTIFICATIONS **/
+
 
     /** DASHBOARD **/
     Route::get('dashboard', function(){

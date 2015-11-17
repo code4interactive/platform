@@ -1,8 +1,8 @@
 <ul class="nav navbar-top-links navbar-right">
     <li class="dropdown profile-menu-badge ">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            {!! \Platform::user()->getAvatar(24) !!}
-            <strong class="font-bold">{!! \Platform::user()->getFirstAndLastName() !!}</strong> <b class="caret"></b>
+            {!! \Auth::getUser()->getAvatar(24) !!}
+            <strong class="font-bold">{!! \Auth::getUser()->getFirstAndLastName() !!}</strong> <b class="caret"></b>
         </a>
         <ul class="dropdown-menu m-t-xs">
             <?php \Menu::get('profile')->render('menu::dropdown'); ?>

@@ -2,6 +2,7 @@
 namespace Code4\Platform;
 
 use Cartalyst\Sentinel\Users\UserInterface;
+use Code4\Platform\Contracts\Auth;
 use Code4\Settings\Settings;
 use Code4\Settings\SettingsFactory;
 use Illuminate\Http\Request;
@@ -12,13 +13,14 @@ use Illuminate\Routing\ResponseFactory;
 class Platform {
 
     private $settings;
-    /**
-     * @var UserInterface | \Code4\Platform\Models\User
-     */
-    private $user;
 
-    public function __construct(UserInterface $user, Request $request, Redirector $redirector, ResponseFactory $response) {
-        $this->user = $user;
+    /**
+     * @var Auth
+     */
+    private $auth;
+
+    public function __construct(Auth $auth, Request $request, Redirector $redirector, ResponseFactory $response) {
+        $this->auth = $auth;
         $this->request = $request;
         $this->redirector = $redirector;
         $this->response = $response;
@@ -48,9 +50,7 @@ class Platform {
 
 
 
-    public function permission($permissions) {
-        return $this->user->hasAccess($permissions);
-    }
+
 
 
     public function checkPermission($permissions) {

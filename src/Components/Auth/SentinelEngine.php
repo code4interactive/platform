@@ -118,6 +118,18 @@ class SentinelEngine implements AuthContract {
         return \Sentinel::guest();
     }
 
+    public function getUser($userId = null) {
+        if (is_null($userId)) {
+            return \Sentinel::getUser();
+        } else {
+            return \Sentinel::getUserRepository()->findById($userId);
+        }
+    }
+
+    public function currentUserId() {
+        return \Sentinel::getUser()->getUserId();
+    }
+
     /** NOT CONTRACTED METHODS **/
     public function getRolesModel() {
         return \Sentinel::getRoleRepository()->createModel();

@@ -1,9 +1,4 @@
 vendor
 composer.lock
-<<<<<<< HEAD
 resources/assets/backend/node_modules
 resources/assets/backend/bower_components
-=======
-resources/assets/backend/bower_components
-resources/assets/backend/node_modules
->>>>>>> develop

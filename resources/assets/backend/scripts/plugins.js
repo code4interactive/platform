@@ -38,23 +38,6 @@ $(document).ready(function () {
     /* END PEITY */
 
 
-    /* TOASTR */
-    toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "progressBar": true,
-        "positionClass": "toast-bottom-right",
-        "onclick": null,
-        "showDuration": "4000",
-        "hideDuration": "5000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    };
-    /* END TOASTR */
 
 
     /* SEARCH */

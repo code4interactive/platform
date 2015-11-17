@@ -149,6 +149,11 @@
     </div>
 </div>
 
+<!-- Scripts variables -->
+<script>
+    {!! '$.currentUserId = ' . \Auth::currentUserId() !!}
+</script>
+
 <!-- Mainly scripts -->
 <script src="{{ Assets::getUrl('scripts/jquery.js') }}"></script>
 <script src="{{ Assets::getUrl('scripts/bootstrap.js') }}"></script>
@@ -192,27 +197,7 @@
     <?php endif; ?>
 
 
-@foreach (Alert::get() as $alert)
 
-
-    if ("{{ $alert->class }}" === "success") {
-        toastr.success("{{ $alert->message }}", "Sukces");
-    }
-
-    if ("{{ $alert->class }}" === "warning") {
-        toastr.warning("{{ $alert->message }}", "Ostrzeżenie");
-    }
-
-    if ("{{ $alert->class }}" === "info") {
-        toastr.info("{{ $alert->message }}", "Informacja");
-    }
-
-    if ("{{ $alert->class }}" === "error") {
-        toastr.error("{{ $alert->message }}", "Błąd");
-    }
-
-
-@endforeach
 </script>
 
 

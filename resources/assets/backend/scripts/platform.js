@@ -9,6 +9,7 @@
         this.opt = $.extend({}, defaults, options);
         this.$body = $(document.body);
         this.$window = $(window);
+        this.userId = currentUserId;
     }
 
     Platform.prototype = {
@@ -35,6 +36,84 @@
             /*this.opt[item] = value;
             $.removeCookie('platform');
             $.cookie('platform', JSON.stringify(this.opt), { expires: 365, path: '/' });*/
+        },
+
+        //Login window
+        login: function() {
+
+        },
+
+        //lockout
+        lockout: function() {
+            var self = this;
+            $.ajax({
+                    url: '/lockout/' + self.userId,
+                    async: false,
+                    global: false,
+                    type: "GET",
+                    dataType: "html",
+                    success: function( data, textStatus, jqXHR ){
+                        self.$body.find('.fullScreenModal').remove();
+                        self.$body.addClass("modal-open");
+                        self.$body.append('<div class="fullScreenModal gray-bg animated slideInDown">' + data + '</div>')
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        self._handleServerError(jqXHR, textStatus, errorThrown);
+                    }
+                }
+            );
+        },
+
+        lockoutExit: function() {
+            var self = this;
+            self.$body.removeClass("modal-open");
+            $('.fullScreenModal').removeClass('slideInDown').addClass('slideOutUp').delay(100).remove();
+        },
+
+        _handleServerResponse: function(jqXHR) {
+            console.log(jqXHR);
+            var self = this;
+            if (jqXHR.status == 200) {
+                var responseText = JSON.parse(jqXHR.responseText);
+                if ('actions' in responseText) {
+                    $.each(responseText.actions, function(action, command){
+                        if (action == 'exitLockout') {
+                            self.lockoutExit();
+                        }
+                        if (action == 'redirect') {
+                            window.location.replace(command);
+                        }
+                        if (action == 'eval') {
+                            eval(command);
+                        }
+                    });
+                }
+            }
+        },
+
+        _handleServerError: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            var self = this;
+            if (jqXHR.status == 401) {
+                //unauthorized
+                $.platform.lockout();
+            } else if (jqXHR.status == 302) {
+                //redirect
+                console.log('redirect ' + jqXHR.responseText);
+                //window.location.replace(jqXHR.responseText);
+            } else  if (jqXHR.status == 200) {
+                var responseText = JSON.parse(jqXHR.responseText);
+
+                if ('action' in responseText) {
+
+                    if (responseText.action == 'exitLockout') {
+                        self.lockoutExit();
+                    }
+
+                }
+
+            }
+
         }
     };
     $.platform = new Platform();
@@ -46,9 +125,8 @@ $( document ).ready( function(){
 
     //$.cookie.json = true;
     $.platform._init();
+    $.notifications._init();
     $.notifications.check();
-
-    $.notifications.showInfo('aaa','sss');
 
     //Automatycznie sprawdza notyfikacje po kazdym wywolaniu przez ajax
     //wyjątkiem jest sytuacja kiedy wywolanie to sprawdzenie notyfikacji 

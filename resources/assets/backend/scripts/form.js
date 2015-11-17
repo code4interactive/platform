@@ -15,6 +15,8 @@ function showResponse(responseText, statusText, xhr, $form)  {
     $('.processingIndicator').css( 'display', 'none');
     $('button[type="submit"], input[type="submit"]').attr("disabled", false);
 
+    $.platform._handleServerResponse(xhr);
+
     if (typeof responseText.status !== "undefined") {
 
         if (responseText.status === "success") {
@@ -60,6 +62,7 @@ function showFieldErrors($form, errors) {
         } else if (fieldName === 'popup') {
 
         } else {
+            console.log(messageArray);
             for (var lp = 0; lp < messageArray.length; lp++) {
                 errorLabel += '<label id="' + fieldName + '-error" class="error field-error" for="' + fieldName + '">' + messageArray[lp] + '</label>';
             }
@@ -71,14 +74,18 @@ function showFieldErrors($form, errors) {
 
 // onError callback
 function showErrors(response, status, statusText, $form) {
+    $('button[type="submit"], input[type="submit"]').attr("disabled", false);
     toastr.error("W przesłanym formularzu są błędy", "Błąd formularza");
-
-    if ("formErrors" in response.responseText) {
-        showFieldErrors($form, response.responseText);
+    console.log(response);
+    var responseText = JSON.parse(response.responseText);
+    if ("formErrors" in responseText) {
+        showFieldErrors($form, responseText.formErrors);
     }
-    if ("notifications" in response.responseText) {
+    /*if ("notifications" in response.responseText) {
         //notifications($form, response.responseText);
-    }
+    }*/
+
+    $.platform._handleServerError(response, status, statusText);
     return true;
 }
 
@@ -97,7 +104,7 @@ $(document).ready(function () {
             error:         showErrors,
 
             type:          'post',
-            dataType:      'json'
+            dataType:      "json"
         };
         $('form.ajax').ajaxForm(options);
     });

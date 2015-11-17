@@ -3,6 +3,9 @@
 namespace Code4\Platform\Controllers;
 
 use App\Http\Controllers\Controller;
+use Code4\Platform\Contracts\Auth;
+use Illuminate\Http\Exception\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 
@@ -12,7 +15,7 @@ class LoginController extends Controller {
      * Ekran logowania
      * @return \Illuminate\View\View
      */
-    public function index()     {
+    public function index() {
         return view('platform::auth.login');
     }
 
@@ -62,6 +65,30 @@ class LoginController extends Controller {
     public function logout() {
         \Sentinel::logout();
         return redirect('/login');
+    }
+
+    public function lockout($userId, Auth $auth) {
+        if (!($user = $auth->getUser($userId))) {
+            return response('/login', 302);
+        }
+        echo \View::make('platform::auth.lockout', compact('user'))->render();
+    }
+
+    public function postLockout(Request $request, Auth $auth)
+    {
+        $this->validate($request, [
+            'email' => 'required', 'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (!($userId = $auth->authenticate($credentials, false, true))) {
+            throw new HttpResponseException($this->buildFailedValidationResponse(
+                $request, ['formErrors' => ['password' => ['Złe hasło']]]
+            ));
+        }
+
+        return response(['actions' => ['exitLockout'=>null, 'eval'=>'alert("ok");']], 200);
     }
 
 }

@@ -90,6 +90,12 @@ interface Auth {
     public function hasAccess($permissions);
 
     /**
+     * Gets current user id
+     * @return int|false
+     */
+    public function currentUserId();
+
+    /**
      * Check if request is from guest (not logged in)
      * @return bool
      */
