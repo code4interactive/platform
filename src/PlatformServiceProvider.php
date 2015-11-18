@@ -36,12 +36,13 @@ class PlatformServiceProvider extends ServiceProvider {
         $this->publishes([
             __DIR__ . '/../config/permissions.php' => base_path('config/permissions.php'),
             __DIR__ . '/../config/platform.php' => base_path('config/platform.php'),
+            __DIR__ . '/../config/menu.php' => base_path('config/menu.php'),
             __DIR__ . '/../config/menu-main.yaml' => base_path('config/menu-main.yaml'),
             __DIR__ . '/../config/menu-profile.yaml' => base_path('config/menu-profile.yaml'),
             __DIR__ . '/../config/cartalyst.sentinel.php' => base_path('config/cartalyst.sentinel.php'),
             __DIR__ . '/../config/c4view.php' => base_path('config/c4view.php')
         ], 'config');
-        $this->publishes([ __DIR__ . '/../resources/assets' => public_path('platform')], 'public');
+        $this->publishes([ __DIR__ . '/../public' => public_path()], 'public');
 
         //Platform routing
         if (! $this->app->routesAreCached()) {
