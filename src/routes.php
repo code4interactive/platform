@@ -8,6 +8,15 @@ Route::get('/lockout/{userId}', 'Code4\Platform\Controllers\LoginController@lock
 Route::post('/lockout', 'Code4\Platform\Controllers\LoginController@postLockout');
 /** END LOGIN **/
 
+Route::get('/testReload', function(){
+
+    \Alert::success('akcja powiodła się');
+    \PlatformResponse::reloadDataTable('usersList')->checkNotifications();
+    return \PlatformResponse::makeResponse();
+
+});
+
+
 Route::group(['middleware' => ['auth']], function (){
 
     /** NOTIFICATIONS **/
@@ -15,7 +24,8 @@ Route::group(['middleware' => ['auth']], function (){
         //return response('Unauthorized', 401);
         \Alert::error("To jest testowa wiadomość");
         //return ['notifications' => \Notifications::all()];
-        return \Platform::makeResponse(\Alert::all(), 'notifications');
+        //return \Platform::makeResponse(\Alert::all(), 'notifications');
+        return \PlatformResponse::makeResponse(\Alert::all(), 'notifications');
     });
     /** END NOTIFICATIONS **/
 

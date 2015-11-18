@@ -127,7 +127,11 @@ class SentinelEngine implements AuthContract {
     }
 
     public function currentUserId() {
-        return \Sentinel::getUser()->getUserId();
+        if ($user = \Sentinel::getUser())
+        {
+            return $user->getUserId();
+        }
+        return null;
     }
 
     /** NOT CONTRACTED METHODS **/

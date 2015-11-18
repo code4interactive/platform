@@ -3,6 +3,7 @@
 namespace Code4\Platform;
 
 use App\Components\C4Form\C4Form;
+use Code4\Platform\Components\Response\PlatformResponse;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +25,10 @@ class PlatformServiceProvider extends ServiceProvider {
             $auth = $app->make('Code4\Platform\Contracts\Auth');
             return new Platform($auth, $app->make('request'), $app->make('redirect'), $app->make('Illuminate\Contracts\Routing\ResponseFactory'));
         });
+
+        $this->app['platformResponse'] = $this->app->share(function($app){
+            return new PlatformResponse($app->make('Illuminate\Contracts\Routing\ResponseFactory'));
+        });
     }
 
     public function boot() {
@@ -36,7 +41,7 @@ class PlatformServiceProvider extends ServiceProvider {
             __DIR__ . '/../config/cartalyst.sentinel.php' => base_path('config/cartalyst.sentinel.php'),
             __DIR__ . '/../config/c4view.php' => base_path('config/c4view.php')
         ], 'config');
-        $this->publishes([ __DIR__ . '/../assets' => public_path('platform')], 'public');
+        $this->publishes([ __DIR__ . '/../resources/assets' => public_path('platform')], 'public');
 
         //Platform routing
         if (! $this->app->routesAreCached()) {
@@ -70,12 +75,14 @@ class PlatformServiceProvider extends ServiceProvider {
         $this->app->register(\Code4\Settings\SettingsServiceProvider::class);
         $this->app->register(\Code4\Notifications\NotificationsServiceProvider::class);
         $this->app->register(\Code4\DataTable\DataTableServiceProvider::class);
+        $this->app->register(\Cmgmyr\Messenger\MessengerServiceProvider::class);
     }
 
     private function registerAliases() {
         $aliasLoader = AliasLoader::getInstance();
         $aliasLoader->alias('Platform', Facades\Platform::class);
         $aliasLoader->alias('Auth', Facades\Auth::class);
+        $aliasLoader->alias('PlatformResponse', Facades\PlatformResponse::class);
     }
 
     public function provides() {

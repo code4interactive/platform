@@ -8,8 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'thomaswelton\\GravatarLib\\' => array($vendorDir . '/thomaswelton/gravatarlib'),
     'phpDocumentor' => array($vendorDir . '/phpdocumentor/reflection-docblock/src'),
-    'Thomaswelton\\LaravelGravatar' => array($vendorDir . '/thomaswelton/laravel-gravatar/src'),
-    'Psy\\' => array($vendorDir . '/psy/psysh/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
@@ -19,5 +17,5 @@ return array(
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
     'DebugBar' => array($vendorDir . '/maximebf/debugbar/src'),
     'Cron' => array($vendorDir . '/mtdowling/cron-expression/src'),
-    'Carbon' => array($vendorDir . '/nesbot/carbon/src'),
+    'Cmgmyr\\Messenger\\' => array($vendorDir . '/cmgmyr/messenger/src'),
 );

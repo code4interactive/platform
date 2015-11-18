@@ -14,9 +14,28 @@
 
     Platform.prototype = {
         _init: function(){
+            var self = this;
             //BOOTSTRAP TOOLTIPS and POPOVERS
             $('[rel=tooltip],[data-rel=tooltip]').tooltip({html: true});
             $('[rel=popover],[data-rel=popover]').popover({html:true});
+
+            $('#testReload').on('click', function() {
+                $.ajax({
+                        url: '/testReload',
+                        async: false,
+                        global: false,
+                        type: "GET",
+                        dataType: "json",
+                        success: function( data, textStatus, jqXHR ){
+                            self._handleServerResponse(jqXHR);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            self._handleServerError(jqXHR, textStatus, errorThrown);
+                        }
+                    }
+                );
+            });
+
 
             //Load from cookies
             /*var retrievedObject = $.cookie('platform');
@@ -71,23 +90,36 @@
         },
 
         _handleServerResponse: function(jqXHR) {
-            console.log(jqXHR);
             var self = this;
             if (jqXHR.status == 200) {
                 var responseText = JSON.parse(jqXHR.responseText);
                 if ('actions' in responseText) {
-                    $.each(responseText.actions, function(action, command){
-                        if (action == 'exitLockout') {
-                            self.lockoutExit();
-                        }
-                        if (action == 'redirect') {
-                            window.location.replace(command);
-                        }
-                        if (action == 'eval') {
-                            eval(command);
-                        }
-                        if (action == 'notifications') {
-                            $.notifications.handleNotifications(command);
+                    $.each(responseText.actions, function(i, actions){
+
+                        for(var action in actions) {
+                            var command = actions[action];
+                            console.log(action);
+                            console.log(command);
+                            if (action === 'exitLockout') {
+                                self.lockoutExit();
+                            }
+                            if (action === 'redirect') {
+                                window.location.replace(command);
+                            }
+                            if (action === 'reload') {
+                                window.location.reload(command);
+                            }
+                            if (action === 'eval') {
+                                eval(command);
+                            }
+                            if (action === 'notifications') {
+                                $.notifications.handleNotifications(command);
+                            }
+                            if (action === 'reloadDataTable') {
+                                $(command).DataTable().ajax.reload(null, false);
+                                console.log($(command).DataTable());
+                                console.log($(command));
+                            }
                         }
                     });
                 }
@@ -103,19 +135,22 @@
             } else if (jqXHR.status == 302) {
                 //redirect
                 console.log('redirect ' + jqXHR.responseText);
-                //window.location.replace(jqXHR.responseText);
-            } else  if (jqXHR.status == 200) {
+                window.location.replace(jqXHR.responseText);
+            } else if (jqXHR.status == 403) {
+                //Forbidden
+                $.notifications.showError("Brak uprawnień", "Nie masz uprawnień do tego zasobu!");
+            }
+
+            /*else  if (jqXHR.status == 200) {
+                //OK
                 var responseText = JSON.parse(jqXHR.responseText);
-
                 if ('action' in responseText) {
-
                     if (responseText.action == 'exitLockout') {
                         self.lockoutExit();
                     }
-
                 }
 
-            }
+            }*/
 
         }
     };

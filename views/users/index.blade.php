@@ -30,6 +30,7 @@
                     <div class="ibox-title">
                         <div class="pull-left" style="margin-top: -3px;">
                             <a href="{{action('\Code4\Platform\Controllers\UsersController@create')}}" class="btn btn-primary btn-xs " type="button"><i class="fa fa-user"></i> Dodaj nowego użytkownika</a>
+                            <button id="testReload" class="btn btn-info btn-xs">Reload table</button>
                         </div>
                         <h5 class="pull-left" style="padding-left: 10px">Lista użytkowników</h5>
                     </div>
