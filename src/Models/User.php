@@ -2,20 +2,15 @@
 
 namespace Code4\Platform\Models;
 
-use App\Interfaces\IActivities;
 use Code4\Platform\Components\Search\SearchTrait;
 use Code4\Platform\Components\Search\SearchInterface;
-use App\Traits\ActivitiesTrait;
-use App\Traits\IsUnique;
 use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends EloquentUser implements SearchInterface, IActivities
+class User extends EloquentUser implements SearchInterface
 {
     use SoftDeletes;
-    use ActivitiesTrait;
     use SearchTrait;
-    use IsUnique;
 
     protected $fillable = [
         'email',
@@ -91,6 +86,16 @@ class User extends EloquentUser implements SearchInterface, IActivities
     }
     /* END SearchInterface Implementation */
 
+    /**
+     * Sprawdza czy we wskazanej kolumnie istnieje przesłany wpis - sprawdzanie unikalności
+     * @param $column
+     * @param $key
+     * @return bool
+     */
+    public static function isUnique($column, $key)
+    {
+        return count(static::where($column, '=', $key)->get()) == 0 ? true : false;
+    }
 
     public function getDataForAutocomplete($str) {
         $result = $this->searchAllFields($str);
