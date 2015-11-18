@@ -25,6 +25,10 @@
         },
         {
             "type": "vcs",
+            "url": "https://github.com/code4interactive/forms"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/code4interactive/notifications"
         },
         {
@@ -48,6 +52,7 @@
         "barryvdh/laravel-dompdf": "0.6.*",
         "code4interactive/settings" : "~0.1",
         "code4interactive/menu" : "~1.1",
+        "code4interactive/forms" : "~0.1",
         "code4interactive/notifications" : "~0.1",
         "code4interactive/DataTable" : "~0.1",
         "code4interactive/view" : "~0.2",
