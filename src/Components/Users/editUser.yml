@@ -1,14 +1,14 @@
 email:
   type: email
   title: E-mail
-  rules: email|required|unique:users
   attributes:
+    disabled:
     class: form-control
     placeholder: Adres email
 password:
   type: password
   title: Hasło
-  rules: required|same:password2
+  rules: same:password2
   attributes:
     class: form-control
     placeholder: Hasło
@@ -17,7 +17,6 @@ password:
 password2:
   type: password
   title: Powtórz hasło
-  rules: required
   attributes:
     class: form-control
     placeholder: Powtórz hasło
@@ -65,7 +64,6 @@ send_email:
   value: true
   attributes:
     class: i-checks
-
 
 ptrue:
   id:

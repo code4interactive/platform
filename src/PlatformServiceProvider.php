@@ -83,6 +83,8 @@ class PlatformServiceProvider extends ServiceProvider {
         $aliasLoader = AliasLoader::getInstance();
         $aliasLoader->alias('Platform', Facades\Platform::class);
         $aliasLoader->alias('Auth', Facades\Auth::class);
+        $aliasLoader->alias('Sentinel', \Cartalyst\Sentinel\Laravel\Facades\Sentinel::class);
+        $aliasLoader->alias('Gravatar', \Thomaswelton\LaravelGravatar\Facades\Gravatar::class);
         $aliasLoader->alias('PlatformResponse', Facades\PlatformResponse::class);
     }
 

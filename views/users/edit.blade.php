@@ -1,4 +1,4 @@
-@extends('theme.layout')
+@extends('platform::layout')
 
 @section('page-heading')
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -12,7 +12,7 @@
                     <a>Administracja</a>
                 </li>
                 <li>
-                    <a href="{{action('UsersController@index')}}">Użytkownicy</a>
+                    <a href="{{action('\Code4\Platform\Controllers\UsersController@index')}}">Użytkownicy</a>
                 </li>
                 <li class="active">
                     <strong>Edycja użytkownika</strong>
@@ -28,13 +28,13 @@
 @section('content')
     <div class="wrapper wrapper-content">
         <div class="row">
-            <form class="form-horizontal ajax" role="form" method="post" action="{{action('UsersController@update', $user->id)}}">
+            <form class="form-horizontal ajax" role="form" method="post" action="{{action('\Code4\Platform\Controllers\UsersController@update', $user->id)}}">
                 <input type="hidden" name="_method" value="put" />
                 <input type="hidden" name="id" value="{{$user->id}}"/>
                 <div class="col-lg-6">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h3>Nowy użytkownik</h3>
+                            <h3>Edycja użytkownika</h3>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -55,7 +55,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-2 control-label">Rola</label>
                                         <div class="col-lg-10">
-                                            {!! $form->get('form-role')->options($roles)->value($user->roles) !!}
+                                            {!! $form->get('role')->options($roles)->value($user->roles) !!}
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -74,7 +74,15 @@
                                     <div class="form-group">
                                         <label class="col-lg-2 control-label">Aktywny</label>
                                         <div class="col-lg-10" style="padding-top: 6px;">
-                                            {!!$form->get('activate')->checked(Activation::completed($user)!==false)!!}
+                                            <div class="switch">
+                                                <div class="onoffswitch">
+                                                    <input type="checkbox" name="activate" {{Activation::completed($user)!==false?'checked':''}} class="onoffswitch-checkbox" id="activate">
+                                                    <label class="onoffswitch-label" for="activate">
+                                                        <span class="onoffswitch-inner"></span>
+                                                        <span class="onoffswitch-switch"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">

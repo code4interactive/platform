@@ -5,6 +5,7 @@ namespace Code4\Platform\Controllers;
 use App\Http\Controllers\Controller;
 
 use Code4\Platform\Components\Users\CreateUserForm;
+use Code4\Platform\Components\Users\EditUserForm;
 use Code4\Platform\Components\Users\UsersDataTable;
 use Code4\Platform\Contracts\Auth;
 use Code4\Platform\Models\User;
@@ -41,7 +42,7 @@ class UsersController extends Controller
     public function create(Auth $auth) {
         //Sprawdzamy uprawnienia do zasobu
         if (!$auth->hasAccess('users.create')) {
-            \Notifications::error('Brak uprawnień do tworzenia tego zasobu');
+            \Alert::error('Brak uprawnień do tworzenia tego zasobu');
             return redirect()->back();
         }
 
@@ -71,7 +72,6 @@ class UsersController extends Controller
         if (!$form->validate($request)) {
             return $form->response();
         }
-
 
         //Ustalamy czy user ma być od razu aktywowany
         $activate = $request->has('activate') && $request->get('activate') ? true : false;
@@ -131,10 +131,10 @@ class UsersController extends Controller
 //        $user->permissions = $permissions;
 //        $user->save();
 
-        \Notifications::success('Użytkownik utworzony');
+        \Alert::success('Użytkownik utworzony');
 
         if ($activate) {
-            \Notifications::info('Użytkownik '.$request->get('email').' aktywowany');
+            \Alert::info('Użytkownik '.$request->get('email').' aktywowany');
         }
 
         return ViewHelper::jsRedirect(action('\Code4\Platform\Controllers\UsersController@index'));
@@ -159,7 +159,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $form = new C4Form('Modules/Users/Forms/editUser');
+        $form = new EditUserForm();
 
         $permissions = \Config::get('permissions');
 
@@ -185,8 +185,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Requests\UserUpdateRequest $request, $userId, Auth $auth)
+    public function update(Request $request, $userId, Auth $auth)
     {
+        $form = new EditUserForm();
+        if (!$form->validate($request)) {
+            return $form->response();
+        }
+
         if (!($user = User::find($userId))) {
             return response('User not found!', 404);
         }
@@ -239,8 +244,8 @@ class UsersController extends Controller
         $user->save();
 
         \Alert::success('Użytkownik zaktualizowany');
-        return C4Form::jsRedirect(action('UsersController@index'));
 
+        return ViewHelper::jsRedirect(action('\Code4\Platform\Controllers\UsersController@index'));
     }
 
     /**
@@ -252,9 +257,9 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $user = \Sentinel::findById($id);
-        if (!$user) { Alert::error('Nie znaleziono użytkownika o ID'); }
+        if (!$user) { \Alert::error('Nie znaleziono użytkownika o ID'); }
         if ($user->delete()) {
-            Alert::success('Użytkownik usunięty!');
+            \Alert::success('Użytkownik usunięty!');
         }
         return redirect(action("UsersController@index"));
     }
