@@ -89,7 +89,10 @@ class LoginController extends Controller {
             ));
         }
 
-        return response(['actions' => ['exitLockout'=>null]], 200);
+        return \PlatformResponse::exitLockScreen()->makeResponse();
+        //return \PlatformResponse::makeResponse();
+
+        //return response(['actions' => ['exitLockout'=>null]], 200);
     }
 
 }

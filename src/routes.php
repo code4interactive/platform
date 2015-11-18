@@ -8,27 +8,24 @@ Route::get('/lockout/{userId}', 'Code4\Platform\Controllers\LoginController@lock
 Route::post('/lockout', 'Code4\Platform\Controllers\LoginController@postLockout');
 /** END LOGIN **/
 
-Route::get('/testReload', function(){
-
-    \Alert::success('akcja powiodła się');
-    \PlatformResponse::reloadDataTable('usersList')->checkNotifications();
-    return \PlatformResponse::makeResponse();
-
-});
-
-
 Route::group(['middleware' => ['auth']], function (){
+
+    /**  **/
+    Route::get('/testReload', function(){
+        \Alert::success('akcja powiodła się');
+        return \PlatformResponse::reloadDataTable('usersList')->checkNotifications()->makeResponse();
+        //return \PlatformResponse::makeResponse(\Alert::all(), 'notifications');
+    });
 
     /** NOTIFICATIONS **/
     Route::post('/getNotifications', function(){
         //return response('Unauthorized', 401);
-        \Alert::error("To jest testowa wiadomość");
+        //\Alert::error("To jest testowa wiadomość");
         //return ['notifications' => \Notifications::all()];
         //return \Platform::makeResponse(\Alert::all(), 'notifications');
-        return \PlatformResponse::makeResponse(\Alert::all(), 'notifications');
+        return \PlatformResponse::makeResponse(\Alert::all(true), 'notifications');
     });
     /** END NOTIFICATIONS **/
-
 
     /** DASHBOARD **/
     Route::get('dashboard', function(){

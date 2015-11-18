@@ -27,10 +27,10 @@ class Role extends EloquentRole implements SearchInterface
         return parent::delete();
     }
 
-
-
-
-
+    /**
+     * @param $str
+     * @return array
+     */
     public function search($str) {
         $results = [];
         $result = $this->where('name', 'like', '%'.$str.'%')
@@ -46,6 +46,9 @@ class Role extends EloquentRole implements SearchInterface
         return $results;
     }
 
+    /**
+     * @return string
+     */
     public function searchIcon(){
         return 'lock';
     }

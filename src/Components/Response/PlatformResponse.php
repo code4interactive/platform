@@ -2,6 +2,7 @@
 
 namespace Code4\Platform\Components\Response;
 
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Collection;
 
@@ -64,30 +65,12 @@ class PlatformResponse extends Collection {
     }
 
     /**
-     *
+     * Sends command to check notifications
+     * @return $this
      */
     public function checkNotifications() {
-
-    }
-
-    /**
-     * Sends notification to user
-     * @param $userId
-     * @param $title
-     * @param $message
-     */
-    public function notify($userId, $title, $message) {
-
-    }
-
-    /**
-     * Stores activity for channel
-     * @param $channel
-     * @param $title
-     * @param $message
-     */
-    public function activity($channel, $title, $message) {
-
+        $this->push(['checkNotifications' => true]);
+        return $this;
     }
 
     /**
@@ -98,7 +81,6 @@ class PlatformResponse extends Collection {
      * @return Response
      */
     public function makeResponse($data = null, $action = null, $statusCode = 200) {
-
         if (is_object($data)) {
             //Handle passed object
             if (is_a($data, 'Code4\Forms\FormInterface')) {
@@ -125,11 +107,4 @@ class PlatformResponse extends Collection {
 
         return $this->response->make($this->responseData, $statusCode);
     }
-
-    //Returning PlatformResponse from controller will cast object to string
-    public function __toString() {
-        return $this->makeResponse();
-    }
-
-
 }

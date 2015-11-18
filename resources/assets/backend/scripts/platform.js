@@ -98,8 +98,6 @@
 
                         for(var action in actions) {
                             var command = actions[action];
-                            console.log(action);
-                            console.log(command);
                             if (action === 'exitLockout') {
                                 self.lockoutExit();
                             }
@@ -112,13 +110,14 @@
                             if (action === 'eval') {
                                 eval(command);
                             }
+                            if (action === 'checkNotifications') {
+                                $.notifications.check();
+                            }
                             if (action === 'notifications') {
                                 $.notifications.handleNotifications(command);
                             }
                             if (action === 'reloadDataTable') {
                                 $(command).DataTable().ajax.reload(null, false);
-                                console.log($(command).DataTable());
-                                console.log($(command));
                             }
                         }
                     });
