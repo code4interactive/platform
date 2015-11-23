@@ -4,6 +4,7 @@
       "files": [
         "scripts/form.js",
         "scripts/modal.js",
+        "scripts/activity.js",
         "scripts/platform.js",
         "scripts/main.js"
       ],
@@ -90,9 +91,9 @@
     "devUrl": "https://pegas-erp.10.1.1.18.xip.io:8890"
   },
   "paths": {
-    "dist": "../../../../../../public/build/",
-    "distProd": "../../../public/prod/",
-    "packageDist": "../../../../../../public/build/",
+    "dist":     "../../../../../../public/build/",
+    "distProd": "../../../../../../public/prod/",
+    "packageDist":     "../../../public/build/",
     "packageDistProd": "../../../public/prod/",
     "source": "",
     "root": "../../../../../../"

@@ -72,15 +72,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label">Aktywny</label>
                                     <div class="col-lg-10" style="padding-top: 6px;">
-                                        <div class="switch">
-                                            <div class="onoffswitch">
-                                                <input type="checkbox" name="activate" checked class="onoffswitch-checkbox" id="activate">
-                                                <label class="onoffswitch-label" for="activate">
-                                                    <span class="onoffswitch-inner"></span>
-                                                    <span class="onoffswitch-switch"></span>
-                                                </label>
-                                            </div>
-                                        </div>
+                                        {!! $form->get('activate') !!}
                                     </div>
                                 </div>
                                 <div class="form-group">

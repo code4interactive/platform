@@ -1,7 +1,7 @@
 <?php
 //Uprawnienia
 return [
-    'users' => [
+    'users'    => [
         'name'        => 'Użytkownicy',
         'permissions' => [
             'users.index'           => 'Przeglądanie użytkowników',
@@ -13,7 +13,7 @@ return [
             'users.showinmenu'      => 'Pokaż w menu'
         ]
     ],
-    'roles' => [
+    'roles'    => [
         'name'        => 'Role',
         'permissions' => [
             'roles.index'           => 'Przeglądanie ról',
@@ -22,6 +22,15 @@ return [
             'roles.edit'            => 'Edycja ról',
             'roles.editpermissions' => 'Zmień uprawnienia',
             'roles.showinmenu'      => 'Pokaż w menu'
+        ]
+    ],
+    'activity' => [
+        'name'        => 'Komunikaty',
+        'permissions' => [
+            'activity.canEdit'      => 'Edycja komunikatów',
+            'activity.canEditOwn'   => 'Może edytować swoje',
+            'activity.canDelete'    => 'Może usuwać komunikaty',
+            'activity.canDeleteOwn' => 'Może usuwać swoje'
         ]
     ]
 ];

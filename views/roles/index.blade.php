@@ -1,4 +1,4 @@
-@extends('platform::theme.layout')
+@extends('platform::layout')
 
 @section('page-heading')
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -41,6 +41,11 @@
                             </div>
                         </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="feed" data-action="getActivityFeed" data-activity-feed="rolesController"></div>
             </div>
         </div>
     </div>

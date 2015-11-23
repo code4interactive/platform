@@ -9,6 +9,8 @@ use Code4\Platform\Models\Role;
 use Cartalyst\Alerts\Laravel\Facades\Alert;
 use Code4\View\Facades\ViewHelper;
 use Illuminate\Http\Request;
+use Code4\Platform\Contracts\Auth;
+
 
 use App\Http\Requests;
 
@@ -110,10 +112,11 @@ class RolesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($id, Auth $auth)
     {
         //check permissions
-        if (!\Platform::permission('roles.edit')) {
+
+        if (!$auth->hasAccess('roles.edit')) {
             redirect(action('\Code4\Platform\Controllers\RolesController@index'));
         }
 

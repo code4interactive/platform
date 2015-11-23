@@ -23,6 +23,7 @@ class UsersController extends Controller
      */
     public function index() {
         $dt = \DataTable::make(UsersDataTable::class);
+        //$logs = \Activity::prepareFeed('usersController');
         return view('platform::users.index', compact('dt'));
     }
 
@@ -83,10 +84,6 @@ class UsersController extends Controller
             $loginHash = generateUniqueHash('uid');
         }
 
-        /*while(!User::isThisIdUnique($loginHash)) {
-            $loginHash = generateUniqueHash('uid');
-        }*/
-
         //Listowanie danych do zapisania
         $credentials = [
             'email' => $request->get('email'),
@@ -104,9 +101,6 @@ class UsersController extends Controller
         //Dodawanie użytkownika do ról
         foreach($request->get('role') as $roleId) {
             $auth->addUserToRole($userId, $roleId);
-
-            //$r = \Sentinel::findRoleById($roleId);
-            //$r->users()->attach($user);
         }
 
         //Listowanie przesłanych uprawnień
@@ -128,8 +122,6 @@ class UsersController extends Controller
 
         //Zapisujemy uprawnienia
         $auth->addUserPermissions($userId, $permissions);
-//        $user->permissions = $permissions;
-//        $user->save();
 
         \Alert::success('Użytkownik utworzony');
 
@@ -138,17 +130,6 @@ class UsersController extends Controller
         }
 
         return ViewHelper::jsRedirect(action('\Code4\Platform\Controllers\UsersController@index'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -172,8 +153,6 @@ class UsersController extends Controller
 
         $roleRepo = \Sentinel::getRoleRepository()->createModel();
         $roles = $roleRepo->all();
-
-        //Menu::get('menu')->item('settings')->activate();
 
         return view('platform::users.edit', compact('permissions','user','roles', 'form'));
     }
@@ -206,11 +185,12 @@ class UsersController extends Controller
             $credentials['password'] = $request->get('password');
         }
 
-        if ($request->has('email') && $request->get('email') != '') {
+        /*if ($request->has('email') && $request->get('email') != '') {
             $credentials['email'] = $request->get('email');
-        }
+        }*/
 
-        $auth->editUser($userId, $credentials);
+        //$auth->editUser($userId, $credentials);
+        $user->fill($credentials);
 
         //Aktualizowanie ról użytkownika
         $roleIds = [];
@@ -221,6 +201,7 @@ class UsersController extends Controller
 
         //Ustalamy czy user ma być aktywowany czy nie
         $activate = $request->has('activate') && $request->get('activate') ? true : false;
+        //Todo: Dezaktywacja usera!!!!
 
         //Listowanie przesłanych uprawnień
         $permissions = [];
@@ -241,9 +222,15 @@ class UsersController extends Controller
 
         //Zapisujemy uprawnienia
         $user->permissions = $permissions;
+        $changes = $user->getChanges();
+
         $user->save();
 
         \Alert::success('Użytkownik zaktualizowany');
+        if ($changes)
+        {
+            \Activity::log('usersController', $changes, $auth->currentUserId());
+        }
 
         return ViewHelper::jsRedirect(action('\Code4\Platform\Controllers\UsersController@index'));
     }

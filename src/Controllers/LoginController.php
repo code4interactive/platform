@@ -25,7 +25,7 @@ class LoginController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function postLogin(Request $request)
+    public function postLogin(Request $request, Auth $auth)
     {
         $this->validate($request, [
             'email' => 'required', 'password' => 'required',
@@ -35,13 +35,14 @@ class LoginController extends Controller {
 
         try
         {
-            if ($request->has('remember'))
-            {
-                \Sentinel::authenticateAndRemember($credentials);
-            } else
-            {
-                \Sentinel::authenticate($credentials);
-            }
+            //if ($request->has('remember'))
+            //{
+                $auth->authenticate($credentials, $request->has('remember'));
+                //\Sentinel::authenticate($credentials);
+            //} else
+            //{
+                //\Sentinel::authenticate($credentials);
+            //}
         } catch (NotActivatedException $e) {
             return redirect('/login')
                 ->withInput($request->only('email', 'remember'))

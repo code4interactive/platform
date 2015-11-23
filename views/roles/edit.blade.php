@@ -1,4 +1,4 @@
-@extends('platform::theme.layout')
+@extends('platform::layout')
 
 @section('page-heading')
     <div class="row wrapper border-bottom white-bg page-heading">

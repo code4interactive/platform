@@ -2,15 +2,26 @@
 
 namespace Code4\Platform\Models;
 
+use Cmgmyr\Messenger\Models\Participant;
+use Cmgmyr\Messenger\Traits\Messagable;
 use Code4\Platform\Components\Search\SearchTrait;
 use Code4\Platform\Components\Search\SearchInterface;
 use Cartalyst\Sentinel\Users\EloquentUser;
+use Code4\Platform\Traits\TrackChanges;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
+/**
+ * Class User
+ * @package Code4\Platform\Models
+ * @method User find() find(int $id)
+ */
 class User extends EloquentUser implements SearchInterface
 {
     use SoftDeletes;
     use SearchTrait;
+    use TrackChanges;
+    use Messagable;
 
     protected $fillable = [
         'email',
@@ -21,6 +32,15 @@ class User extends EloquentUser implements SearchInterface
         'login_hash',
         'job_title',
         'permissions',
+    ];
+
+    protected $fieldNames = [
+        'email' => 'E-mail',
+        'last_name' => 'Nazwisko',
+        'first_name' => 'Imię',
+        'image' => 'Zdjęcie',
+        'job_title' => 'Stanowisko',
+        'permissions' => 'Uprawnienia',
     ];
 
     protected $searchableColumns = ['email','last_name','first_name','job_title','created_at'];
@@ -99,6 +119,27 @@ class User extends EloquentUser implements SearchInterface
 
     public function getDataForAutocomplete($str) {
         $result = $this->searchAllFields($str);
+    }
+
+    /**
+     * Returns all new messages
+     *
+     * @return array
+     */
+    public function threadsWithNewOrLatestMessages($limit = 10)
+    {
+        $messages = [];
+        $participants = Participant::where('user_id', $this->id)->lists('last_read', 'thread_id');
+        $participants = $participants->all();
+
+        if ($participants)
+        {
+            $threads = Thread::whereIn('id', array_keys($participants))->orderBy('updated_at', 'desc')->get();
+            foreach($threads as $thread) {
+                $messages[] = $thread->messages()->where('updated_at', '>', $participants[$thread->id])->get();
+            }
+            var_dump($messages);
+        }
     }
 
 }

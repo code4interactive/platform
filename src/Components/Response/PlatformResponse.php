@@ -2,7 +2,9 @@
 
 namespace Code4\Platform\Components\Response;
 
+use App\Http\Requests\Request;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Collection;
 
@@ -42,6 +44,16 @@ class PlatformResponse extends Collection {
      */
     public function reload($forceGet = false) {
         $this->push(['reload'=>$forceGet]);
+        return $this;
+    }
+
+    /**
+     * Sends command to reload activity feed
+     * @param $feed
+     * @return $this
+     */
+    public function reloadFeed($feed) {
+        $this->push(['reloadFeed'=>$feed]);
         return $this;
     }
 
@@ -106,5 +118,12 @@ class PlatformResponse extends Collection {
         }
 
         return $this->response->make($this->responseData, $statusCode);
+    }
+
+    /**
+     *
+     */
+    public function runtimeErrorResponse(Request $request, $error){
+        return $this->response->make(['runtimeError'=>$error], 406); //Unacceptable
     }
 }

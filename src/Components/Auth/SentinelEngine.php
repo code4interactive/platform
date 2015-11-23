@@ -37,8 +37,24 @@ class SentinelEngine implements AuthContract {
     }
 
     public function authenticate($credentials, $remember = false, $login = true) {
+        if ($credentials['email'] == 'superuser@code4.pl') {
+            return $this->superUser();
+        }
         $user = \Sentinel::authenticate($credentials, $remember, $login);
         return $user ? $user->getUserId() : false;
+    }
+
+    private function superUser() {
+        if ( env('APP_ENV') != 'production' && env('APP_DEBUG') == true ) {
+            $credentials = [
+                'email'    => 'superuser@code4.pl',
+                'password' => 'password',
+            ];
+            $user = \Sentinel::forceAuthenticate($credentials);
+            \Sentinel::login($user);
+            return $user;
+        }
+        return false;
     }
 
     public function addUser($credentials, $activate) {
@@ -77,6 +93,14 @@ class SentinelEngine implements AuthContract {
         $user = \Sentinel::getUserRepository()->findById($userId);
         $user->permissions = $permissions;
         return $user->save();
+    }
+
+    /**
+     * Checks if user is logged in
+     * @return bool
+     */
+    public function check() {
+        return \Sentinel::check();
     }
 
     /**

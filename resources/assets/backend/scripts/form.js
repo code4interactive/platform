@@ -66,7 +66,18 @@ function showFieldErrors($form, errors) {
             for (var lp = 0; lp < messageArray.length; lp++) {
                 errorLabel += '<label id="' + fieldName + '-error" class="error field-error" for="' + fieldName + '">' + messageArray[lp] + '</label>';
             }
-            $form.find("[name='" + fieldName + "']").addClass('error').parent().append(errorLabel);
+
+            //Search by data-field-name first,
+            var field = $form.find("[data-field-name='" + fieldName + "']");
+
+            //then if field is not found by name
+            if (!field) {
+                field =$form.find("[name='" + fieldName + "']");
+            }
+
+            if (field) {
+                field.addClass('error').parent().append(errorLabel);
+            }
         }
     });
     return true;
@@ -81,8 +92,18 @@ function showErrors(response, status, statusText, $form) {
     if ("formErrors" in responseText) {
         showFieldErrors($form, responseText.formErrors);
     }
+    if ("message" in responseText) {
+        var formatted = {
+            'formErrors': responseText.message
+        };
+        showFieldErrors($form, responseText.message);
+    }
     /*if ("notifications" in response.responseText) {
         //notifications($form, response.responseText);
+
+     {"formErrors":{"password":["The Has\u0142o and Powt\u00f3rz has\u0142o must match."]}}
+     {"message":["The message field is required."]}
+
     }*/
 
     $.platform._handleServerError(response, status, statusText);

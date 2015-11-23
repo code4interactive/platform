@@ -2,8 +2,9 @@
 
 namespace Code4\Platform;
 
-use App\Components\C4Form\C4Form;
+use Carbon\Carbon;
 use Code4\Platform\Components\Response\PlatformResponse;
+use Code4\Platform\Components\Activity\Activity;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,10 +16,6 @@ class PlatformServiceProvider extends ServiceProvider {
         $this->registerProviders();
         $this->registerAliases();
 
-        $this->app['c4form'] = $this->app->share(function($app){
-            return new C4Form();
-        });
-
         $this->app->bind('Code4\Platform\Contracts\Auth', 'Code4\Platform\Components\Auth\SentinelEngine');
 
         $this->app->singleton('platform', function($app) {
@@ -26,13 +23,30 @@ class PlatformServiceProvider extends ServiceProvider {
             return new Platform($auth, $app->make('request'), $app->make('redirect'), $app->make('Illuminate\Contracts\Routing\ResponseFactory'));
         });
 
+        $this->app['activity'] = $this->app->share(function($app){
+            return new Activity();
+        });
+
         $this->app['platformResponse'] = $this->app->share(function($app){
             return new PlatformResponse($app->make('Illuminate\Contracts\Routing\ResponseFactory'));
         });
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/permissions.php', 'permissions'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/platform.php', 'platform'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/menu.php', 'menu'
+        );
     }
 
     public function boot() {
         $this->publishes([ __DIR__ . '/../migrations' => base_path('database/migrations')], 'migrations');
+        $this->publishes([ __DIR__ . '/../public' => public_path()], 'public');
         $this->publishes([
             __DIR__ . '/../config/permissions.php' => base_path('config/permissions.php'),
             __DIR__ . '/../config/platform.php' => base_path('config/platform.php'),
@@ -42,7 +56,6 @@ class PlatformServiceProvider extends ServiceProvider {
             __DIR__ . '/../config/cartalyst.sentinel.php' => base_path('config/cartalyst.sentinel.php'),
             __DIR__ . '/../config/c4view.php' => base_path('config/c4view.php')
         ], 'config');
-        $this->publishes([ __DIR__ . '/../public' => public_path()], 'public');
 
         //Platform routing
         if (! $this->app->routesAreCached()) {
@@ -64,6 +77,7 @@ class PlatformServiceProvider extends ServiceProvider {
 
     private function initComponents() {
         \Menu::init();
+        Carbon::setLocale('pl');
     }
 
     private function registerProviders() {
@@ -83,6 +97,7 @@ class PlatformServiceProvider extends ServiceProvider {
         $aliasLoader = AliasLoader::getInstance();
         $aliasLoader->alias('Platform', Facades\Platform::class);
         $aliasLoader->alias('Auth', Facades\Auth::class);
+        $aliasLoader->alias('Activity', Facades\Activity::class);
         $aliasLoader->alias('Sentinel', \Cartalyst\Sentinel\Laravel\Facades\Sentinel::class);
         $aliasLoader->alias('Gravatar', \Thomaswelton\LaravelGravatar\Facades\Gravatar::class);
         $aliasLoader->alias('PlatformResponse', Facades\PlatformResponse::class);

@@ -1,5 +1,6 @@
 <?php
 
+
 /** LOGIN **/
 Route::get('/login', [ 'as' => 'login', 'uses' => 'Code4\Platform\Controllers\LoginController@index' ]);
 Route::post('/login', ['uses'=>'Code4\Platform\Controllers\LoginController@postLogin']);
@@ -10,22 +11,26 @@ Route::post('/lockout', 'Code4\Platform\Controllers\LoginController@postLockout'
 
 Route::group(['middleware' => ['auth']], function (){
 
-    /**  **/
-    Route::get('/testReload', function(){
-        \Alert::success('akcja powiodła się');
-        return \PlatformResponse::reloadDataTable('usersList')->checkNotifications()->makeResponse();
-        //return \PlatformResponse::makeResponse(\Alert::all(), 'notifications');
-    });
-
     /** NOTIFICATIONS **/
     Route::post('/getNotifications', function(){
-        //return response('Unauthorized', 401);
-        //\Alert::error("To jest testowa wiadomość");
-        //return ['notifications' => \Notifications::all()];
-        //return \Platform::makeResponse(\Alert::all(), 'notifications');
         return \PlatformResponse::makeResponse(\Alert::all(true), 'notifications');
     });
     /** END NOTIFICATIONS **/
+
+    /** ACTIVITY **/
+    Route::post('/getActivityFeed', 'Code4\Platform\Controllers\ActivityController@getActivityFeed');
+    Route::post('/writeComment', 'Code4\Platform\Controllers\ActivityController@comment');
+    Route::get('/watchThread/{threadId}', 'Code4\Platform\Controllers\ActivityController@watchThread');
+
+    Route::get('/testMessages', function() {
+
+        $userId = \Auth::currentUserId();
+        $user = \Code4\Platform\Models\User::find($userId);
+        $user->threadsWithNewOrLatestMessages();
+
+    });
+
+    /** END ACTIVITY **/
 
     /** DASHBOARD **/
     Route::get('dashboard', function(){

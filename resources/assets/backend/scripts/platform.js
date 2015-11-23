@@ -104,6 +104,9 @@
                             if (action === 'redirect') {
                                 window.location.replace(command);
                             }
+                            if (action === 'reloadFeed') {
+                                $.activity.reloadFeed(command);
+                            }
                             if (action === 'reload') {
                                 window.location.reload(command);
                             }
@@ -138,19 +141,10 @@
             } else if (jqXHR.status == 403) {
                 //Forbidden
                 $.notifications.showError("Brak uprawnień", "Nie masz uprawnień do tego zasobu!");
+            } else if (jqXHR.status == 500) {
+                //Internal server error
+                $.notifications.showError("Błąd serwera", "Jeśli będzie się powtarzał, skontaktuj się z administratorem!");
             }
-
-            /*else  if (jqXHR.status == 200) {
-                //OK
-                var responseText = JSON.parse(jqXHR.responseText);
-                if ('action' in responseText) {
-                    if (responseText.action == 'exitLockout') {
-                        self.lockoutExit();
-                    }
-                }
-
-            }*/
-
         }
     };
     $.platform = new Platform();
@@ -164,6 +158,7 @@ $( document ).ready( function(){
     $.platform._init();
     $.notifications._init();
     $.notifications.check();
+    $.activity._init();
 
     //Automatycznie sprawdza notyfikacje po kazdym wywolaniu przez ajax
     //wyjątkiem jest sytuacja kiedy wywolanie to sprawdzenie notyfikacji 

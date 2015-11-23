@@ -44,6 +44,11 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="feed" data-action="getActivityFeed" data-activity-feed="usersController"></div>
+            </div>
+        </div>
     </div>
 
 @endsection
@@ -76,6 +81,11 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+
+            //Activity feed
+            //$.activity.getActivityFeed('#feed');
+
+
 
             $('body').on('click', 'a.generateQr', function(e){
 

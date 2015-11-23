@@ -23,7 +23,7 @@ interface Auth {
      * @param bool $login
      * @return bool|int User Id or false
      */
-    public function authenticate($credentials, $remember, $login);
+    public function authenticate($credentials, $remember, $login = true);
 
     /**
      * @param array $data
@@ -53,6 +53,12 @@ interface Auth {
      * @return bool
      */
     public function addUserPermissions($userId, $permissions);
+
+    /**
+     * Checks if user is logged in
+     * @return bool
+     */
+    public function check();
 
     //public function deleteUser($userId);
 

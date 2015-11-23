@@ -27,6 +27,7 @@ role:
   name: role[]
   title: Rola
   type: select
+  rules: required
   attributes:
     class: form-control chosen-select m-b
     multiple:
@@ -57,6 +58,7 @@ job_title:
 
 activate:
   type: onOffSwitch
+  checked:
   value: 1
 
 send_email:
