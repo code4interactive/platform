@@ -166,9 +166,8 @@ gulp.task('styles', ['wiredep'], function() {
         merged.add(gulp.src(dep.globs, {base: 'styles'})
             .pipe(cssTasksInstance));
     });
-    return merged
-        .pipe(writeToManifest('styles'))
-        .pipe(prodWriteToManifest('styles'));
+    merged.pipe(writeToManifest('styles'));
+    return merged.pipe(prodWriteToManifest('styles'));
 });
 
 // ### Scripts
@@ -182,9 +181,8 @@ gulp.task('scripts', [], function() {
                 .pipe(jsTasks(dep.name))
         );
     });
-    return merged
-        .pipe(writeToManifest('scripts'))
-        .pipe(prodWriteToManifest('scripts'));
+    merged.pipe(writeToManifest('scripts'))
+    return merged.pipe(prodWriteToManifest('scripts'));
 });
 
 // ### Fonts
