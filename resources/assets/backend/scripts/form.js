@@ -40,45 +40,33 @@ function showResponse(responseText, statusText, xhr, $form)  {
 // Iterując po tablicy błędów wyświetla je przy ospowiednich polach
 function showFieldErrors($form, errors) {
 
-    $('.processingIndicator').css( 'display', 'none');
-    $('button[type="submit"], input[type="submit"]').attr("disabled", false);
-
     //Jeżeli przeglądarka nie parsowała odpowiedzi serwera jako json robimy to ręcznie
     if (typeof errors === 'string') {
         errors = jQuery.parseJSON( errors );
     }
 
     //Przesłane błędy nie są w formacie JSON
-    if (typeof errors !== 'object') { console.log('form.js: Errors are not in object form'); return false; }
+    if (typeof errors !== 'object') { console.log('form.js: Errors are not an object'); return false; }
 
     jQuery.each(errors, function(fieldName, messageArray) {
         var errorLabel = '';
-        if (fieldName === 'messageBox') {
-            var alertBox = $(document.createElement('div')).addClass('alert alert-danger');
-            for (var op = 0; op < messageArray.length; op++) {
-                alertBox.append('<p>'+messageArray[op]+'</p>');
-            }
-            $form.find('.messageBox').html(alertBox);
-        } else if (fieldName === 'popup') {
 
-        } else {
-            console.log(messageArray);
-            for (var lp = 0; lp < messageArray.length; lp++) {
-                errorLabel += '<label id="' + fieldName + '-error" class="error field-error" for="' + fieldName + '">' + messageArray[lp] + '</label>';
-            }
-
-            //Search by data-field-name first,
-            var field = $form.find("[data-field-name='" + fieldName + "']");
-
-            //then if field is not found by name
-            if (!field) {
-                field =$form.find("[name='" + fieldName + "']");
-            }
-
-            if (field) {
-                field.addClass('error').parent().append(errorLabel);
-            }
+        for (var lp = 0; lp < messageArray.length; lp++) {
+            errorLabel += '<label id="' + fieldName + '-error" class="error field-error" for="' + fieldName + '">' + messageArray[lp] + '</label>';
         }
+
+        //Search by data-field-name first,
+        var field = $form.find("[data-field-name='" + fieldName + "']");
+
+        //then if field is not found by name
+        if (typeof field !== 'object' || field.length === 0) {
+            field = $form.find("[name='" + fieldName + "']");
+        }
+
+        if (field.length) {
+            field.addClass('error').parent().append(errorLabel);
+        }
+
     });
     return true;
 }
@@ -86,26 +74,23 @@ function showFieldErrors($form, errors) {
 // onError callback
 function showErrors(response, status, statusText, $form) {
     $('button[type="submit"], input[type="submit"]').attr("disabled", false);
+    $('.processingIndicator').css( 'display', 'none');
+
     toastr.error("W przesłanym formularzu są błędy", "Błąd formularza");
-    console.log(response);
-    var responseText = JSON.parse(response.responseText);
-    if ("formErrors" in responseText) {
-        showFieldErrors($form, responseText.formErrors);
-    }
-    if ("message" in responseText) {
-        var formatted = {
-            'formErrors': responseText.message
-        };
-        showFieldErrors($form, responseText.message);
-    }
-    /*if ("notifications" in response.responseText) {
-        //notifications($form, response.responseText);
-
-     {"formErrors":{"password":["The Has\u0142o and Powt\u00f3rz has\u0142o must match."]}}
-     {"message":["The message field is required."]}
-
-    }*/
-
+    try {
+        var responseObject = JSON.parse(response.responseText);
+        if (responseObject !== null && typeof responseObject === 'object') {
+            if ("formErrors" in responseObject) {
+                showFieldErrors($form, responseObject.formErrors);
+            }
+            if ("message" in responseObject) {
+                var formatted = {
+                    'formErrors': responseObject.message
+                };
+                showFieldErrors($form, responseObject.message);
+            }
+        }
+    } catch (e) { }
     $.platform._handleServerError(response, status, statusText);
     return true;
 }

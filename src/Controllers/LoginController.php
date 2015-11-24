@@ -3,6 +3,7 @@
 namespace Code4\Platform\Controllers;
 
 use App\Http\Controllers\Controller;
+use Code4\Forms\AbstractForm;
 use Code4\Platform\Contracts\Auth;
 use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Http\JsonResponse;
@@ -76,11 +77,16 @@ class LoginController extends Controller {
         echo \View::make('platform::auth.lockout', compact('user'))->render();
     }
 
-    public function postLockout(Request $request, Auth $auth)
-    {
-        $this->validate($request, [
+    public function postLockout(Request $request, Auth $auth) {
+
+        $form = new AbstractForm();
+        if (!$form->validate($request, ['email' => 'required', 'password' => 'required|min:100'])) {
+            return $form->response();
+        }
+
+        /*$this->validate($request, [
             'email' => 'required', 'password' => 'required',
-        ]);
+        ]);*/
 
         $credentials = $request->only('email', 'password');
 
@@ -91,9 +97,6 @@ class LoginController extends Controller {
         }
 
         return \PlatformResponse::exitLockScreen()->makeResponse();
-        //return \PlatformResponse::makeResponse();
-
-        //return response(['actions' => ['exitLockout'=>null]], 200);
     }
 
 }
