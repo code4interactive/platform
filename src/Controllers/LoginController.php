@@ -69,31 +69,38 @@ class LoginController extends Controller {
         return redirect('/login');
     }
 
+    /**
+     * Generates lockout screen
+     * @param $userId
+     * @param Auth $auth
+     * @return \Illuminate\Http\Response
+     */
     public function lockout($userId, Auth $auth) {
         if (!($user = $auth->getUser($userId))) {
-            return response('/login', 302);
-            //return \Platform::action()->
+            return \PlatformResponse::redirect('/login');
         }
         echo \View::make('platform::auth.lockout', compact('user'))->render();
     }
 
+    /**
+     * Handles lockout post request
+     * @param Request $request
+     * @param Auth $auth
+     * @return $this|\Code4\Platform\Components\Response\PlatformResponse|JsonResponse
+     */
     public function postLockout(Request $request, Auth $auth) {
 
-        $form = new AbstractForm();
-        if (!$form->validate($request, ['email' => 'required', 'password' => 'required|min:100'])) {
-            return $form->response();
-        }
-
-        /*$this->validate($request, [
-            'email' => 'required', 'password' => 'required',
-        ]);*/
-
         $credentials = $request->only('email', 'password');
+        $form = new AbstractForm();
 
-        if (!($userId = $auth->authenticate($credentials, false, true))) {
-            throw new HttpResponseException($this->buildFailedValidationResponse(
-                $request, ['formErrors' => ['password' => ['Złe hasło']]]
-            ));
+        $form->customFieldRule('password', function($request) use ($credentials, $auth) {
+            if (!($auth->authenticate($credentials, false, true))) {
+                return 'Złe hasło';
+            }
+        });
+
+        if (!$form->validate($request, ['email' => 'required', 'password' => 'required'])) {
+            return $form->response();
         }
 
         return \PlatformResponse::exitLockScreen()->makeResponse();

@@ -14,8 +14,9 @@ class PlatformResponse extends Collection {
 
     private $responseData = [];
 
-    public function __construct(ResponseFactory $response) {
+    public function __construct(ResponseFactory $response, \Illuminate\Http\Request $request) {
         $this->response = $response;
+        $this->request = $request;
     }
 
     /**
@@ -34,7 +35,11 @@ class PlatformResponse extends Collection {
      * @return \Illuminate\Http\Response
      */
     public function redirect($url) {
-        return $this->response->make($url, 302);
+        if ($this->request->ajax()) {
+            return $this->response->make($url, 302);
+        } else {
+            return $this->response->redirectTo($url);
+        }
     }
 
     /**
@@ -83,6 +88,26 @@ class PlatformResponse extends Collection {
     public function checkNotifications() {
         $this->push(['checkNotifications' => true]);
         return $this;
+    }
+
+    /**
+     * Returns to browser error for field in form
+     * @param string $field
+     * @param string $message
+     * @return \Illuminate\Http\Response
+     */
+    public function formError($field, $message) {
+        return $this->response->make(['formErrors' => [$field => [$message]]], 422);
+    }
+
+    /**
+     * Returns multiple errors for multiple fields in form.
+     *
+     * @param array $messages ['field' => ['message1', 'message2']]
+     * @return \Illuminate\Http\Response
+     */
+    public function formErrors($messages) {
+        return $this->response->make(['formErrors' => $messages], 422);
     }
 
     /**

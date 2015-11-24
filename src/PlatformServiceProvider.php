@@ -28,7 +28,7 @@ class PlatformServiceProvider extends ServiceProvider {
         });
 
         $this->app['platformResponse'] = $this->app->share(function($app){
-            return new PlatformResponse($app->make('Illuminate\Contracts\Routing\ResponseFactory'));
+            return new PlatformResponse($app->make('Illuminate\Contracts\Routing\ResponseFactory'), $app->make('request'));
         });
 
         $this->mergeConfigFrom(
