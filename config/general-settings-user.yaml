@@ -1,0 +1,3 @@
+displayGravatar:
+    type: onOffSwitch
+    title: Wyświetlać gravatary?

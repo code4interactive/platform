@@ -1,3 +1,6 @@
 profile:
   title: Profil
-  url: profile
+  url: /user/profile
+settings:
+  title: Ustawienia
+  url: /user/settings/general

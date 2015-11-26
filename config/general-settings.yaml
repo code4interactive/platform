@@ -1,0 +1,18 @@
+ogolne:
+    type: htmlTag
+    tag: h3
+    content: Ustawienia aplikacji
+    attributes:
+        class: underline
+appName:
+    title: Nazwa aplikacji
+    label: Nazwa aplikacji
+    rules: regex:/[a-z0-9 \.\-\_]+/i
+    type: text
+displayGravatar:
+    type: checkbox
+    label: Wyświetlać gravatary?
+    baseValue: false
+    value: 1
+    attributes:
+        class: i-checks

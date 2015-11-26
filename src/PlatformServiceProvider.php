@@ -20,7 +20,7 @@ class PlatformServiceProvider extends ServiceProvider {
 
         $this->app->singleton('platform', function($app) {
             $auth = $app->make('Code4\Platform\Contracts\Auth');
-            return new Platform($auth, $app->make('request'), $app->make('redirect'), $app->make('Illuminate\Contracts\Routing\ResponseFactory'));
+            return new Platform($auth, $app->make('config'), $app->make('request'), $app->make('redirect'), $app->make('Illuminate\Contracts\Routing\ResponseFactory'));
         });
 
         $this->app['activity'] = $this->app->share(function($app){
@@ -42,6 +42,14 @@ class PlatformServiceProvider extends ServiceProvider {
         $this->mergeConfigFrom(
             __DIR__ . '/../config/menu.php', 'menu'
         );
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/general.php', 'general'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/general_user.php', 'general_user'
+        );
     }
 
     public function boot() {
@@ -50,6 +58,10 @@ class PlatformServiceProvider extends ServiceProvider {
         $this->publishes([
             __DIR__ . '/../config/permissions.php' => base_path('config/permissions.php'),
             __DIR__ . '/../config/platform.php' => base_path('config/platform.php'),
+            __DIR__ . '/../config/general.php' => base_path('config/general.php'),
+            __DIR__ . '/../config/general_user.php' => base_path('config/general_user.php'),
+            __DIR__ . '/../config/general-settings.yaml' => base_path('config/general-settings.yaml'),
+            __DIR__ . '/../config/general-settings-user.yaml' => base_path('config/general-settings-user.yaml'),
             __DIR__ . '/../config/menu.php' => base_path('config/menu.php'),
             __DIR__ . '/../config/menu-main.yaml' => base_path('config/menu-main.yaml'),
             __DIR__ . '/../config/menu-profile.yaml' => base_path('config/menu-profile.yaml'),

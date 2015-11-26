@@ -34,6 +34,7 @@
             var requestData = {
               'feedSubject': feedName
             };
+            $('.processingIndicator').css( 'display', 'block');
             $.ajax({
                     url: self.opt.activityFeedUrl,
                     async: true,
@@ -42,9 +43,11 @@
                     data: requestData,
                     dataType: "html",
                     success: function( data, textStatus, jqXHR ){
+                        $('.processingIndicator').css( 'display', 'none');
                         self.showFeed(data, target);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
+                        $('.processingIndicator').css( 'display', 'none');
                         self._handleServerError(jqXHR, textStatus, errorThrown);
                     }
                 }

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Dashboard</title>
+    <title>{!! \Platform::settings('general.appName', 'CODE4 Platform '.env('APP_VER', '3.0')) !!} | Dashboard</title>
 
     <link rel="stylesheet" href="{{ Assets::getUrl('styles/bootstrap.css') }}"/>
 
@@ -23,6 +23,7 @@
     @show
 </head>
 <body>
+
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">

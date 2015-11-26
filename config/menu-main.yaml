@@ -5,7 +5,7 @@ settings:
   collection:
     ogolne:
       title: Ogólne
-      url: settings/general
+      url: settings/general/general
 
     docnumbers:
       title: Numeracja dokumentów
