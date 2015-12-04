@@ -54,4 +54,27 @@ class Platform {
         return $this->settingsCollection->settings();
     }
 
+
+    public function getAvatar($email, $firstName, $lastName, $size = 'large', $class = 'img-circle') {
+        if ($this->settings('general.displayGravatar') == '1')
+        {
+            $imgSize = 60;
+            if ($size == 'small') { $imgSize = 30; }
+            $gravatar_src = \Gravatar::src($email, $imgSize);
+            $temp = '<div class="avatar '.$size.'">';
+            $temp .= '<div class="photo">';
+            $temp .= '<img src="' . $gravatar_src . '" alt="' . $firstName . ' ' . $lastName . '" class="' . $class . '">';
+            $temp .= '</div>';
+            $temp .= '</div>';
+            return $temp;
+        } else {
+            $initials = ''.substr($firstName, 0, 1).substr($lastName, 0, 1).'';
+            $temp = '<div class="avatar '.$size.'">';
+            $temp .= '<div class="photo">';
+            $temp .= '<abbr class="initials-text">'.$initials.'</abbr>';
+            $temp .= '</div>';
+            $temp .= '</div>';
+            return $temp;
+        }
+    }
 }

@@ -7,7 +7,7 @@ ogolne:
 appName:
     title: Nazwa aplikacji
     label: Nazwa aplikacji
-    rules: regex:/[a-z0-9 \.\-\_]+/i
+    rules: Regex:/^[a-z0-9 \.\-\_]+$/i
     type: text
 displayGravatar:
     type: checkbox

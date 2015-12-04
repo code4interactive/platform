@@ -4,6 +4,7 @@ $(document).ready(function () {
         radioClass: 'iradio_square-green'
     });
 
+    $('[data-toggle=tooltip]').tooltip();
 
     var config = {
         '.chosen-select'           : {},

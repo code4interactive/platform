@@ -97,7 +97,7 @@ $(document).ready(function () {
     });
 
     // Move modal to body
-    // Fix Bootstrap backdrop issu with animation.css
+    // Fix Bootstrap backdrop issue with animation.css
     $('.modal').appendTo("body");
 
     // Full height of sidebar

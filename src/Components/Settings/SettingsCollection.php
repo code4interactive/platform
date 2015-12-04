@@ -39,11 +39,11 @@ class SettingsCollection extends Collection {
 
 
     /**
-     * Returns configuration for blocks set in platform.php config file / settingsBlocks section
+     * Returns blocks from configuration
      * @param bool|false $user
      * @return array
      */
-    public function settingsBlockConfiguration($user = false) {
+    public function getBlocksFromConfiguration($user = false) {
         $blocks = [];
         foreach ($this->blocks as $blockName => $block) {
             //Tylko formsy usera
@@ -51,7 +51,6 @@ class SettingsCollection extends Collection {
             if ($user && !$userBlock) {
                 continue;
             }
-
             //Tylko formsy globalne
             if (!$user && $userBlock) {
                 continue;

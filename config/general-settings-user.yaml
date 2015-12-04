@@ -1,3 +1,13 @@
+ogolne:
+    type: htmlTag
+    tag: h3
+    content: Ustawienia aplikacji - Użytkownik
+    attributes:
+        class: underline
 displayGravatar:
-    type: onOffSwitch
-    title: Wyświetlać gravatary?
+    type: checkbox
+    label: Wyświetlać gravatary?
+    baseValue: false
+    value: 1
+    attributes:
+        class: i-checks

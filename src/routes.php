@@ -48,9 +48,10 @@ Route::group(['middleware' => ['auth']], function (){
     Route::resource('administration/roles', 'Code4\Platform\Controllers\RolesController');
 
     /** SETTINGS **/
-    Route::get('settings/general/{block}', 'Code4\Platform\Controllers\SettingsController@general');
+    Route::get('settings/general', 'Code4\Platform\Controllers\SettingsController@general');
     Route::post('settings/general', 'Code4\Platform\Controllers\SettingsController@store');
-    Route::get('settings/user/{block}', 'Code4\Platform\Controllers\SettingsController@user');
+    Route::get('settings/general/user', 'Code4\Platform\Controllers\SettingsController@generalUser');
+    Route::post('settings/general/user', 'Code4\Platform\Controllers\SettingsController@storeGeneralUser');
 
     /** GLOBAL SEARCH **/
     Route::post('search', 'Code4\Platform\Controllers\SearchController@index');

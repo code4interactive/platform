@@ -69,10 +69,19 @@ class User extends EloquentUser implements SearchInterface
      * @param string $class
      * @return string
      */
-    public function getAvatar($size = 30, $class = 'img-circle') {
-        $gravatar_src = \Gravatar::src($this->email, $size);
-        $gravatar = '<img src="' . $gravatar_src . '" alt="' . $this->first_name . ' ' . $this->last_name . '" class="'.$class.'">';
-        return $gravatar;
+    public function getAvatar($size = 'small', $class = 'img-circle') {
+        return \Platform::getAvatar($this->email, $this->first_name, $this->last_name, $size, $class = 'img-circle');
+
+        /*if (\Platform::settings('general.displayGravatar') == '1')
+        {
+            $gravatar_src = \Gravatar::src($this->email, $size);
+            $gravatar = '<img src="' . $gravatar_src . '" alt="' . $this->first_name . ' ' . $this->last_name . '" class="' . $class . '">';
+            return $gravatar;
+        } else {
+
+            $initials = ''.substr($this->first_name, 0, 1).substr($this->last_name, 0, 1).'';
+            return '<span style="width: '.$size.'px; height: '.$size.'px;" class="initials ' . $class . '">'.$initials.'</span>';
+        }*/
     }
 
     /**

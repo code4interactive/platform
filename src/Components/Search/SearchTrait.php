@@ -32,11 +32,24 @@ trait SearchTrait {
             {
                 if ($first)
                 {
-                    $query->where($column, 'like', '%' . $str . '%');
+                    if ($column == 'created_at') {
+                        $query->raw(' OR WHERE '.$column.'::string like '.'%' . $str . '%');
+                        //$query->orwhere($column.'::string', 'like', '%' . $str . '%');
+                    } else
+                    {
+                        $query->where($column, 'like', '%' . $str . '%');
+                    }
                     $first = false;
                 } else
                 {
-                    $query->orwhere($column, 'like', '%' . $str . '%');
+                    if ($column == 'created_at') {
+                        $query->raw(' OR WHERE '.$column.'::string like '.'%' . $str . '%');
+
+                        //$query->orwhere($column.'::string', 'like', '%' . $str . '%');
+                    } else
+                    {
+                        $query->orwhere($column, 'like', '%' . $str . '%');
+                    }
                 }
             }
         });

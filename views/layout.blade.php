@@ -81,7 +81,7 @@
         <?php
 
             //\Platform::user();
-            \Auth::getUser()
+            //\Auth::getUser()
 
         ?>
 
@@ -157,6 +157,13 @@
 
 <!-- Mainly scripts -->
 <script src="{{ Assets::getUrl('scripts/jquery.js') }}"></script>
+<!-- jQuery UI -->
+<script src="{{ Assets::getUrl('scripts/jqueryui.js') }}"></script>
+<script>
+    /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
+    $.widget.bridge('uibutton', $.ui.button);
+    $.widget.bridge('uitooltip', $.ui.tooltip);
+</script>
 <script src="{{ Assets::getUrl('scripts/bootstrap.js') }}"></script>
 
 <!-- Custom and plugin javascript -->
@@ -167,8 +174,6 @@
 <!-- QRCodeReader -->
 <script src="{{ Assets::getUrl('scripts/qrreader.js') }}"></script>
 
-<!-- jQuery UI -->
-<script src="{{ Assets::getUrl('scripts/jqueryui.js') }}"></script>
 
 @yield("scripts")
 

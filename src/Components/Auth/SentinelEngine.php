@@ -37,9 +37,9 @@ class SentinelEngine implements AuthContract {
     }
 
     public function authenticate($credentials, $remember = false, $login = true) {
-        if ($credentials['email'] == 'superuser@code4.pl') {
-            return $this->superUser();
-        }
+        //if ($credentials['email'] == 'superuser@code4.pl') {
+        //    return $this->superUser();
+        //}
         $user = \Sentinel::authenticate($credentials, $remember, $login);
         return $user ? $user->getUserId() : false;
     }

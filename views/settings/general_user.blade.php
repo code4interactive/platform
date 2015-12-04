@@ -3,7 +3,7 @@
 @section('page-heading')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Ustawienia aplikacji</h2>
+            <h2>Ustawienia aplikacji - Użytkownik</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="/">Home</a>
@@ -12,7 +12,7 @@
                     <a>Administracja</a>
                 </li>
                 <li class="active">
-                    <strong>Ustawienia</strong>
+                    <strong>Ustawienia użytkownika</strong>
                 </li>
             </ol>
         </div>
@@ -22,7 +22,7 @@
 @section('content')
     <div class="wrapper wrapper-content">
         <div class="row">
-            <form class="form-horizontal ajax" role="form" method="post" action="{{action('\Code4\Platform\Controllers\SettingsController@store')}}">
+            <form class="form-horizontal ajax" role="form" method="post" action="{{action('\Code4\Platform\Controllers\SettingsController@storeGeneralUser')}}">
                 <div class="col-lg-12">
                     <div class="ibox">
                         <ul class="nav nav-tabs nav-tabs-white">

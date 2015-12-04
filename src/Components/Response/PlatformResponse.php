@@ -8,15 +8,16 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Collection;
 
-class PlatformResponse extends Collection {
+class PlatformResponse {
 
     private $response;
-
     private $responseData = [];
+    private $data;
 
     public function __construct(ResponseFactory $response, \Illuminate\Http\Request $request) {
         $this->response = $response;
         $this->request = $request;
+        $this->data = new Collection();
     }
 
     /**
@@ -25,7 +26,7 @@ class PlatformResponse extends Collection {
      * @return $this
      */
     public function jsEval($evalScript) {
-        $this->push(['eval' => $evalScript]);
+        $this->data->push(['eval' => $evalScript]);
         return $this;
     }
 
@@ -48,7 +49,7 @@ class PlatformResponse extends Collection {
      * @return $this
      */
     public function reload($forceGet = false) {
-        $this->push(['reload'=>$forceGet]);
+        $this->data->push(['reload'=>$forceGet]);
         return $this;
     }
 
@@ -58,7 +59,7 @@ class PlatformResponse extends Collection {
      * @return $this
      */
     public function reloadFeed($feed) {
-        $this->push(['reloadFeed'=>$feed]);
+        $this->data->push(['reloadFeed'=>$feed]);
         return $this;
     }
 
@@ -67,7 +68,7 @@ class PlatformResponse extends Collection {
      * @return $this
      */
     public function exitLockScreen() {
-        $this->push(['exitLockout' => true]);
+        $this->data->push(['exitLockout' => true]);
         return $this;
     }
 
@@ -77,7 +78,7 @@ class PlatformResponse extends Collection {
      * @return $this
      */
     public function reloadDataTable($dataTableName) {
-        $this->push(['reloadDataTable' => '#dt-'.$dataTableName]);
+        $this->data->push(['reloadDataTable' => '#dt-'.$dataTableName]);
         return $this;
     }
 
@@ -86,7 +87,7 @@ class PlatformResponse extends Collection {
      * @return $this
      */
     public function checkNotifications() {
-        $this->push(['checkNotifications' => true]);
+        $this->data->push(['checkNotifications' => true]);
         return $this;
     }
 
@@ -139,7 +140,7 @@ class PlatformResponse extends Collection {
         //If previous actions are still 200
         //handle stored locally actions
         if ($statusCode == 200) {
-            $this->responseData['actions'] = $this->toArray();
+            $this->responseData['actions'] = $this->data->toArray();
         }
 
         return $this->response->make($this->responseData, $statusCode);
