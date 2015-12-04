@@ -1,0 +1,49 @@
+<?php
+namespace DummyNamespace;
+
+use Code4\DataTable\DataTable;
+
+class DummyClass extends DataTable {
+
+    protected $name = "DummyClassDataTable";
+
+    protected $columns = [
+        //'column1' => 'column 1 Name',
+        //'column2' => 'column 2 Name'
+    ];
+
+    //Lista kolumn które nie mają być sortowane
+    protected $noSorting = [
+        //'column1', 'column2'
+    ];
+
+    //Lista dekoratorów dla kolumn (także kilka dla jednej kolumny)
+    protected $cellDecorators = [
+        //'column1' => ['doSomething']
+    ];
+
+    //Url do kontrolera zwracającego dane dla tabeli
+    protected $url = '/path/to/controller';
+
+    //Metoda wymagana - musi zwracać dane w postaci arraya wg. klucza: [['column1' => 'value', 'column2' => 'value'],['column1' => 'value' ...
+    protected function getData($start, $length, $search, $orderCol, $orderDir)
+    {
+        return [['column1' => 'value', 'column2' => 'value'],['column1' => 'value', 'column2' => 'value']];
+    }
+
+
+    //Metoda wymagana - musi zwracać INT z ilością wszystkich wierszy w tabeli
+    protected function countAll()
+    {
+        return 2;
+    }
+
+    //Zdefiniowana w $cellDecorator funkcja dekorująca kolumnę. Musi zwracać string.
+    //W $row znajduje się cały wiersz danych, w $cell tylko wartość kolumny dla której przypisany jest dekorator
+    protected function doSomethingDecorator($cell, $row)
+    {
+        return '<strong>' . $cell . '</strong>';
+    }
+
+
+}

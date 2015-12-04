@@ -1,0 +1,18 @@
+<?php
+
+namespace {{namespace}};
+
+use Code4\Forms\AbstractForm;
+
+class {{class}} extends AbstractForm {
+
+    //Opcjonalna lista nazw pól które mają pojawiać się w komunikatach
+    protected $messages = [
+        'email' => 'EMAIL'
+    ];
+
+    public function __construct() {
+        parent::__construct();
+        $this->{{functionToExec}}(__DIR__ . '/{{config}}');
+    }
+}

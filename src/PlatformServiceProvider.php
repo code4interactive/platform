@@ -55,6 +55,8 @@ class PlatformServiceProvider extends ServiceProvider {
     public function boot() {
         $this->publishes([ __DIR__ . '/../migrations' => base_path('database/migrations')], 'migrations');
         $this->publishes([ __DIR__ . '/../public' => public_path()], 'public');
+        $this->publishes([ __DIR__ . '/../resources/stubs' => base_path('resources/stubs')], 'resources');
+        $this->publishes([ __DIR__ . '/../src/Console/Commands' => base_path('app/Console/Commands')], 'commands');
         $this->publishes([
             __DIR__ . '/../config/permissions.php' => base_path('config/permissions.php'),
             __DIR__ . '/../config/platform.php' => base_path('config/platform.php'),

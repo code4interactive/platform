@@ -1,0 +1,7 @@
+email:
+  type: email
+  title: E-mail
+  rules: email|required
+  attributes:
+    class: form-control
+    placeholder: Adres email
