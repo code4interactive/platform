@@ -22,7 +22,7 @@
 @section('content')
     <div class="wrapper wrapper-content">
         <div class="row">
-            <form class="form-horizontal ajax" role="form" method="post" action="{{action('\Code4\Platform\Controllers\SettingsController@store')}}">
+            <form class="form-horizontal ajax" role="form" method="post" action="{{$action}}">
                 <div class="col-lg-12">
                     <div class="ibox">
                         <ul class="nav nav-tabs nav-tabs-white">
@@ -59,4 +59,7 @@
 @endsection
 
 @section('scripts')
+    <script>
+        $.c4forms.alertUnsavedChanges();
+    </script>
 @endsection

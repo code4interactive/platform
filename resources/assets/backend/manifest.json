@@ -2,9 +2,9 @@
   "dependencies": {
     "main.js": {
       "files": [
-        "scripts/form.js",
         "scripts/modal.js",
         "scripts/activity.js",
+        "scripts/forms.js",
         "scripts/platform.js",
         "scripts/main.js"
       ],

@@ -10,9 +10,7 @@ appName:
     rules: Regex:/^[a-z0-9 \.\-\_]+$/i
     type: text
 displayGravatar:
-    type: checkbox
+    type: fancyCheckbox
     label: Wyświetlać gravatary?
     baseValue: false
     value: 1
-    attributes:
-        class: i-checks

@@ -5,9 +5,7 @@ ogolne:
     attributes:
         class: underline
 displayGravatar:
-    type: checkbox
+    type: fancyCheckbox
     label: Wyświetlać gravatary?
     baseValue: false
     value: 1
-    attributes:
-        class: i-checks

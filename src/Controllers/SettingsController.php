@@ -24,9 +24,10 @@ class SettingsController extends Controller
         $form = new GeneralSettingsForm();
         $settings = $platform->settings($currentBlock);
         $tabs = $platform->settings()->getBlocksFromConfiguration();
+        $action = action('\Code4\Platform\Controllers\SettingsController@store');
         $form->values($settings->all());
 
-        return view('platform::settings.general', compact('form', 'tabs','currentBlock'));
+        return view('platform::settings.general', compact('form', 'tabs','currentBlock', 'action'));
     }
 
     /**
@@ -68,7 +69,8 @@ class SettingsController extends Controller
         $settings = $platform->settings($currentBlock);
         $tabs = $platform->settings()->getBlocksFromConfiguration(true);
         $form->values($settings->all());
-        return view('platform::settings.general_user', compact('form', 'tabs','currentBlock'));
+        $action = action('\Code4\Platform\Controllers\SettingsController@storeGeneralUser');
+        return view('platform::settings.general_user', compact('form', 'tabs','currentBlock', 'action'));
     }
 
     /**

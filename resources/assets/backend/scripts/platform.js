@@ -159,6 +159,7 @@ $( document ).ready( function(){
     $.notifications._init();
     $.notifications.check();
     $.activity._init();
+    $.c4forms._init();
 
     //Automatycznie sprawdza notyfikacje po kazdym wywolaniu przez ajax
     //wyjątkiem jest sytuacja kiedy wywolanie to sprawdzenie notyfikacji 

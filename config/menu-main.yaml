@@ -1,15 +1,17 @@
 settings:
   title: Ustawienia
-  url: settings
+  url: #
   icon: wrench
+  order: 300
   collection:
     ogolne:
       title: Ogólne
-      url: settings/general/general
+      url: settings/general
 
     docnumbers:
       title: Numeracja dokumentów
       url: settings/numerator
+      icon: terminal
 
     users:
       title: Użytkownicy

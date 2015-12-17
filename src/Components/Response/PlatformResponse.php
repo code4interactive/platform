@@ -26,7 +26,7 @@ class PlatformResponse {
      * @return $this
      */
     public function jsEval($evalScript) {
-        $this->data->push(['eval' => $evalScript]);
+        $this->data->push(['evalScript' => $evalScript]);
         return $this;
     }
 
