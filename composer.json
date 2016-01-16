@@ -41,8 +41,7 @@
         }
     ],
     "require": {
-        "illuminate/support" : "~5.0",
-        "laravel/framework": "5.1.*",
+        "laravel/framework": "5.2.*",
         "cartalyst/sentinel": "2.0.*",
         "cartalyst/alerts": "2.0.*",
         "laravelcollective/html": "~5.0",
