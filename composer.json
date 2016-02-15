@@ -41,13 +41,9 @@
         }
     ],
     "require": {
-<<<<<<< HEAD
         "illuminate/support" : "~5.2",
         "illuminate/contracts" : "~5.2",
         "illuminate/filesystem" : "~5.2",
-=======
->>>>>>> d4ec6f6ba7f2bee810f07bed6a7cf830748afd1e
-        "laravel/framework": "5.2.*",
         "cartalyst/sentinel": "2.0.*",
         "cartalyst/alerts": "2.0.*",
         "laravelcollective/html": "~5.2",
