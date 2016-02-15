@@ -55,8 +55,8 @@
         "code4interactive/menu" : "~1.1",
         "code4interactive/forms" : "~0.*",
         "code4interactive/notifications" : "~0.*",
-        "code4interactive/DataTable" : "~0.1",
-        "code4interactive/view" : "~0.2",
+        "code4interactive/DataTable" : "~0.*",
+        "code4interactive/view" : "~0.*",
         "cmgmyr/messenger" : "~2.8"
     },
     "require-dev": {
