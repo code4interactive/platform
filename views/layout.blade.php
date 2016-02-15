@@ -29,13 +29,12 @@
         <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
-                            {!! \Auth::getUser()->getAvatar(48) !!}
-                             </span>
+                    <div class="dropdown profile-element">
+                        {!! \ViewHelper::userAvatar(\Auth::getUser(), 'large') !!}
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{!! \Auth::getUser()->getFirstAndLastName() !!}</strong>
                              </span> <span class="text-muted text-xs block">{!! \Auth::getUser()->job_title !!} <b class="caret"></b></span> </span> </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <ul class="dropdown-menu m-t-xs">
                             <li><a href="profile.html">Profile</a></li>
                             <li><a href="contacts.html">Contacts</a></li>
                             <li><a href="mailbox.html">Mailbox</a></li>

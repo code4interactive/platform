@@ -1,7 +1,6 @@
 <ul class="nav navbar-top-links navbar-right">
     <li class="dropdown profile-menu-badge ">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            {!! \Auth::getUser()->getAvatar(24) !!}
             <strong class="font-bold">{!! \Auth::getUser()->getFirstAndLastName() !!}</strong> <b class="caret"></b>
         </a>
         <ul class="dropdown-menu m-t-xs">
@@ -16,7 +15,7 @@
             <li>
                 <div class="dropdown-messages-box">
                     <a href="profile.html" class="pull-left">
-                        <img alt="image" class="img-circle" src="/theme/images/a7.jpg">
+                        {!! \ViewHelper::userAvatar(\Auth::getUser(), 'medium') !!}
                     </a>
                     <div class="media-body">
                         <small class="pull-right">46h ago</small>

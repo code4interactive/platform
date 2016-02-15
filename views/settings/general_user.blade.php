@@ -25,11 +25,6 @@
             <form class="form-horizontal ajax" role="form" method="post" action="{{$action}}">
                 <div class="col-lg-12">
                     <div class="ibox">
-                        <ul class="nav nav-tabs nav-tabs-white">
-                            @foreach($tabs as $blockName => $block)
-                                <li class="{!! $blockName == $currentBlock ? 'active' : '' !!}"><a href="{{action($block['url'])}}"><i class="fa {!! $block['icon'] !!}"></i> {!! $block['title'] !!}</a></li>
-                            @endforeach
-                        </ul>
                         <div class="ibox-content" >
                             <div class="row">
                                 <div class="col-lg-6">

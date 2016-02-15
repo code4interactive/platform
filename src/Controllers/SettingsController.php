@@ -20,14 +20,12 @@ class SettingsController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function general(Platform $platform) {
-        $currentBlock = 'general';
         $form = new GeneralSettingsForm();
-        $settings = $platform->settings($currentBlock);
-        $tabs = $platform->settings()->getBlocksFromConfiguration();
+        $settings = $platform->settings('general');
         $action = action('\Code4\Platform\Controllers\SettingsController@store');
         $form->values($settings->all());
 
-        return view('platform::settings.general', compact('form', 'tabs','currentBlock', 'action'));
+        return view('platform::settings.general', compact('form', 'action'));
     }
 
     /**
@@ -37,9 +35,9 @@ class SettingsController extends Controller
      * @return $this|\Illuminate\Http\JsonResponse
      */
     public function store(Request $request, Platform $platform) {
-        $block = 'general';
+        //$block = 'general';
         $form = new GeneralSettingsForm();
-        $settings = $platform->settings($block);
+        //$settings = $platform->settings($block);
 
         if (!$form->validate($request)) {
             return $form->response();
@@ -51,8 +49,8 @@ class SettingsController extends Controller
             $values['displayGravatar'] = "0";
         }
 
-        $platform->getSettingsFactory()->set($block . '.displayGravatar', $values['displayGravatar']);
-        $platform->getSettingsFactory()->set($block . '.appName', $values['appName']);
+        $platform->getSettingsFactory()->set('general.displayGravatar', $values['displayGravatar']);
+        $platform->getSettingsFactory()->set('general.appName', $values['appName']);
         $platform->getSettingsFactory()->save();
         \Alert::success('Dane zapisane');
         return \PlatformResponse::checkNotifications()->makeResponse();
@@ -64,13 +62,11 @@ class SettingsController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function generalUser(Platform $platform) {
-        $currentBlock = 'general_user';
         $form = new GeneralSettingsFormUser();
-        $settings = $platform->settings($currentBlock);
-        $tabs = $platform->settings()->getBlocksFromConfiguration(true);
+        $settings = $platform->settings('general_user');
         $form->values($settings->all());
         $action = action('\Code4\Platform\Controllers\SettingsController@storeGeneralUser');
-        return view('platform::settings.general_user', compact('form', 'tabs','currentBlock', 'action'));
+        return view('platform::settings.general_user', compact('form', 'action'));
     }
 
     /**
@@ -80,9 +76,7 @@ class SettingsController extends Controller
      * @return $this|\Illuminate\Http\JsonResponse
      */
     public function storeGeneralUser(Request $request, Platform $platform) {
-        $block = 'general_user';
         $form = new GeneralSettingsFormUser();
-        $settings = $platform->settings($block);
 
         if (!$form->validate($request)) {
             return $form->response();
@@ -94,7 +88,7 @@ class SettingsController extends Controller
             $values['displayGravatar'] = "0";
         }
 
-        $platform->getSettingsFactory()->set($block . '.displayGravatar', $values['displayGravatar']);
+        $platform->getSettingsFactory()->set('general_user.displayGravatar', $values['displayGravatar']);
         $platform->getSettingsFactory()->save();
         \Alert::success('Dane zapisane');
         return \PlatformResponse::checkNotifications()->makeResponse();

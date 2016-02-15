@@ -86,7 +86,9 @@
             $('.processingIndicator').css( 'display', 'none');
             $('button[type="submit"], input[type="submit"]').attr("disabled", false);
 
-            if (typeof responseText.status !== "undefined") {
+            $.platform._handleServerResponse(xhr);
+
+            /*if (typeof responseText.status !== "undefined") {
                 if (responseText.status === "success") {
 
                     //Obsługa jsRedirect
@@ -100,13 +102,15 @@
                         eval("("+responseText.evalScript+")");
                     }
                 }
-            }
+            }*/
         },
 
         // Iterując po tablicy błędów wyświetla je przy ospowiednich polach
         showFieldErrors: function($form, errors) {
             $('.processingIndicator').css( 'display', 'none');
             $('button[type="submit"], input[type="submit"]').attr("disabled", false);
+
+            console.log('forms.showFieldErrors');
 
             //Jeżeli przeglądarka nie parsowała odpowiedzi serwera jako json robimy to ręcznie
             if (typeof errors === 'string') {
@@ -118,28 +122,59 @@
 
             jQuery.each(errors, function(fieldName, messageArray) {
                 var errorLabel = '';
-                if (fieldName === 'messageBox') {
-                    var alertBox = $(document.createElement('div')).addClass('alert alert-danger');
-                    for (var op = 0; op < messageArray.length; op++) {
-                        alertBox.append('<p>'+messageArray[op]+'</p>');
-                    }
-                    $form.find('.messageBox').html(alertBox);
-                } else if (fieldName === 'popup') {
-
-                } else {
-                    for (var lp = 0; lp < messageArray.length; lp++) {
-                        errorLabel += '<label id="' + fieldName + '-error" class="error field-error" for="' + fieldName + '">' + messageArray[lp] + '</label>';
-                    }
-                    $form.find('#form-' + fieldName).addClass('error').parent().append(errorLabel);
+                for (var lp = 0; lp < messageArray.length; lp++) {
+                    errorLabel += '<label id="' + fieldName + '-error" class="error field-error" for="' + fieldName + '">' + messageArray[lp] + '</label>';
                 }
+
+                //Search for error container
+                var errorContainer = $form.find(".error-container[data-field-name='" + fieldName + "']");
+
+                if (typeof errorContainer !== 'object' || errorContainer.length === 0) {
+                    errorContainer = $form.find(".error-container[name='" + fieldName + "']");
+                }
+
+                //Search by data-field-name first,
+                var field = $form.find("[data-field-name='" + fieldName + "']");
+
+                //then if field is not found by name
+                if (typeof field !== 'object' || field.length === 0) {
+                    field = $form.find("[name='" + fieldName + "']");
+                }
+
+                if (field.length) {
+                    field.addClass('error');
+                    //Jeżeli nie ma kontenera na błąd dodajemy go za polem formularza
+                    if (typeof errorContainer !== 'object' || errorContainer.length === 0) {
+                        field.parent().append(errorLabel);
+                    }
+                    else {
+                        errorContainer.append(errorLabel);
+                    }
+                }
+
             });
             return true;
         },
         // onError callback
         showErrors: function(response, status, statusText, $form) {
             var self = this;
-            toastr.error("W przesłanym formularzu są błędy", "Błąd formularza");
-            return $.c4forms.showFieldErrors($form, response.responseText);
+            console.log('forms.showErrors');
+
+            try {
+                var responseObject = JSON.parse(response.responseText);
+                if (responseObject !== null && typeof responseObject === 'object') {
+                    if ("formErrors" in responseObject) {
+                        $.c4forms.showFieldErrors($form, responseObject.formErrors);
+                    }
+                    if ("message" in responseObject) {
+                        var formatted = {
+                            'formErrors': responseObject.message
+                        };
+                        $.c4forms.showFieldErrors($form, responseObject.message);
+                    }
+                }
+            } catch (e) { }
+            $.platform._handleServerError(response, status, statusText);
         },
         ajaxSuccess: function() {}
     };

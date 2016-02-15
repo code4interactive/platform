@@ -1,0 +1,68 @@
+useGravatar:
+    type: fancyCheckbox
+    label: Wyświetlać gravatary?
+    baseValue: false
+    value: 1
+
+userColor:
+    type: radio
+    group:
+      color-0:
+        name: userColor
+        label: color 0
+        value: color-0
+        _view: colorRadio
+        attributes:
+          class:
+      color-1:
+        name: userColor
+        label: color 1
+        value: color-1
+        _view: colorRadio
+        attributes:
+          class:
+      color-2:
+        name: userColor
+        label: color 2
+        value: color-2
+        _view: colorRadio
+        attributes:
+          class:
+      color-3:
+        name: userColor
+        label: color 3
+        value: color-3
+        _view: colorRadio
+        attributes:
+          class:
+      color-4:
+        name: userColor
+        label: color 4
+        value: color-4
+        _view: colorRadio
+        attributes:
+          class:
+      color-5:
+        name: userColor
+        label: color 5
+        value: color-5
+        _view: colorRadio
+        attributes:
+          class:
+      color-6:
+        name: userColor
+        label: color 6
+        value: color-6
+        _view: colorRadio
+        attributes:
+          class:
+      color-7:
+        name: userColor
+        label: color 7
+        value: color-7
+        _view: colorRadio
+        attributes:
+          class:
+
+
+

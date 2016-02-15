@@ -89,7 +89,7 @@ function showErrors(response, status, statusText, $form) {
     $('button[type="submit"], input[type="submit"]').attr("disabled", false);
     $('.processingIndicator').css( 'display', 'none');
 
-    toastr.error("W przesłanym formularzu są błędy", "Błąd formularza");
+    //toastr.error("W przesłanym formularzu są błędy", "Błąd formularza");
     try {
         var responseObject = JSON.parse(response.responseText);
         if (responseObject !== null && typeof responseObject === 'object') {

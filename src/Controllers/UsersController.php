@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Code4\Platform\Components\Users\CreateUserForm;
 use Code4\Platform\Components\Users\EditUserForm;
+use Code4\Platform\Components\Users\UserProfileForm;
 use Code4\Platform\Components\Users\UsersDataTable;
 use Code4\Platform\Contracts\Auth;
 use Code4\Platform\Models\User;
@@ -34,6 +35,44 @@ class UsersController extends Controller
      */
     public function indexDataTable(Request $request) {
         return \DataTable::make(UsersDataTable::class)->renderData($request);
+    }
+
+    /**
+     * Wyświetla profil użytkownika
+     * @param int $id - user_id
+     * @param Auth $auth
+     * @return \Illuminate\View\View
+     */
+    public function show($id, Auth $auth) {
+
+        if ($auth->currentUserId() !== $id && !$auth->check('users.viewprofile')) {
+
+        }
+
+        $user = \Sentinel::findById($id);
+        $form = new UserProfileForm();
+
+        //dd($user->settings()->get());
+
+        $form->values($user->settings()->get());
+
+        return view('platform::users.profile', compact('user', 'form'));
+    }
+
+    public function saveProfile($id, Request $request, Auth $auth) {
+        $form = new UserProfileForm();
+        if (!$form->validate($request)) {
+            return $form->response();
+        }
+
+        $user = \Sentinel::findById($id);
+        $user->setSetting('useGravatar', $request->get('useGravatar') ? : 0);
+
+        //Color
+        $user->setSetting('userColor', $request->get('userColor') ? : 'color-1');
+
+        \Alert::success('Profil zapisany');
+        return \PlatformResponse::reload()->makeResponse();
     }
 
     /**
@@ -251,3 +290,5 @@ class UsersController extends Controller
         return redirect(action("UsersController@index"));
     }
 }
+
+

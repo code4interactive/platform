@@ -41,19 +41,20 @@
         }
     ],
     "require": {
-        "illuminate/support" : "~5.0",
-        "laravel/framework": "5.1.*",
+        "illuminate/support" : "~5.2",
+        "illuminate/contracts" : "~5.2",
+        "illuminate/filesystem" : "~5.2",
+        "laravel/framework": "5.2.*",
         "cartalyst/sentinel": "2.0.*",
         "cartalyst/alerts": "2.0.*",
-        "laravelcollective/html": "~5.0",
+        "laravelcollective/html": "~5.2",
         "nesbot/carbon": "~1.14",
         "thomaswelton/laravel-gravatar": "~1.0",
         "symfony/yaml": "2.7.*",
         "barryvdh/laravel-dompdf": "0.6.*",
-        "code4interactive/settings" : "~0.1",
         "code4interactive/menu" : "~1.1",
-        "code4interactive/forms" : "~0.1",
-        "code4interactive/notifications" : "~0.1",
+        "code4interactive/forms" : "~0.*",
+        "code4interactive/notifications" : "~0.*",
         "code4interactive/DataTable" : "~0.1",
         "code4interactive/view" : "~0.2",
         "cmgmyr/messenger" : "~2.8"
@@ -62,8 +63,8 @@
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
-        "barryvdh/laravel-ide-helper": "~2.0.6",
-        "barryvdh/laravel-debugbar": "^2.0"
+        "barryvdh/laravel-ide-helper": "~2.1",
+        "barryvdh/laravel-debugbar": "^2.1"
     },
     "autoload": {
         "psr-4": {

@@ -38,8 +38,11 @@ Route::group(['middleware' => ['auth']], function (){
     });
 
     /** USERS **/
+    Route::get('administration/user/{id}', 'Code4\Platform\Controllers\UsersController@show');
+    Route::post('administration/user/{id}', 'Code4\Platform\Controllers\UsersController@saveProfile');
     Route::post('administration/users/index', 'Code4\Platform\Controllers\UsersController@indexDataTable');
     Route::get('administration/users/{id}/delete', 'Code4\Platform\Controllers\UsersController@destroy');
+    //Route::get('user/profile/{id}', 'Code4\Platform\Controllers\UsersController@profile');
     Route::resource('administration/users', 'Code4\Platform\Controllers\UsersController');
 
     /** ROLES **/

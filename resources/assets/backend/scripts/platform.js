@@ -129,15 +129,17 @@
         },
 
         _handleServerError: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
+            console.log('_handleServerError');
             var self = this;
             if (jqXHR.status == 401) {
                 //unauthorized
                 $.platform.lockout();
             } else if (jqXHR.status == 302) {
                 //redirect
-                console.log('redirect ' + jqXHR.responseText);
                 window.location.replace(jqXHR.responseText);
+            } else if (jqXHR.status == 422) {
+                //Unprocessable Entity
+                $.notifications.showError("Błąd formularza", "Wystąpiły błędy podczas przetwarzania formularza!");
             } else if (jqXHR.status == 403) {
                 //Forbidden
                 $.notifications.showError("Brak uprawnień", "Nie masz uprawnień do tego zasobu!");

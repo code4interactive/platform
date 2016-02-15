@@ -88,7 +88,7 @@
     }
   },
   "config": {
-    "devUrl": "http://erp.app"
+    "devUrl": "https://erp.app"
   },
   "paths": {
     "dist":     "../../../../../../public/build/",
